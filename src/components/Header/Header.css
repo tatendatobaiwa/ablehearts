@@ -7,7 +7,7 @@ header {
     background-color: #FFFFFF;
     font-family: Poppins, sans-serif;
     font-weight: 600;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.3s ease;
   }
   
   nav {
@@ -120,6 +120,17 @@ header {
     cursor: pointer;
   }
   
+  .menu-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #043F70;
+    cursor: pointer;
+  }
+  
   .nav-item a span {
     display: inline-block;
   }
@@ -145,9 +156,6 @@ header {
     list-style: none;
   }
   
-  .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-  }
   
   .dropdown-menu li {
     white-space: nowrap;
@@ -169,8 +177,12 @@ header {
     color: #008CFF;
   }
 
+.nav-item.dropdown.active .dropdown-menu {
+ display: block;
+}
+
   @media (max-width: 968px) {
-    .nav-item.dropdown .dropdown-menu {
+  .nav-item.dropdown .dropdown-menu {
       display: none !important; 
     }
   }
@@ -197,6 +209,7 @@ header {
       background-color: #FFFFFF;
       text-align: center; 
       gap: 1rem;
+      padding-top: 2rem; /* Add padding to make space for the close button */
       opacity: 0; 
       transform: translateY(-20px);
       pointer-events: none; 

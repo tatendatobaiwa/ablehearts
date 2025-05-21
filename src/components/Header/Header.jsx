@@ -8,6 +8,20 @@ const Header = () => {
   const [isDropdownActive, setDropdownActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Scroll event listener (moved to top-level)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,24 +37,26 @@ const Header = () => {
     setDropdownActive(!isDropdownActive);
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleMousedown = (event) => {
+      // Check if the click is outside the dropdown menu and the dropdown toggle link
+      if (isDropdownActive && !event.target.closest('.nav-item.dropdown')) {
+        setDropdownActive(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleMousedown);
+    return () => document.removeEventListener('mousedown', handleMousedown);
+  }, [isDropdownActive]); // Add isDropdownActive to dependency array
+
+
   const isActive = (path) => location.pathname === path;
 
   return (
     <header className={isScrolled ? 'transparent-header' : ''}>
-      <nav>
+      <nav role="navigation" aria-label="Main navigation">
         <div className="container">
-        {/* Scroll event listener */}
-      {useEffect(() => {
-        const handleScroll = () => {
-          if (window.scrollY > 50) {
-            setIsScrolled(true);
-          } else {
-            setIsScrolled(false);
-          }
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, [])}
           <div className="nav-content">
             <div>
               <button
@@ -54,10 +70,14 @@ const Header = () => {
               className="menu-toggle"
               onClick={toggleMenu}
               aria-label="Toggle menu"
+              aria-expanded={isMenuActive}
+              aria-controls="nav-links"
             >
               ☰
-            </button>
-            <ul className={`nav-links ${isMenuActive ? 'active' : ''}`}>
+ {isMenuActive && (
+ <button className="menu-close-button" onClick={toggleMenu}>X</button>
+ )} </button>
+            <ul id="nav-links" className={`nav-links ${isMenuActive ? 'active' : ''}`}>
               <li className={`nav-item ${isMenuActive ? 'visible' : ''}`}>
                 <a href="/" className={isActive('/') ? 'active' : ''}>
                   <span>Home</span>
@@ -69,9 +89,7 @@ const Header = () => {
                 </a>
               </li>
               <li
-                className={`nav-item dropdown ${isDropdownActive ? 'active' : ''}`}
-                onMouseEnter={toggleDropdown}
-                onMouseLeave={toggleDropdown}
+                className={`nav-item dropdown ${isDropdownActive ? 'active' : ''}`} // Keep active class for CSS
               >
                 <a href="/get-involved" className={isActive('/get-involved') ? 'active' : ''}>
                   <span>Get Involved</span>
