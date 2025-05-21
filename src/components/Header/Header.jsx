@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ableheartslogo from '/src/assets/fixed/icons/ableheartslogo.webp';
 import './Header.css';
@@ -6,6 +6,7 @@ import './Header.css';
 const Header = () => {
   const [isMenuActive, setMenuActive] = useState(false);
   const [isDropdownActive, setDropdownActive] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,9 +26,21 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header>
+    <header className={isScrolled ? 'transparent-header' : ''}>
       <nav>
         <div className="container">
+        {/* Scroll event listener */}
+      {useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 50) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, [])}
           <div className="nav-content">
             <div>
               <button
