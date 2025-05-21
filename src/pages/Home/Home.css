@@ -169,10 +169,10 @@ body {
 
 /* Blob Animation */
 @keyframes blobMove {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(10px, -10px) rotate(10deg); }
-  50% { transform: translate(-10px, 10px) rotate(-10deg); }
-  75% { transform: translate(10px, 10px) rotate(10deg); }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(5px, -5px); }
+  50% { transform: translate(-5px, 5px); }
+  75% { transform: translate(5px, 5px); }
 }
 
 .blob {
@@ -303,7 +303,7 @@ body {
 .logo-slider {
   display: flex;
   gap: 2rem;
-  animation: slide 200s linear infinite;
+  animation: slide 40s linear infinite;
 }
 
 .logo-slider img {
@@ -472,6 +472,6 @@ body {
   .logo-slider {
     display: flex;
     gap: 2rem;
-    animation: slide 20s linear infinite;
+ animation: slide 40s linear infinite;
   }
 }

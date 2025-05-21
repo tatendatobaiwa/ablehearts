@@ -176,6 +176,8 @@ const imageLoaders = {
                     alt="Event Logo" 
                     className="event-logo"
                     loading="lazy" 
+ width={200}
+ height="auto"
                   />
                   <div className="event-text">
                     <h2>{slide.title}</h2>
@@ -240,6 +242,8 @@ const imageLoaders = {
           <img 
             src={getImageUrl('newsletter')} 
             alt="Newsletter"
+ width="100%"
+ height="auto"
             loading="lazy"
           />
         </div>
@@ -259,6 +263,8 @@ const imageLoaders = {
                   key={`${logo}-${index}`}
                   src={getImageUrl(logo)}
                   alt={`Collaborator ${index + 1}`}
+ height={100}
+ width="auto"
                   loading="lazy"
                 />
               ))}
