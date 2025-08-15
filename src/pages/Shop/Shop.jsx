@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import PropTypes from 'prop-types';
 import { ShoppingCart, X, Plus, Minus } from 'lucide-react';
-import { db } from '/src/firebase/config';
+import { db } from "../../firebase/config";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { safeMap, safeLength, isValidArray } from '../../utils/safeArrayOperations';
 import { safeDocument, safeWindow } from '../../utils/safeDOMAccess';
