@@ -1,15 +1,16 @@
+
 import thefounderphoto from '@/assets/fixed/thefounderphoto.webp';
 import { useEffect, useState } from 'react';
 import './AboutUs.css';
 import ubLogo from '@/assets/fixed/icons/ub.webp';
 import biustLogo from '@/assets/fixed/icons/biust.webp';
 import AnimatedNumber from '../../components/AnimatedNumber';
-
-
 import blob1 from '../../assets/fixed/icons/blob1.webp';
 import blob2 from '../../assets/fixed/icons/blob2.webp';
 import blob3 from '../../assets/fixed/icons/blob3.webp';
 import blob4 from '../../assets/fixed/icons/blob4.webp';
+import banoImg from '@/assets/fixed/bano.jpg';
+import kgosiImg from '@/assets/fixed/kgosi.jpg';
 
 
 
@@ -23,14 +24,14 @@ const blobImages = [
 const ubPresident = {
   name: 'Banoziba Gombalume',
   role: 'President',
-  image: '@/assets/fixed/bano.jpg',
+  image: banoImg,
   linkedin: 'https://www.linkedin.com/in/banoziba-gombalume-b86018199/', // Placeholder link
 };
 
 const biustPresident = {
   name: 'Kgosi Moagi-Angaman',
   role: 'President',
-  image: '@/assets/fixed/kgosi.jpg',
+  image: kgosiImg,
 };
 
 const AboutUs = () => {
