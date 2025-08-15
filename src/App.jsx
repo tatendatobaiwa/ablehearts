@@ -18,12 +18,6 @@ import BIUSTApp from "./pages/BIUSTApp/BIUSTApp.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.jsx";
 import './App.css';
 
-
-
-/**
- * Main App component with error boundary protection
- * Handles routing and provides global context providers
- */
 function App() {
   return (
     <ErrorBoundary>
