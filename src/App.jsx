@@ -31,7 +31,7 @@ function App() {
             <main role="main" style={{ flex: '1 0 auto' }}>
               <ErrorBoundary fallback={<div>Page failed to load</div>}>
                 <Routes>
-                  <Route path="/ablehearts" element={<Home />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/programs-and-initiatives" element={<ProgramsAndInitiatives />} />
                   <Route path="/get-involved" element={<GetInvolved />} />
                   <Route path="/shop" element={<Shop />} />
