@@ -1,0 +1,327 @@
+.donation-form-card {
+  width: 100%;
+  max-width: calc(100% - 4rem); /* Smaller than page width by 2rem on each side */
+  min-height: 400px;
+  margin: 0 auto; /* Center the container */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem; /* Uniform padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-success {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.form-title {
+  font-family: Poppins, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #043F70;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.donation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form-label {
+  font-family: Poppins, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #043F70;
+  text-align: left;
+}
+
+.form-input,
+.form-select,
+.donation-textarea {
+  width: 100%;
+  padding: 1.5rem 1.2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-family: inherit;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.donation-textarea:focus {
+  outline: none;
+  border-color: #008CFF;
+  box-shadow: 0 0 0 2px rgba(0, 140, 255, 0.1);
+}
+
+.donation-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #008CFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: Poppins, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #005bb5;
+}
+
+.form-note {
+  text-align: center;
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.form-input:disabled,
+.form-select:disabled,
+.donation-textarea:disabled,
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-button:disabled {
+  background-color: #93c5fd;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submit-button:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Enhanced Responsive Styles */
+@media (max-width: 768px) {
+  .donation-form-card {
+    max-width: calc(100% - 2rem); /* Adjust max-width for smaller screens */
+    margin: 1rem auto; /* Center on smaller screens */
+    padding: 1.5rem;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+  }
+
+  .donation-form {
+    gap: 1.25rem;
+  }
+
+  .form-input,
+  .form-select,
+  .donation-textarea {
+    padding: 1rem 0.9rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .donation-form-card {
+    margin: 0.5rem auto; /* Center on very small screens */
+    max-width: calc(100% - 1rem); /* Adjust max-width for very small screens */
+    padding: 1rem;
+  }
+
+  .form-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-title {
+    font-size: 1.2rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .form-label {
+    font-size: 0.875rem;
+  }
+
+  .form-input,
+  .form-select,
+  .donation-textarea {
+    font-size: 0.95rem;
+    padding: 0.8rem 0.7rem;
+    box-sizing: border-box;
+  }
+
+  .submit-button {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .form-note {
+    font-size: 0.8rem;
+  }
+
+  .error-message {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .donation-form-card {
+    margin: 0.25rem auto; /* Center on smallest screens */
+    padding: 0.75rem;
+  }
+
+  .form-title {
+    font-size: 1.1rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+  }
+
+  .form-input,
+  .form-select,
+  .donation-textarea {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+  }
+
+  .form-note {
+    font-size: 0.75rem;
+  }
+
+  .error-message {
+    font-size: 0.85rem;
+  }
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: Poppins, sans-serif;
+  font-size: 0.875rem;
+  color: #043F70;
+}
+
+.radio-group input[type="radio"] {
+  /* default radio button styling */
+  appearance: none; /* Hide default radio button */
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #008CFF;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.radio-group input[type="radio"]::before {
+  content: "";
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.2s ease;
+  background-color: #008CFF; /* Inner circle color */
+}
+
+.radio-group input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.radio-group input[type="radio"]:focus {
+  outline: 2px solid #008CFF; /* Focus outline */
+  outline-offset: 2px;
+}

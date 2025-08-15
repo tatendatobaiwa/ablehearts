@@ -1,0 +1,58 @@
+/* Import universal animations */
+@import url('./styles/animations.css');
+
+/* Import design system */
+@import url('./styles/designSystem.css');
+
+/* Import mobile optimizations */
+@import url('./styles/mobileOptimizations.css');
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Screen Reader Mode Styles */
+body.screen-reader-mode {
+  /* General accessibility improvements */
+  background-color: #f8f8f8 !important; /* Light background for high contrast */
+  color: #1a1a1a !important; /* Dark text for high contrast */
+  line-height: 1.8 !important;
+  letter-spacing: 0.02em !important;
+}
+
+body.screen-reader-mode .background-blobs,
+body.screen-reader-mode .blobs,
+body.screen-reader-mode .blobt,
+body.screen-reader-mode .blobg,
+body.screen-reader-mode .mission-blobs,
+body.screen-reader-mode .carousel-container,
+body.screen-reader-mode .newsletter-image,
+body.screen-reader-mode .contour-overlay {
+  display: none !important; /* Hide decorative background elements */
+  visibility: hidden !important;
+}
+
+body.screen-reader-mode img:not([alt]):not([role="presentation"]) {
+  border: 2px solid red !important; /* Highlight images without alt text */
+}
+
+body.screen-reader-mode a:focus,
+body.screen-reader-mode button:focus,
+body.screen-reader-mode input:focus,
+body.screen-reader-mode select:focus,
+body.screen-reader-mode textarea:focus {
+  outline: 3px solid #005bb5 !important; /* Stronger focus indicator */
+  outline-offset: 2px !important;
+}
+
+body.screen-reader-mode [aria-hidden="true"] {
+  display: none !important;
+}
+
+body.screen-reader-mode h1, body.screen-reader-mode h2, body.screen-reader-mode h3, body.screen-reader-mode p, body.screen-reader-mode span, body.screen-reader-mode a, body.screen-reader-mode button, body.screen-reader-mode input {
+  font-size: 1.25em !important; /* Slightly larger text for all elements */
+  font-weight: normal !important; /* Reset font-weight to prevent overly bold text */
+}

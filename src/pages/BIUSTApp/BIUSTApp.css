@@ -1,0 +1,277 @@
+.biust-app-page-background {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+  font-family: Poppins, "sans-serif";
+}
+
+.biust-app-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.biust-app-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.biust-app-logo {
+  width: auto;
+  height: 90px;
+}
+
+.biust-app-title {
+  text-align: center;
+  color: #043F70;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.biust-app-description {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.biust-app-application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.biust-app-fieldset {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 0;
+}
+
+.biust-app-legend {
+  font-weight: 600;
+  color: #043F70;
+  padding: 0 0.5rem;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.biust-app-label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.biust-app-input,
+.biust-app-textarea,
+.biust-app-country-code-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.biust-app-input:focus,
+.biust-app-textarea:focus,
+.biust-app-country-code-select:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.biust-app-phone-input-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.biust-app-country-code-select {
+  flex: 0 0 150px;
+}
+
+.biust-app-button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.biust-app-submit-button,
+.biust-app-back-button {
+  font-family: Poppins, "sans-serif";
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.biust-app-submit-button {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.biust-app-submit-button:hover {
+  background-color: #004d99;
+  transform: translateY(-2px);
+}
+
+.biust-app-back-button {
+  background-color: #e9ecef;
+  color: #333;
+  border: 1px solid #adb5bd;
+}
+
+.biust-app-back-button:hover {
+  background-color: #ced4da;
+}
+
+.biust-app-error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.biust-app-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.biust-app-success-popup {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.biust-app-success-popup h3 {
+  color: #043F70;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.biust-app-success-popup p {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.biust-app-success-close-button {
+  padding: 0.75rem 2rem;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.biust-app-success-close-button:hover {
+  background-color: #0056b3;
+}
+
+/* Background blobs */
+.biust-background-blobs {
+  opacity: 0.7;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #f9f9f9;
+}
+
+.biust-blobg {
+  position: absolute;
+  width: 600px;
+  height: auto;
+  filter: blur(5px); 
+  animation: float 20s infinite ease-in-out;
+}
+
+.biust-blobg.blob-1 {
+  top: 0%;
+  left: -10%;
+  animation: moveBlob1 20s infinite ease-in-out;
+}
+
+.biust-blobg.blob-2 {
+  top: 25%;
+  right: -15%;
+  animation: moveBlob2 20s infinite ease-in-out;
+}
+
+.biust-blobg.blob-3 {
+  bottom: 20%;
+  left: 25%;
+  animation: moveBlob3 20s infinite ease-in-out;
+}
+
+.biust-blobg.blob-4 {
+  bottom: 0%;
+  right: -10%;
+  animation: moveBlob4 20s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes moveBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 20px) scale(1.1); }
+}
+
+@keyframes moveBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, 30px) scale(1.15); }
+}
+
+@keyframes moveBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+@keyframes moveBlob4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-25px, -25px) scale(1.12); }
+}
+
+@media (max-width: 768px) {
+  .biust-app-page-background {
+    padding-top: 2rem;
+  }
+}

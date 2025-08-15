@@ -1,0 +1,325 @@
+:root {
+  --header-background: #FFFFFF;
+  --header-background-scrolled: rgba(255, 255, 255, 0.90);
+  --header-text-color: #043F70;
+  --header-link-active-color: #008CFF;
+  --header-link-hover-bg: #E0F2F7;
+  --header-link-hover-text: #005BB5;
+  --header-separator-color: #CCCED0;
+  --header-font: Poppins, sans-serif;
+  --header-z-index: 1000;
+  --dropdown-bg: var(--header-background);
+  --dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --dropdown-item-hover-bg: #d4ecff; /* Consistent with settings */
+  --dropdown-item-hover-text: var(--header-link-active-color);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--header-z-index);
+  background-color: var(--header-background);
+  font-family: var(--header-font);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin: 0 auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  min-height: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo img {
+  display: block;
+  max-height: 55px;
+  width: auto;
+}
+
+.header-nav {
+  display: flex;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.header-nav li a {
+  text-decoration: none;
+  color: var(--header-text-color);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-nav li a:hover {
+  background-color: var(--header-link-hover-bg);
+  color: var(--header-link-hover-text);
+}
+
+.header-nav li a[aria-current="page"] {
+  color: var(--header-link-active-color);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-us-button,
+.donate-button {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.contact-us-button {
+  color: var(--header-text-color);
+  border: 1px solid var(--header-text-color);
+}
+
+.contact-us-button:hover {
+  background-color: var(--header-text-color);
+  color: white;
+}
+
+.donate-button {
+  background-color: var(--header-link-active-color);
+  color: white;
+  border: 1px solid var(--header-link-active-color);
+}
+
+.donate-button:hover {
+  background-color: var(--header-link-hover-text);
+  border-color: var(--header-link-hover-text);
+}
+
+header.scrolled {
+  background-color: var(--header-background-scrolled);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem; /* Consistent padding */
+}
+
+.container {
+  width: 100%;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 80px; /* Ensure header has a minimum height */
+}
+
+.logo-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex; /* For alignment if needed */
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  max-height: 55px; /* Adjusted for overall header height */
+  width: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem; /* Reduced gap for more items */
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-links > .nav-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -0.25rem; /* Adjusted for reduced gap */
+  height: 50%;
+  width: 1px;
+  background-color: var(--header-separator-color);
+  transform: translateY(-50%);
+}
+
+.nav-item a,
+.nav-link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--header-text-color);
+  gap: 0.5rem;
+  padding: 0.75rem 1rem; /* Standardized padding */
+  background: none;
+  border: none; /* For buttons */
+  font-family: inherit; /* For buttons */
+  font-size: inherit; /* For buttons */
+  font-weight: inherit; /* For buttons */
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.nav-item a.active,
+.nav-link-button.active {
+  color: var(--header-link-active-color);
+  font-weight: bold;
+}
+
+.nav-item a:hover,
+.nav-link-button:hover {
+  background: var(--header-link-hover-bg);
+  color: var(--header-link-hover-text);
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem; /* Slightly adjusted */
+  background: transparent;
+  color: var(--header-text-color);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Desktop Dropdown Styles */
+.nav-item.dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px); /* Add a small gap */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dropdown-bg);
+  border-radius: 4px;
+  box-shadow: var(--dropdown-shadow);
+  z-index: calc(var(--header-z-index) + 1);
+  padding: 0.5rem 0;
+  list-style: none;
+  min-width: 200px; /* Ensure dropdown has enough width */
+}
+
+.nav-item.dropdown.active .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  white-space: nowrap;
+}
+
+.dropdown-menu li a,
+.dropdown-menu li button {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem; /* Slightly adjusted */
+  color: var(--header-text-color);
+  font-weight: 500; /* Normal weight for dropdown items */
+  transition: background 0.2s ease, color 0.2s ease;
+  padding: 0.75rem 1.5rem; /* Consistent padding */
+  background: none; /* For buttons */
+  border: none; /* For buttons */
+  font-family: inherit; /* For buttons */
+  cursor: pointer;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li button:hover {
+  background: var(--dropdown-item-hover-bg);
+  color: var(--dropdown-item-hover-text);
+}
+
+.settings-dropdown-menu {
+  /* Desktop: Align settings dropdown to the left of its button */
+  left: 0; 
+  transform: translateX(0); /* No horizontal centering needed if aligned left */
+  /* If you want it to align to the right of the button, use right: 0; */
+}
+
+.dyslexia-toggle-button { margin-right: 2rem; }
+
+/* Mobile Menu Icon Styles */
+.mobile-menu-icon {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--header-text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  z-index: calc(var(--header-z-index) + 1);
+}
+
+.mobile-menu-icon:hover {
+  background-color: var(--header-link-hover-bg);
+  color: var(--header-link-hover-text);
+}
+
+.mobile-menu-icon:focus {
+  outline: 2px solid var(--header-link-active-color);
+  outline-offset: 2px;
+} 
+
+@media (max-width: 968px) {
+  .header-container {
+    padding: 0 1rem; /* Adjust padding for mobile */
+  }
+  
+  .header-nav {
+    display: none; /* Hide desktop navigation on mobile */
+  }
+  
+  .header-actions {
+    display: none; /* Hide desktop actions on mobile */
+  }
+  
+  .mobile-menu-icon {
+    display: block; /* Show mobile menu icon */
+  }
+  
+  .header-logo img {
+    max-height: 45px;
+  }
+
+  /* Mobile menu is handled by MobileMenu component */
+
+}

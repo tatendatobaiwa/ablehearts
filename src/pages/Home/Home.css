@@ -1,0 +1,583 @@
+:root {
+  --primary-font: 'Poppins', sans-serif;
+  --secondary-font: 'Cedarville Cursive', serif; /* Ensure this font is imported/available */
+  --primary-text-color: #043F70;
+  --highlight-color: #004d99;
+  --accent-color-gold: #CC9917;
+  --accent-color-gold-dark: #A37A12;
+  --accent-color-yellow: #F4BC2A;
+  --background-color-light: #FFFFFF;
+  --background-color-medium: #f9f9f9;
+  --background-color-dark: #0066cc; /* Consider a less saturated blue if too strong */
+  --text-color-light: #FFFFFF;
+  --carousel-overlay-start: rgba(0, 0, 0, 0);
+  --carousel-overlay-end: rgba(0, 0, 0, 0.7);
+  --button-hover-bg: rgba(0, 0, 0, 0.9);
+  --base-padding: 1rem;
+  --large-padding: 2rem;
+  --section-padding-vertical: 3rem; /* Consistent vertical padding for sections */
+  --input-border-color: #ccc;
+}
+
+/*
+  The .page-wrapper for the Home page can be used for specific background
+  or full-width elements if needed, but general page padding and max-width
+  should be handled by .main-content or a PageContainer component as discussed.
+*/
+.home-page-wrapper {
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll from animations/content */
+}
+
+
+.carousel-container {
+  height: 75vh; /* Adjusted height */
+  max-height: 700px; /* Max height for very tall screens */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--primary-text-color); /* Fallback bg */
+}
+
+.carousel-slide {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  will-change: opacity, transform; /* Performance hint */
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.carousel-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--carousel-overlay-start) 20%, /* Gradient starts a bit lower */
+    var(--carousel-overlay-end) 100%
+  );
+  z-index: 1; /* Ensure overlay is above image but below content */
+}
+
+.slide-content {
+  position: absolute;
+  bottom: var(--large-padding); /* More space from bottom */
+  left: var(--large-padding);
+  right: var(--large-padding);
+  color: var(--text-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s; /* Delayed transition */
+  z-index: 2; /* Above overlay */
+}
+
+.carousel-slide.active .slide-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 0.75rem; /* Slightly adjusted gap */
+}
+
+.indicator {
+  width: 12px; /* Smaller indicators */
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7); /* Subtle border */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.indicator:hover {
+  transform: scale(1.1);
+}
+
+.indicator.active {
+  background-color: var(--accent-color-gold);
+  border-color: var(--accent-color-gold-dark);
+}
+
+.event-details-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.event-details {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.event-details h2,
+.event-details p {
+  font-family: var(--primary-font); /* Using primary for readability, secondary can be an accent */
+  margin: 0;
+}
+
+.event-details h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem); /* Responsive font size */
+  font-weight: 700;
+}
+
+.event-details p {
+  color: var(--accent-color-yellow);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 500;
+}
+
+.event-logo-slide { /* Renamed from .event-logo to be specific */
+  width: clamp(60px, 15vw, 100px); /* Responsive logo size */
+  height: auto;
+  object-fit: contain;
+}
+
+.mission-container {
+  position: relative;
+  padding: var(--section-padding-vertical) var(--large-padding);
+  background-color: var(--background-color-light);
+  text-align: center;
+  z-index: 1; /* Above fixed blobs if they are viewport-wide */
+  overflow: hidden; /* Contains its own content, not the fixed blobs */
+}
+
+.home-background-blobs {
+  opacity: 0.5; /* Softer blobs */
+  position: fixed; /* Relative to viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind all page content */
+  pointer-events: none;
+  /* background-color: var(--background-color-medium); Removed, let body bg show */
+}
+
+.home-blobg {
+  position: absolute;
+  width: clamp(300px, 40vw, 600px); /* Responsive blob size */
+  height: auto;
+  filter: blur(10px); /* More blur */
+  animation: float 20s infinite ease-in-out alternate; /* Added alternate */
+}
+
+.home-blobg.blob-1 { top: -10%; left: -15%; animation-name: moveBlob1; animation-duration: 22s; }
+.home-blobg.blob-2 { top: 20%; left: 40%; animation-name: moveBlob2; animation-duration: 25s; }
+.home-blobg.blob-3 { bottom: 15%; left: 75%; animation-name: moveBlob3; animation-duration: 20s; }
+/* .home-blobg.blob-4 was removed from JSX, so removed here too */
+
+.mission-container h2 {
+  font-size: clamp(2rem, 5vw, 3rem); /* Responsive heading */
+  font-weight: 700; /* Bolder */
+  margin-bottom: var(--base-padding);
+  color: var(--primary-text-color);
+}
+
+.mission-container p {
+  line-height: 1.7;
+  font-size: clamp(1rem, 2.5vw, 1.25rem); /* Responsive text */
+  margin-bottom: 0; /* Remove bottom margin if it's the last element */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--primary-text-color);
+}
+
+.highlight {
+  color: var(--highlight-color);
+  font-weight: 700;
+}
+
+.newsletter-section-wrapper {
+  display: flex; /* Will be overridden by .newsletter-content-area for direct children */
+  padding: var(--section-padding-vertical) 0; /* Vertical padding, horizontal handled by content area */
+  background-color: var(--background-color-dark);
+  overflow: hidden;
+  position: relative;
+  color: var(--text-color-light);
+}
+
+.contour-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contour-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.newsletter-content-area {
+  display: flex;
+  align-items: center;
+  gap: var(--large-padding);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px; /* Max width for newsletter content */
+  margin: 0 auto; /* Center it */
+  padding: 0 var(--large-padding); /* Padding for content within this area */
+}
+
+.newsletter-text h3,
+.newsletter-text p {
+  color: var(--text-color-light); /* Ensure this is applied */
+  margin-bottom: var(--base-padding);
+}
+
+.newsletter-text h3 {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+}
+
+.newsletter-text p {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--base-padding);
+  margin-top: var(--large-padding); /* Space above form */
+}
+
+.newsletter-input {
+  padding: 0.85rem 1rem; /* Slightly more padding */
+  flex-grow: 1;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  font-family: var(--primary-font);
+  font-size: 1rem;
+  background-color: rgba(255,255,255,0.9); /* Slightly transparent */
+  color: var(--primary-text-color);
+}
+.newsletter-input::placeholder {
+  color: #6c757d; /* Placeholder color */
+}
+
+.newsletter-button {
+  padding: 0.85rem 1.5rem;
+  background-color: var(--accent-color-gold);
+  color: var(--primary-text-color); /* Ensure contrast */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--primary-font);
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.newsletter-button:hover {
+  background-color: var(--accent-color-gold-dark);
+  transform: translateY(-2px);
+}
+
+.newsletter-image-container {
+  width: 33%;
+  max-width: 380px; /* Slightly adjusted */
+  flex-shrink: 0;
+}
+
+.newsletter-image-actual { /* Target the img tag itself */
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px; /* Consistent border-radius */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.collaborators-container {
+  text-align: center;
+  background-color: var(--background-color-light);
+  overflow: hidden; /* For the logo bar */
+  padding: var(--section-padding-vertical) 0; /* Vertical padding, horizontal handled by logo bar if needed */
+}
+
+.collaborators-container h3 {
+  color: var(--primary-text-color);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  margin-bottom: var(--large-padding);
+}
+
+.logo-bar {
+  overflow: hidden; /* Essential for the animation */
+  padding: 1rem 0; /* Some vertical space for the logos */
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+
+.logo-slider {
+  display: flex;
+  align-items: center; /* Vertically align logos if heights vary */
+  white-space: nowrap;
+  animation: slide 60s linear infinite; /* Slower animation */
+  gap: clamp(2rem, 6vw, 4rem); /* Responsive gap */
+}
+.logo-slider:hover {
+  animation-play-state: paused; /* Pause on hover */
+}
+
+.collaborator-logo-item {
+  flex-shrink: 0; /* Prevent logos from shrinking */
+  display: inline-flex; /* For alignment */
+  align-items: center;
+}
+
+.collaborator-logo {
+  height: clamp(60px, 10vh, 80px); /* Responsive logo height */
+  width: auto;
+  max-width: 150px; /* Max width for very wide logos */
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.collaborator-logo:hover {
+  opacity: 1;
+}
+
+.collaborator-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.collaborator-logo-link:hover {
+  background-color: rgba(0, 139, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 139, 255, 0.2);
+}
+
+.collaborator-logo-link:focus {
+  outline: 2px solid #008CFF;
+  outline-offset: 2px;
+}
+
+.collaborator-logo-link:hover .collaborator-logo {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly less opaque */
+  color: var(--text-color-light);
+  border: none;
+  padding: 0.6rem 1rem; /* Adjusted padding */
+  cursor: pointer;
+  font-size: 1.75rem; /* Larger icons */
+  border-radius: 50%; /* Circular buttons */
+  width: 44px; /* Explicit width */
+  height: 44px; /* Explicit height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.prev-button { left: var(--base-padding); }
+.next-button { right: var(--base-padding); }
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: var(--button-hover-bg);
+  color: var(--accent-color-yellow);
+  transform: translateY(-50%) scale(1.05);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes moveBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(15px, 10px) scale(1.05) rotate(5deg); }
+}
+
+@keyframes moveBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-10px, 15px) scale(1.1) rotate(-5deg); }
+}
+
+@keyframes moveBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(10px, -10px) scale(1.05) rotate(3deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); } /* For duplicated list */
+}
+
+.pre-animate {
+  opacity: 0;
+  transform: translateY(25px); /* Consistent with fadeIn animation */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition for JS fallback */
+  will-change: opacity, transform;
+}
+
+.fade-in {
+  opacity: 1; /* Target state for JS fallback */
+  transform: translateY(0); /* Target state for JS fallback */
+  animation: fadeIn 1s ease-out forwards; /* Animation preferred */
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 1024px) {
+  .carousel-container {
+    height: 70vh;
+  }
+  .newsletter-content-area {
+    padding: 0 var(--base-padding); /* Less padding on tablet */
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel-container {
+    height: 60vh;
+    min-height: 350px; /* Ensure it's not too small */
+  }
+  .slide-content {
+    flex-direction: column;
+    align-items: center; /* Center content on mobile */
+    text-align: center;
+    bottom: var(--base-padding);
+    left: var(--base-padding);
+    right: var(--base-padding);
+  }
+  .event-details-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .event-logo-slide {
+    width: 70px;
+    margin-bottom: 0.5rem;
+  }
+  .carousel-indicators {
+    margin-top: 1rem; /* Space between text and indicators */
+  }
+  .mission-container {
+    padding: var(--section-padding-vertical) var(--base-padding);
+  }
+  .newsletter-section-wrapper {
+    padding-top: var(--section-padding-vertical);
+    padding-bottom: var(--section-padding-vertical);
+  }
+  .newsletter-content-area {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--base-padding);
+  }
+  .newsletter-content-area .newsletter-text {
+    width: 100%;
+    max-width: 500px;
+    order: 1;
+  }
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch; /* Full width buttons/inputs */
+    width: 100%;
+  }
+  .newsletter-image-container {
+    width: 70%;
+    max-width: 300px;
+    order: 2;
+    margin-top: var(--large-padding);
+  }
+  .home-blobg { animation: none !important; display: none; } /* Hide blobs on mobile for performance/simplicity */
+
+  .prev-button, .next-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  .prev-button { left: 0.5rem; }
+  .next-button { right: 0.5rem; }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    height: 55vh;
+    min-height: 300px;
+  }
+  .event-details h2 { font-size: 1.25rem; }
+  .event-details p { font-size: 0.85rem; }
+  .event-logo-slide { display: none; } /* Hide logo on very small screens */
+
+  .indicator { width: 10px; height: 10px; }
+
+  .mission-container h2 { font-size: 1.75rem; }
+  .mission-container p { font-size: 0.95rem; }
+
+  .newsletter-text h3 { font-size: 1.5rem; }
+  .newsletter-text p { font-size: 1rem; }
+
+  .newsletter-image-container {
+    width: 80%;
+    max-width: 250px;
+  }
+  .collaborators-container h3 { font-size: 1.5rem; }
+  .logo-slider { gap: 2rem; }
+  .collaborator-logo { height: 50px; }
+}
+
+/* Screen Reader Mode Adjustments (from original, ensure they are still relevant) */
+body.screen-reader-mode .carousel-container {
+  height: auto !important;
+  min-height: 50px;
+}
+body.screen-reader-mode .mission-container,
+body.screen-reader-mode .newsletter-section-wrapper,
+body.screen-reader-mode .collaborators-container {
+  padding-top: var(--large-padding) !important;
+  padding-bottom: var(--large-padding) !important;
+}
+body.screen-reader-mode .newsletter-content-area {
+  flex-direction: column !important;
+  align-items: center !important;
+}
+body.screen-reader-mode .newsletter-content-area .newsletter-text,
+body.screen-reader-mode .newsletter-image-container {
+  width: 100% !important;
+  text-align: center !important;
+}
+body.screen-reader-mode .home-background-blobs {
+  display: none !important;
+}

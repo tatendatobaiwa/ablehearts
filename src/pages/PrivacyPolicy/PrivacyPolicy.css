@@ -1,0 +1,234 @@
+:root {
+  --privacy-font: 'Poppins', sans-serif;
+  --privacy-primary-text: #043F70; /* Deep Blue */
+  --privacy-secondary-text: #333;
+  --privacy-tertiary-text: #555;
+  --privacy-accent-color1: #005BB5; /* Lighter Blue for section titles */
+  --privacy-accent-color2: #008CFF; /* Link color */
+  --privacy-accent-hover-color: #004d99; /* Link hover */
+  --privacy-bg-page: #FFFFFF; /* Overall page background */
+  --privacy-bg-container: #FFFFFF; /* Content card background */
+  --privacy-bg-blobs: #f9f9f9;
+  --privacy-border-color: #e0e0e0;
+  --privacy-subtle-border-color: #eee;
+  --privacy-card-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); /* Softer, more modern shadow */
+  --privacy-base-padding: 1.5rem;
+  --privacy-large-padding: 2rem;
+  --privacy-content-padding: 4.5rem; /* Padding inside the content card */
+  --privacy-section-margin: 2rem;
+  --privacy-border-radius: 12px;
+  --privacy-animation-duration: 0.7s;
+}
+
+.privacy-page-wrapper {
+  position: relative;
+  z-index: 1; /* Ensure it's above fixed blobs if blobs are part of this wrapper */
+  min-height: 100vh;
+  font-family: var(--privacy-font);
+  background-color: var(--privacy-bg-page); /* Could be same as blob bg or different */
+  padding: var(--privacy-large-padding) var(--privacy-base-padding); /* Padding for the overall page */
+}
+
+/* Initial Animation States & Transitions */
+.pre-animate {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-in-animate { /* Applied by JS when contentLoaded is true */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--privacy-animation-duration) ease-out, transform var(--privacy-animation-duration) ease-out;
+}
+.privacy-page-wrapper.content-loaded .pre-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--privacy-animation-duration) ease-out, transform var(--privacy-animation-duration) ease-out;
+}
+
+/* Background Blobs */
+.privacy-background-blobs {
+  position: fixed; /* Fixed to viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind all content */
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--privacy-bg-blobs);
+}
+.privacy-blobg {
+  position: absolute;
+  width: clamp(400px, 50vw, 650px);
+  height: auto;
+  filter: blur(7px);
+  opacity: 0.55;
+  animation: privacyFloat 22s infinite ease-in-out alternate;
+}
+.privacy-blobg.blob-1 { top: -8%; left: -10%; animation-duration: 24s; }
+.privacy-blobg.blob-2 { top: 18%; right: -10%; animation-duration: 27s; }
+.privacy-blobg.blob-3 { bottom: -12%; left: -5%; animation-duration: 21s; }
+.privacy-blobg.blob-4 { bottom: -20%; right: -12%; animation-duration: 25s; }
+
+@keyframes privacyFloat {
+  0% { transform: translateY(0px) translateX(0px) scale(1); }
+  100% { transform: translateY(-18px) translateX(12px) scale(1.04); }
+}
+/* Keep your specific moveBlob animations if you prefer more distinct paths */
+@keyframes moveBlob1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,20px) scale(1.1); } }
+@keyframes moveBlob2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-20px,30px) scale(1.15); } }
+@keyframes moveBlob3 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
+@keyframes moveBlob4 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-25px,-25px) scale(1.12); } }
+
+/* Main Content Container (the card) */
+.privacy-content-container { /* Replaced .legal-container and .privacy-page-wrapper for content card */
+  max-width: 850px;
+  margin: 0 auto; /* Centered */
+  padding: var(--privacy-content-padding);
+  background-color: var(--privacy-bg-container);
+  border-radius: var(--privacy-border-radius);
+  box-shadow: var(--privacy-card-shadow);
+  color: var(--privacy-secondary-text);
+  line-height: 1.75; /* Improved line height for readability */
+  position: relative; /* For stacking context if needed */
+  z-index: 1; /* Above page background, below fixed blobs if blobs are outside this */
+}
+
+/* Header Section within the card */
+.privacy-header { /* Replaced .legal-header */
+  position: relative;
+  background: transparent;
+  text-align: center;
+  margin-bottom: var(--privacy-content-padding);
+  padding-bottom: var(--privacy-base-padding);
+  border-bottom: 1px solid var(--privacy-border-color);
+  border-radius: 12px;
+}
+.privacy-main-title { /* Re solid var(--privacy-border-color);placed .legal-header h1 */
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--privacy-primary-text);
+  margin: 0;
+}
+.privacy-intro { /* Replaced .legal-header p */
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--privacy-tertiary-text);
+}
+
+/* Content Sections */
+.privacy-section { /* Replaced .legal-section */
+  margin-bottom: var(--privacy-section-margin);
+}
+.privacy-section:last-child {
+  margin-bottom: 0;
+}
+.privacy-section-title { /* Replaced .legal-section h2 */
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--privacy-accent-color1);
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--privacy-subtle-border-color);
+}
+.privacy-text { /* Replaced .legal-section p */
+  margin-bottom: 1rem;
+  color: var(--privacy-secondary-text);
+}
+
+/* List Styling */
+.privacy-list { /* Replaced .legal-section ul */
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+.privacy-list-item { /* Replaced .legal-section li */
+  margin-bottom: 0.75rem;
+  color: var(--privacy-secondary-text);
+}
+.privacy-list-item::marker {
+  color: var(--privacy-accent-color1);
+}
+
+/* Link Styling */
+.privacy-link, /* Replaced .legal-link */
+.email-link { /* Added for specificity if needed */
+  color: var(--privacy-accent-color2);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--privacy-transition-duration) ease, border-color var(--privacy-transition-duration) ease;
+}
+.privacy-link:hover,
+.email-link:hover,
+.privacy-link:focus,
+.email-link:focus {
+  color: var(--privacy-accent-hover-color);
+  border-bottom-color: var(--privacy-accent-hover-color);
+  outline: none;
+}
+
+/* Contact Text Styling */
+.privacy-contact-text { /* Replaced .legal-section p for contact */
+  font-size: 1.05rem;
+  margin-top: var(--privacy-section-margin);
+  color: var(--privacy-secondary-text);
+  padding-top: var(--privacy-base-padding);
+  border-top: 1px solid var(--privacy-subtle-border-color);
+}
+.privacy-contact-text .email-link {
+  margin-left: 0.5ch;
+}
+
+/* Remove unused styles from original CSS */
+/* .privacy-container (if it was different from .privacy-page-wrapper) */
+/* .privacy-section:hover (hover effect on whole section might be too much) */
+/* .info-grid, .info-card, .info-card-blob, .info-card-content (not used in JSX) */
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .privacy-page-wrapper {
+    padding: var(--privacy-base-padding);
+  }
+  .privacy-content-container {
+    margin: 0; /* Full width within page padding */
+    padding: var(--privacy-large-padding);
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-content-container {
+    padding: var(--privacy-base-padding);
+    margin: 0; /* Ensure it takes available space within page wrapper padding */
+  }
+  .privacy-main-title {
+    font-size: 2.1rem;
+  }
+  .privacy-section-title {
+    font-size: 1.4rem;
+  }
+  .privacy-text,
+  .privacy-intro,
+  .privacy-list-item {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .privacy-list {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-page-wrapper {
+    padding: 0.75rem;
+  }
+  .privacy-content-container {
+    padding: var(--privacy-base-padding); /* Keep some padding */
+  }
+  .privacy-main-title {
+    font-size: 1.8rem;
+  }
+  .privacy-section-title {
+    font-size: 1.2rem;
+  }
+}

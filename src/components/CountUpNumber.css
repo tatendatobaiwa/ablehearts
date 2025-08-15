@@ -1,0 +1,208 @@
+/* CountUp Number Component Styles */
+.count-up-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 91, 181, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.count-up-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 91, 181, 0.15);
+}
+
+.count-up-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #005BB5, #008CFF, #005BB5);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.count-up-number {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.count-up-prefix {
+  font-size: 1.5rem;
+  color: #005BB5;
+  margin-right: 0.2rem;
+  font-weight: 600;
+}
+
+.count-up-value {
+  font-size: 3rem;
+  color: #043F70;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.count-up-suffix {
+  font-size: 1.8rem;
+  color: #005BB5;
+  margin-left: 0.2rem;
+  font-weight: 600;
+}
+
+.count-up-label {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
+/* Size Variants */
+.count-up-container.large .count-up-value {
+  font-size: 4rem;
+}
+
+.count-up-container.large .count-up-prefix,
+.count-up-container.large .count-up-suffix {
+  font-size: 2rem;
+}
+
+.count-up-container.small .count-up-value {
+  font-size: 2rem;
+}
+
+.count-up-container.small .count-up-prefix,
+.count-up-container.small .count-up-suffix {
+  font-size: 1.2rem;
+}
+
+/* Color Variants */
+.count-up-container.primary {
+  background: linear-gradient(135deg, #005BB5 0%, #008CFF 100%);
+  color: white;
+}
+
+.count-up-container.primary .count-up-value,
+.count-up-container.primary .count-up-prefix,
+.count-up-container.primary .count-up-suffix {
+  color: white;
+}
+
+.count-up-container.primary .count-up-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.count-up-container.success {
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  color: white;
+}
+
+.count-up-container.success .count-up-value,
+.count-up-container.success .count-up-prefix,
+.count-up-container.success .count-up-suffix {
+  color: white;
+}
+
+.count-up-container.success .count-up-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.count-up-container.warning {
+  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+  color: white;
+}
+
+.count-up-container.warning .count-up-value,
+.count-up-container.warning .count-up-prefix,
+.count-up-container.warning .count-up-suffix {
+  color: white;
+}
+
+.count-up-container.warning .count-up-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes countUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.count-up-container.animating .count-up-value {
+  animation: countUp 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .count-up-container {
+    padding: 1rem;
+  }
+  
+  .count-up-value {
+    font-size: 2.5rem;
+  }
+  
+  .count-up-prefix,
+  .count-up-suffix {
+    font-size: 1.3rem;
+  }
+  
+  .count-up-label {
+    font-size: 0.9rem;
+  }
+  
+  .count-up-container.large .count-up-value {
+    font-size: 3rem;
+  }
+  
+  .count-up-container.small .count-up-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .count-up-value {
+    font-size: 2rem;
+  }
+  
+  .count-up-prefix,
+  .count-up-suffix {
+    font-size: 1.1rem;
+  }
+  
+  .count-up-label {
+    font-size: 0.8rem;
+  }
+}

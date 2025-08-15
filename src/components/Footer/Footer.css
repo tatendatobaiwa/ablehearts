@@ -1,0 +1,238 @@
+:root {
+  --footer-bg: #043F70;
+  --footer-text-color: #FFFFFF;
+  --footer-heading-color: #F4BC2A;
+  --footer-link-hover-color: #CC9917;
+  --footer-quote-bg: #00345E;
+  --footer-font: 'Poppins', sans-serif;
+}
+
+footer {
+  margin: 0 auto;
+  background: var(--footer-bg);
+  color: var(--footer-text-color);
+  width: 100%;
+  text-align: left;
+  font-family: var(--footer-font);
+  padding: 2rem 0 0; /* Add padding at the top, bottom padding handled by footer-bottom */
+  z-index: 5; /* Ensure it's above some elements if needed, but below header overlay */
+}
+
+.footer-content { /* Renamed from .container to avoid conflict if .container has specific layout elsewhere */
+  max-width: 1200px; /* Or your preferred max-width */
+  margin: 0 auto;
+  padding: 0 1rem; /* Horizontal padding for content within the footer */
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem; /* Adds space between columns */
+  margin-bottom: 2rem; /* Space before the quote/bottom */
+}
+
+.footer-column {
+  flex: 1 1 220px; /* Allow columns to grow and shrink, with a base size */
+  padding: 0 15px; /* Keep your column padding */
+  box-sizing: border-box;
+  min-width: 200px; /* Prevent columns from becoming too narrow */
+}
+
+.footer-logo-column .ablehearts-logo-list {
+  padding-left: 0;
+  margin: 0; /* Reset default ul margin */
+  list-style: none; /* Remove bullet point if li is used */
+}
+
+.footer-logo-column .ablehearts-logo-list li {
+    display: flex; /* Helps with alignment if needed */
+    justify-content: flex-start; /* Align logo to the start on larger screens */
+}
+
+
+.ablehearts-footer-logo {
+  height: 90px; /* Adjusted default height */
+  width: auto;
+  /* padding: 2rem; */ /* Padding might be better on the container or column */
+}
+
+h4.footer-heading {
+  color: var(--footer-heading-color);
+  font-size: 1.5rem; /* Adjusted for better hierarchy */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: 0; /* Remove default top margin from h4 */
+}
+
+.footer-links { /* Common class for lists of links */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem; /* Base font size for links */
+  font-weight: 400;
+}
+
+.offices-item, .contact-item {
+  margin-bottom: 0.75rem; /* Consistent spacing */
+}
+
+.offices-item a, .contact-item a { /* Assuming contact items might become links */
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.offices-item a:hover, .contact-item a:hover {
+  color: var(--footer-link-hover-color);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+}
+
+.contact-item .icon {
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  height: 24px; /* Standardized icon size */
+  width: 24px;
+}
+
+.contact-item span {
+  white-space: normal; /* Allow text to wrap if needed */
+  word-break: break-word; /* Break long email/strings */
+}
+
+.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-icons li img {
+  height: 30px; /* Keep your desired size */
+  width: 30px;
+  vertical-align: middle;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons li a:hover img {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.footer-quote {
+  background-color: var(--footer-quote-bg);
+  color: var(--footer-text-color);
+  text-align: center; /* Centered quote is common */
+  padding: 1.5rem 1rem;
+  font-weight: 600;
+  font-size: 1.25rem; /* Adjusted size */
+  margin: 2rem 0; /* Space around the quote */
+  border-radius: 4px; /* Optional: slightly rounded corners */
+}
+
+.footer-bottom {
+  width: 100%;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.footer-bottom p {
+  color: var(--footer-text-color);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-bottom a {
+  text-decoration: none;
+  color: var(--footer-heading-color);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom a:hover {
+  color: var(--footer-link-hover-color);
+  opacity: 0.9;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 1023px) {
+  .footer-column {
+    flex-basis: calc(50% - 2rem); /* Adjust basis considering gap */
+    min-width: unset; /* Allow more fluid wrapping */
+  }
+  .footer-logo-column .ablehearts-logo-list li {
+    justify-content: center; /* Center logo when columns stack */
+  }
+  .ablehearts-footer-logo {
+    height: 100px; /* Slightly larger for tablet */
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-wrapper {
+    flex-direction: column; /* Stack columns */
+    align-items: center; /* Center columns when stacked */
+    text-align: center; /* Center text within columns */
+  }
+  .footer-column {
+    flex-basis: 100%; /* Full width for stacked columns */
+    margin-bottom: 1.5rem; /* Space between stacked columns */
+    padding: 0; /* Reset padding if centered */
+  }
+  .footer-logo-column .ablehearts-logo-list li,
+  .contact-info,
+  .social-icons {
+    justify-content: center; /* Center items within these sections */
+  }
+  .contact-item {
+    justify-content: center; /* Center individual contact items */
+    text-align: left; /* Keep text left aligned within the item if preferred */
+    width: auto; /* Allow item to size to content */
+    max-width: 300px; /* Prevent very long contact items from stretching too far */
+  }
+  h4.footer-heading {
+    font-size: 1.35rem;
+  }
+  .footer-links {
+    font-size: 1rem;
+  }
+  .ablehearts-footer-logo {
+    height: 80px;
+  }
+  .footer-quote {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h4.footer-heading {
+    font-size: 1.25rem;
+  }
+  .footer-links {
+    font-size: 0.9rem;
+  }
+  .contact-item span {
+    font-size: 0.9rem;
+  }
+  .ablehearts-footer-logo {
+    height: 70px;
+  }
+  .social-icons li img {
+    height: 26px;
+    width: 26px;
+  }
+  .footer-quote {
+    font-size: 1rem;
+  }
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
+}

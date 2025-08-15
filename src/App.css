@@ -1,0 +1,69 @@
+/* Global Styles */
+.app-content {
+  position: relative;
+  z-index: 1;
+  background-color: transparent; /* Ensure content area doesn't hide blobs */
+}
+
+/* App.css or index.css */
+:root {
+  --header-height-desktop: 80px; /* Match Header.css */
+  --header-height-mobile: 70px;  /* Match Header.css */
+  /* --footer-height: 60px; /* Example: Define if your footer has a fixed known height */
+}
+
+/* Universal box-sizing and reset */
+html {
+  box-sizing: border-box;
+  height: 100%; /* Ensure html takes full height */
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0; /* Remove default margins from all elements */
+  padding: 0; /* Remove default padding from all elements */
+}
+
+body {
+  min-height: 100%;
+  font-family: 'Poppins', sans-serif; /* Or your default global font */
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--header-height-desktop); /* ONLY for the fixed header */
+  /* NO other padding or margin on the body itself */
+  background-color: #fff; /* Or your desired page background color */
+}
+
+.main-content {
+  flex: 1 0 auto; /* Allows content to grow and push footer down */
+  width: 100%;
+  /*
+    If you want a max-width for your content and to center it,
+    but have NO padding by default, do it like this:
+  */
+  /*
+  max-width: 1200px; // Example max width
+  margin-left: auto;   // Center the content block
+  margin-right: auto;  // Center the content block
+  */
+  /*
+    Any specific padding for the content of your pages should be applied
+    INSIDE this .main-content div, either on child elements or on a
+    page-specific wrapper.
+    For example, a page component might have:
+    <div style={{ padding: '1rem' }}> ... page content ... </div>
+  */
+}
+
+footer {
+  flex-shrink: 0; /* Prevents footer from shrinking */
+  width: 100%; /* Ensure footer is full width */
+}
+
+@media (max-width: 968px) { /* MOBILE_BREAKPOINT from Header.js */
+  body {
+    padding-top: var(--header-height-mobile);
+  }
+}

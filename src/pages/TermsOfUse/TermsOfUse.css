@@ -1,0 +1,236 @@
+:root {
+  --terms-font: 'Poppins', sans-serif;
+  --terms-primary-text: #043F70; /* Deep Blue */
+  --terms-secondary-text: #333;
+  --terms-tertiary-text: #555;
+  --terms-accent-color1: #005BB5; /* Lighter Blue for section titles */
+  --terms-accent-color2: #008CFF; /* Link color */
+  --terms-accent-hover-color: #004d99; /* Link hover */
+  --terms-bg-page: #FFFFFF;
+  --terms-bg-container: #FFFFFF;
+  --terms-bg-blobs: #f9f9f9;
+  --terms-border-color: #e0e0e0;
+  --terms-subtle-border-color: #eee;
+  --terms-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --terms-base-padding: 1.5rem;
+  --terms-large-padding: 2rem; /* For container */
+  --terms-header-padding: 2.5rem; /* For header within container */
+  --terms-section-margin: 2rem;
+  --terms-border-radius: 12px;
+  --terms-animation-duration: 0.8s; /* Slower fade for content pages */
+}
+
+.terms-page-wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  font-family: var(--terms-font);
+  background-color: var(--terms-bg-page); /* Fallback if blobs don't cover */
+}
+
+/* Initial Animation States & Transitions */
+.pre-animate {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-in-animate { /* Applied by JS when contentLoaded is true */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--terms-animation-duration) ease-out, transform var(--terms-animation-duration) ease-out;
+}
+/* Apply animation once content is loaded via JS state */
+.terms-page-wrapper.content-loaded .pre-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--terms-animation-duration) ease-out, transform var(--terms-animation-duration) ease-out;
+}
+
+
+/* Background Blobs */
+.terms-background-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--terms-bg-blobs);
+}
+.terms-blobg {
+  position: absolute;
+  width: clamp(400px, 50vw, 700px); /* Responsive blob size */
+  height: auto;
+  filter: blur(7px); /* Slightly more blur */
+  opacity: 0.5;
+  animation: termsFloat 22s infinite ease-in-out alternate;
+}
+.terms-blobg.blob-1 { top: -5%; left: -8%; animation-duration: 25s; }
+.terms-blobg.blob-2 { top: 15%; right: -12%; animation-duration: 28s; }
+.terms-blobg.blob-3 { bottom: -15%; left: -2%; animation-duration: 20s; }
+.terms-blobg.blob-4 { bottom: -25%; right: -8%; animation-duration: 26s; }
+
+@keyframes termsFloat { /* Renamed for specificity */
+  0% { transform: translateY(0px) translateX(0px) scale(1); }
+  100% { transform: translateY(-15px) translateX(10px) scale(1.03); }
+}
+/* Keep your specific moveBlob animations if you prefer more distinct paths */
+@keyframes moveBlob1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,20px) scale(1.1); } }
+@keyframes moveBlob2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-20px,30px) scale(1.15); } }
+@keyframes moveBlob3 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
+@keyframes moveBlob4 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-25px,-25px) scale(1.12); } }
+
+
+/* Terms of Use Container */
+.terms-of-use-container {
+  max-width: 850px; /* Slightly wider for readability */
+  margin: var(--terms-large-padding) auto; /* Top/bottom margin */
+  padding: var(--terms-header-padding); /* Generous padding */
+  background-color: var(--terms-bg-container);
+  border-radius: var(--terms-border-radius);
+  box-shadow: var(--terms-card-shadow);
+  color: var(--terms-secondary-text);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Section */
+.terms-of-use-header {
+  position: relative; 
+  background: transparent;
+  text-align: center;
+  margin-bottom: var(--terms-header-padding);
+  padding-bottom: var(--terms-base-padding);
+  border-bottom: 1px solid var(--terms-border-color);
+  border-radius: 12px;
+
+}
+.terms-of-use-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--terms-primary-text);
+  margin: 0;
+}
+.terms-of-use-intro {
+  margin-top: 0.75rem; /* Increased margin */
+  font-size: 0.95rem; /* Slightly larger */
+  color: var(--terms-tertiary-text);
+}
+
+/* Content Sections */
+.terms-of-use-section {
+  margin-bottom: var(--terms-section-margin);
+}
+.terms-of-use-section:last-child {
+  margin-bottom: 0;
+}
+.terms-of-use-section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--terms-accent-color1);
+  margin-bottom: 1.2rem; /* Increased margin */
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--terms-subtle-border-color);
+}
+.terms-of-use-text {
+  margin-bottom: 1rem;
+  color: var(--terms-secondary-text);
+}
+
+/* List Styling */
+.terms-of-use-list {
+  list-style-type: disc; /* Or 'circle' or custom */
+  padding-left: 2.5rem; /* More indentation */
+  margin-bottom: 1rem;
+}
+.terms-of-use-item {
+  margin-bottom: 0.8rem; /* More spacing */
+  color: var(--terms-secondary-text);
+}
+.terms-of-use-item::marker { /* Style list markers if desired */
+  color: var(--terms-accent-color1);
+}
+
+/* Link Styling */
+.terms-of-use-link,
+.terms-of-use-email {
+  color: var(--terms-accent-color2);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent; /* Prepare for hover effect */
+  transition: color var(--terms-transition-duration) ease, border-color var(--terms-transition-duration) ease;
+}
+.terms-of-use-link:hover,
+.terms-of-use-email:hover,
+.terms-of-use-link:focus, /* Added focus state */
+.terms-of-use-email:focus {
+  color: var(--terms-accent-hover-color);
+  border-bottom-color: var(--terms-accent-hover-color); /* Underline on hover/focus */
+  outline: none; /* Remove default focus outline if custom is applied */
+}
+
+/* Email Contact Styling */
+.terms-of-use-contact {
+  font-size: 1.1rem;
+  margin-top: var(--terms-section-margin);
+  color: var(--terms-secondary-text);
+  padding-top: var(--terms-base-padding);
+  border-top: 1px solid var(--terms-subtle-border-color); /* Separator before contact */
+}
+.terms-of-use-contact .terms-of-use-email {
+  margin-left: 0.5ch; /* Space before email link */
+}
+
+/* Responsive Design */
+@media (max-width: 992px) { /* Tablet */
+  .terms-of-use-container {
+    margin: var(--terms-base-padding) var(--terms-base-padding);
+    padding: var(--terms-large-padding);
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .terms-of-use-container {
+    margin: var(--terms-base-padding) var(--terms-base-padding); /* Consistent with tablet */
+    padding: var(--terms-base-padding);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Softer shadow on mobile */
+  }
+  .terms-of-use-title {
+    font-size: 2.2rem;
+  }
+  .terms-of-use-section-title {
+    font-size: 1.45rem;
+  }
+  .terms-of-use-text,
+  .terms-of-use-intro,
+  .terms-of-use-item {
+    font-size: 0.95rem; /* Slightly more readable */
+    line-height: 1.7;
+  }
+  .terms-of-use-list {
+    padding-left: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) { /* Smaller Mobile */
+  .terms-page-wrapper {
+    padding: var(--terms-base-padding) 0.75rem; /* Less horizontal padding */
+  }
+  .terms-of-use-container {
+    margin: 0.75rem;
+    padding: 1.2rem;
+  }
+  .terms-of-use-title {
+    font-size: 1.9rem;
+  }
+  .terms-of-use-section-title {
+    font-size: 1.25rem;
+  }
+  .terms-of-use-text,
+  .terms-of-use-intro,
+  .terms-of-use-item {
+    font-size: 0.9rem;
+  }
+}

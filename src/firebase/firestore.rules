@@ -1,0 +1,15 @@
+    rules_version = '2';
+    service cloud.firestore {
+      match /databases/{database}/documents {
+        // Allow read/write to 'newsletter_subscribers' for anyone
+        match /newsletter_subscribers/{document=**} {
+          allow read, write: if true; // THIS IS INSECURE FOR PRODUCTION
+        }
+
+        // Keep other rules as they are, or restrict access to other collections
+        // For example, if you have other collections:
+        // match /{path=**} {
+        //   allow read, write: if request.auth != null; // Only authenticated users
+        // }
+      }
+    }
