@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"; 
+import { BrowserRouter, Routes, Route } from "react-router-dom"; 
 import Header from './components/Header/Header.jsx';
 import Footer from "./components/Footer/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
@@ -29,34 +29,34 @@ function App() {
     <ErrorBoundary>
       <SecurityProvider>
         <MobileOptimizer>
-          <div className="app-content" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-            <ScrollToTop />
-            <ErrorBoundary fallback={<div>Header failed to load</div>}>
-              <Header />
-            </ErrorBoundary>
-            
-            <main role="main" style={{ flex: '1 0 auto' }}>
-              <ErrorBoundary fallback={<div>Page failed to load</div>}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/programs-and-initiatives" element={<ProgramsAndInitiatives />} />
-                  <Route path="/get-involved" element={<GetInvolved />} />
-                  <Route path="/shop" element={<Shop />} />
-                  <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/terms-of-use" element={<TermsOfUse />} />
-                  <Route path="/gallery" element={<Gallery />} />
-                  <Route path="/ablehearts-ub" element={<UBApp />} />
-                  <Route path="/ablehearts-biust" element={<BIUSTApp />} />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                </Routes>
+          <BrowserRouter basename="/ablehearts">
+            <div className="app-content" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+              <ScrollToTop />
+              <ErrorBoundary fallback={<div>Header failed to load</div>}>
+                <Header />
               </ErrorBoundary>
-            </main>
-            
-            <ErrorBoundary fallback={<div>Footer failed to load</div>}>
-              <Footer />
-            </ErrorBoundary>
-            <CookieConsent />
-          </div>
+              <main role="main" style={{ flex: '1 0 auto' }}>
+                <ErrorBoundary fallback={<div>Page failed to load</div>}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/programs-and-initiatives" element={<ProgramsAndInitiatives />} />
+                    <Route path="/get-involved" element={<GetInvolved />} />
+                    <Route path="/shop" element={<Shop />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/terms-of-use" element={<TermsOfUse />} />
+                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/ablehearts-ub" element={<UBApp />} />
+                    <Route path="/ablehearts-biust" element={<BIUSTApp />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  </Routes>
+                </ErrorBoundary>
+              </main>
+              <ErrorBoundary fallback={<div>Footer failed to load</div>}>
+                <Footer />
+              </ErrorBoundary>
+              <CookieConsent />
+            </div>
+          </BrowserRouter>
         </MobileOptimizer>
       </SecurityProvider>
     </ErrorBoundary>
