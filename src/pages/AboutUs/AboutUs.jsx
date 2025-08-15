@@ -1,3 +1,4 @@
+import thefounderphoto from '@/assets/fixed/thefounderphoto.webp';
 import { useEffect, useState } from 'react';
 import './AboutUs.css';
 import ubLogo from '@/assets/fixed/icons/ub.webp';
@@ -115,7 +116,7 @@ const AboutUs = () => {
         <div className="founder-card">
           <div className="founder-image-wrapper">
             <img
-              src={require('@/assets/fixed/thefounderphoto.webp')}
+              src={thefounderphoto}
               alt="Sakshi Bhargava, Founder of Able Hearts Foundation"
               className="founder-image"
             />
