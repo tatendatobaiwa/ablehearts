@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './AboutUs.css';
-import ubLogo from '/src/assets/fixed/icons/ub.webp';
-import biustLogo from '/src/assets/fixed/icons/biust.webp';
+import ubLogo from '@/assets/fixed/icons/ub.webp';
+import biustLogo from '@/assets/fixed/icons/biust.webp';
 import AnimatedNumber from '../../components/AnimatedNumber';
 
 
@@ -22,14 +22,14 @@ const blobImages = [
 const ubPresident = {
   name: 'Banoziba Gombalume',
   role: 'President',
-  image: '/src/assets/fixed/bano.jpg',
+  image: '@/assets/fixed/bano.jpg',
   linkedin: 'https://www.linkedin.com/in/banoziba-gombalume-b86018199/', // Placeholder link
 };
 
 const biustPresident = {
   name: 'Kgosi Moagi-Angaman',
   role: 'President',
-  image: '/src/assets/fixed/kgosi.jpg',
+  image: '@/assets/fixed/kgosi.jpg',
 };
 
 const AboutUs = () => {
@@ -115,7 +115,7 @@ const AboutUs = () => {
         <div className="founder-card">
           <div className="founder-image-wrapper">
             <img
-              src="/src/assets/fixed/thefounderphoto.webp" 
+              src={require('@/assets/fixed/thefounderphoto.webp')}
               alt="Sakshi Bhargava, Founder of Able Hearts Foundation"
               className="founder-image"
             />

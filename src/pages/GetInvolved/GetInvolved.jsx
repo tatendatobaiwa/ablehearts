@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import scribble from '/src/assets/fixed/icons/scribblebackground.webp';
-import DonationForm from '/src/components/DonationForm.jsx';
+import scribble from '@/assets/fixed/icons/scribblebackground.webp';
+import DonationForm from '@/components/DonationForm.jsx';
 import './GetInvolved.css';
 
-const blobImages = [
-  '/src/assets/fixed/icons/blob1.webp',
-  '/src/assets/fixed/icons/blob3.webp',
-  '/src/assets/fixed/icons/blob4.webp',
-  '/src/assets/fixed/icons/blob2.webp',
-];
+import blob1 from '@/assets/fixed/icons/blob1.webp';
+import blob2 from '@/assets/fixed/icons/blob2.webp';
+import blob3 from '@/assets/fixed/icons/blob3.webp';
+import blob4 from '@/assets/fixed/icons/blob4.webp';
+import ubVolunteers from '@/assets/fixed/ubvolunteers.webp';
+import chescover from '@/assets/fixed/chesirefoundation/chescover.webp';
+import partner from '@/assets/fixed/partner.webp';
+const blobImages = [blob1, blob3, blob4, blob2];
 
 const GetInvolved = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -105,7 +107,7 @@ const GetInvolved = () => {
             </div>
             <div className="right-content">
               <img
-                src="/src/assets/fixed/ubvolunteers.webp"
+                src={ubVolunteers}
                 alt="AbleHearts University of Botswana student volunteers group photo."
                 className="placeholder-image"
                 loading="lazy"
@@ -131,7 +133,7 @@ const GetInvolved = () => {
             </div>
             <div className="right-content">
               <img
-                src="/src/assets/fixed/chesirefoundation/chescover.webp"
+                src={chescover}
                 alt="AbleHearts BIUST student volunteers."
                 className="placeholder-image"
                 loading="lazy"
@@ -165,7 +167,7 @@ const GetInvolved = () => {
             </div>
             <div className="right-content partnership-image-container" style={{ padding: '0' }}>
               <img
-                src="/src/assets/fixed/partner.webp"
+                src={partner}
                 alt="Hands shaking, symbolizing partnership."
                 className="placeholder-image"
                 style={{ borderRadius: '0' }}

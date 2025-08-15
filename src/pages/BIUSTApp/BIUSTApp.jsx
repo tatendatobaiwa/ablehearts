@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import { useNavigate } from 'react-router-dom';
 import './BIUSTApp.css';
-import countryCodes from '/src/data/countryCodes.json';
+import countryCodes from '@/data/countryCodes.json';
 
 
-const blobImages = [
-  '/src/assets/fixed/icons/blob1.webp',
-  '/src/assets/fixed/icons/blob3.webp',
-  '/src/assets/fixed/icons/blob4.webp',
-  '/src/assets/fixed/icons/blob2.webp',
-];
+import blob1 from '@/assets/fixed/icons/blob1.webp';
+import blob2 from '@/assets/fixed/icons/blob2.webp';
+import blob3 from '@/assets/fixed/icons/blob3.webp';
+import blob4 from '@/assets/fixed/icons/blob4.webp';
+import biustLogo from '@/assets/fixed/icons/biust.webp';
+const blobImages = [blob1, blob3, blob4, blob2];
 
 const BIUSTApp = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', reason: '', message: '', countryCode: '+267' });
@@ -93,7 +93,7 @@ const BIUSTApp = () => {
       </div>
       <div className="biust-app-container">
         <div className="biust-app-logo-container pre-animate">
-          <img src="/src/assets/fixed/icons/biust.webp" alt="biust Logo" className="biust-app-logo" 
+          <img src={biustLogo} alt="biust Logo" className="biust-app-logo" 
           width="90"
           height="90"
           />

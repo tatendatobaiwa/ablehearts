@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import { useNavigate } from 'react-router-dom';
 import './UBApp.css';
-import countryCodes from '/src/data/countryCodes.json';
+import countryCodes from '@/data/countryCodes.json';
 import Footer from '../../components/Footer/Footer';
 
-const blobImages = [
-  '/src/assets/fixed/icons/blob1.webp',
-  '/src/assets/fixed/icons/blob3.webp',
-  '/src/assets/fixed/icons/blob4.webp',
-  '/src/assets/fixed/icons/blob2.webp',
-];
+import blob1 from '@/assets/fixed/icons/blob1.webp';
+import blob2 from '@/assets/fixed/icons/blob2.webp';
+import blob3 from '@/assets/fixed/icons/blob3.webp';
+import blob4 from '@/assets/fixed/icons/blob4.webp';
+import ubLogo from '@/assets/fixed/icons/ub.webp';
+const blobImages = [blob1, blob3, blob4, blob2];
 
 const UBApp = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', reason: '', message: '', countryCode: '+267' });
@@ -92,7 +92,7 @@ const UBApp = () => {
       </div>
       <div className="ub-app-container">
         <div className="ub-app-logo-container pre-animate">
-          <img src="/src/assets/fixed/icons/ub.webp" alt="UB Logo" className="ub-app-logo" 
+          <img src={ubLogo} alt="UB Logo" className="ub-app-logo" 
           width="90"
           height="90"
           />

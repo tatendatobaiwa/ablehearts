@@ -9,17 +9,17 @@ import './Shop.css';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import SimpleSEO from '../../components/SEO/SimpleSEO';
 
-import blob1 from '/src/assets/fixed/icons/blob1.webp';
-import blob2 from '/src/assets/fixed/icons/blob2.webp';
-import blob3 from '/src/assets/fixed/icons/blob3.webp';
-import blob4 from '/src/assets/fixed/icons/blob4.webp';
+import blob1 from '@/assets/fixed/icons/blob1.webp';
+import blob2 from '@/assets/fixed/icons/blob2.webp';
+import blob3 from '@/assets/fixed/icons/blob3.webp';
+import blob4 from '@/assets/fixed/icons/blob4.webp';
 
-import whiteTfront from '/src/assets/fixed/merch/whiteTfront.webp';
-import whiteTback from '/src/assets/fixed/merch/whiteTback.webp';
-import whitejersey1 from '/src/assets/fixed/merch/whitejersey1.webp';
-import whitejersey2 from '/src/assets/fixed/merch/whitejersey2.webp';
-import blackjerseyfront from '/src/assets/fixed/merch/blackjerseyfront.webp';
-import blackjerseyback from '/src/assets/fixed/merch/blackjerseyback.webp';
+import whiteTfront from '@/assets/fixed/merch/whiteTfront.webp';
+import whiteTback from '@/assets/fixed/merch/whiteTback.webp';
+import whitejersey1 from '@/assets/fixed/merch/whitejersey1.webp';
+import whitejersey2 from '@/assets/fixed/merch/whitejersey2.webp';
+import blackjerseyfront from '@/assets/fixed/merch/blackjerseyfront.webp';
+import blackjerseyback from '@/assets/fixed/merch/blackjerseyback.webp';
 
 const BLOB_IMAGE_IMPORTS = [blob1, blob3, blob4, blob2];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
