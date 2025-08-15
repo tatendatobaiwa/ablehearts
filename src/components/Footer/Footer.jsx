@@ -20,7 +20,7 @@ const Footer = () => {
               <ul className="ablehearts-logo-list">
                 <li>
                   <Link to="/">
-                    <img src={ablehearts} alt="AbleHearts Foundation Logo" className="ablehearts-footer-logo" />
+                    <img src={ablehearts} alt="AbleHearts Foundation Logo" className="ablehearts-footer-logo" loading="lazy" width="120" height="40" srcSet={ablehearts + ' 1x, ' + ablehearts + ' 2x'} />
                   </Link>
                 </li>
               </ul>
@@ -54,15 +54,15 @@ const Footer = () => {
               <h4 className="footer-heading">Contact Us</h4>
               <ul className="contact-info footer-links">
                 <li className="contact-item">
-                  <img src={mailIcon} alt="Mail Icon" className="icon" />
+                  <img src={mailIcon} alt="Mail Icon" className="icon" loading="lazy" width="24" height="24" srcSet={mailIcon + ' 1x, ' + mailIcon + ' 2x'} />
                   <span>ableheartsfoundation@gmail.com</span>
                 </li>
                 <li className="contact-item">
-                  <img src={phoneIcon} alt="Phone Icon" className="icon" />
+                  <img src={phoneIcon} alt="Phone Icon" className="icon" loading="lazy" width="24" height="24" srcSet={phoneIcon + ' 1x, ' + phoneIcon + ' 2x'} />
                   <span>+267 71 422 300</span>
                 </li>
                 <li className="contact-item">
-                  <img src={locationlogo} alt="Location Pin Icon" className="icon" />
+                  <img src={locationlogo} alt="Location Pin Icon" className="icon" loading="lazy" width="24" height="24" srcSet={locationlogo + ' 1x, ' + locationlogo + ' 2x'} />
                   <span>Botswana</span>
                 </li>
               </ul>
@@ -77,7 +77,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label="AbleHearts on Facebook"
                   >
-                    <img src={facebookIcon} alt="Facebook logo" />
+                    <img src={facebookIcon} alt="Facebook logo" loading="lazy" width="24" height="24" srcSet={facebookIcon + ' 1x, ' + facebookIcon + ' 2x'} />
                   </a>
                 </li>
                 <li>
@@ -87,7 +87,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label="AbleHearts on Instagram"
                   >
-                    <img src={instagramIcon} alt="Instagram logo" />
+                    <img src={instagramIcon} alt="Instagram logo" loading="lazy" width="24" height="24" srcSet={instagramIcon + ' 1x, ' + instagramIcon + ' 2x'} />
                   </a>
                 </li>
                 <li>
@@ -97,7 +97,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label="AbleHearts on WhatsApp"
                   >
-                    <img src={whatsapplogo} alt="Whatsapp logo" />
+                    <img src={whatsapplogo} alt="Whatsapp logo" loading="lazy" width="24" height="24" srcSet={whatsapplogo + ' 1x, ' + whatsapplogo + ' 2x'} />
                   </a>
                 </li>
               </ul>

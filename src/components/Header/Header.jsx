@@ -56,7 +56,7 @@ const Header = memo(() => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
       <div className="header-container">
         <Link to="/" className="header-logo" aria-label="AbleHearts Foundation Home">
-          <img src={logo} alt="AbleHearts Foundation Logo" />
+          <img src={logo} alt="AbleHearts Foundation Logo" loading="lazy" width="120" height="40" srcSet={logo + ' 1x, ' + logo + ' 2x'} />
         </Link>
         
         <nav className="header-nav" role="navigation" aria-label="Main navigation">

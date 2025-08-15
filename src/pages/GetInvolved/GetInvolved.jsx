@@ -113,6 +113,7 @@ const GetInvolved = () => {
                 loading="lazy"
                 width="500"
                 height="300"
+                srcSet={ubVolunteers + ' 1x, ' + ubVolunteers + ' 2x'}
               />
             </div>
           </section>
@@ -139,6 +140,7 @@ const GetInvolved = () => {
                 loading="lazy"
                 width="500"
                 height="300"
+                srcSet={chescover + ' 1x, ' + chescover + ' 2x'}
               />
             </div>
           </section>
@@ -148,6 +150,7 @@ const GetInvolved = () => {
               <img src={scribble} alt=""
                 loading="lazy" width="1000"
                 height="1280"
+                srcSet={scribble + ' 1x, ' + scribble + ' 2x'}
               />
             </div>
             <div className="partnership-left-content">
@@ -174,6 +177,7 @@ const GetInvolved = () => {
                 loading="lazy"
                 width="500"
                 height="300"
+                srcSet={partner + ' 1x, ' + partner + ' 2x'}
               />
             </div>
           </section>

@@ -62,6 +62,7 @@ const ProductCard = memo(({ product, onOpenModal }) => (
       loading="lazy"
       width="300"
       height="300"
+      srcSet={product.images[0] + ' 1x, ' + product.images[0] + ' 2x'}
     />
     <h2 className="product-title-shop">{product.name}</h2>
     <p className="product-price-shop">P{product.price.toFixed(2)}</p>
@@ -347,7 +348,7 @@ const Shop = () => {
           ) : (
             safeMap(cart, (item) => (
               <div key={item.id} className="cart-item">
-                <img src={item.image} alt={item.name} className="cart-item-image" />
+                <img src={item.image} alt={item.name} className="cart-item-image" loading="lazy" width="100" height="100" srcSet={item.image + ' 1x, ' + item.image + ' 2x'} />
                 <div className="cart-item-details">
                   <h4>{item.name}</h4>
                   <p>Size: {item.size}, Qty: {item.quantity}</p>
@@ -396,7 +397,7 @@ const Shop = () => {
 
       {enlargedImage && (
         <div className="enlarged-image-overlay" onClick={closeEnlargedImage} role="dialog" aria-modal="true" aria-label="Enlarged product image">
-          <img src={enlargedImage} alt="Enlarged product view" className="enlarged-image-content" onClick={(e) => e.stopPropagation()} />
+          <img src={enlargedImage} alt="Enlarged product view" className="enlarged-image-content" onClick={(e) => e.stopPropagation()} loading="lazy" width="400" height="400" srcSet={enlargedImage + ' 1x, ' + enlargedImage + ' 2x'} />
           <button className="modal-close-button enlarged-image-close-btn" onClick={closeEnlargedImage} aria-label="Close enlarged image"><X size={28}/></button>
         </div>
       )}

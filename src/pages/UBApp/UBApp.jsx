@@ -95,6 +95,8 @@ const UBApp = () => {
           <img src={ubLogo} alt="UB Logo" className="ub-app-logo" 
           width="90"
           height="90"
+          loading="lazy"
+          srcSet={ubLogo + ' 1x, ' + ubLogo + ' 2x'}
           />
         </div>
 

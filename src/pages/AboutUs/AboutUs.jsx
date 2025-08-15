@@ -187,12 +187,12 @@ const AboutUs = () => {
       <section className="about-section team-section pre-animate">
         <h2 className="section-title">Meet Our Branch Presidents</h2>
         <div className="team-branch">
-          <img src={ubLogo} alt="UB Logo" className="branch-logo" width="60" height="60"/>
+          <img src={ubLogo} alt="UB Logo" className="branch-logo" width="60" height="60" loading="lazy" srcSet={ubLogo + ' 1x, ' + ubLogo + ' 2x'} />
           <h3 className="branch-title">University of Botswana Branch</h3>
           <div className="team-grid">
             <div className="team-member-card" key={ubPresident.name}>
               <a href={ubPresident.linkedin} target="_blank" rel="noopener noreferrer">
-                <img src={ubPresident.image} alt={ubPresident.name} className="team-member-image" width="150" height="150"/>
+                <img src={ubPresident.image} alt={ubPresident.name} className="team-member-image" width="150" height="150" loading="lazy" srcSet={ubPresident.image + ' 1x, ' + ubPresident.image + ' 2x'} />
               </a>
               <h4 className="team-member-name">{ubPresident.name}</h4>
               <p className="team-member-role">{ubPresident.role}</p>
@@ -200,12 +200,12 @@ const AboutUs = () => {
           </div>
         </div>
         <div className="team-branch">
-          <img src={biustLogo} alt="BIUST Logo" className="branch-logo" width="60" height="60"/>
+          <img src={biustLogo} alt="BIUST Logo" className="branch-logo" width="60" height="60" loading="lazy" srcSet={biustLogo + ' 1x, ' + biustLogo + ' 2x'} />
           <h3 className="branch-title">BIUST Branch</h3>
           <div className="team-grid">
             <div className="team-member-card" key={biustPresident.name}>
               <a href={biustPresident.linkedin} target="_blank" rel="noopener noreferrer">
-                <img src={biustPresident.image} alt={biustPresident.name} className="team-member-image" width="150" height="150"/>
+                <img src={biustPresident.image} alt={biustPresident.name} className="team-member-image" width="150" height="150" loading="lazy" srcSet={biustPresident.image + ' 1x, ' + biustPresident.image + ' 2x'} />
               </a>
               <h4 className="team-member-name">{biustPresident.name}</h4>
               <p className="team-member-role">{biustPresident.role}</p>

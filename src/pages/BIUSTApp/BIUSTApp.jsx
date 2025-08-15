@@ -96,6 +96,8 @@ const BIUSTApp = () => {
           <img src={biustLogo} alt="biust Logo" className="biust-app-logo" 
           width="90"
           height="90"
+          loading="lazy"
+          srcSet={biustLogo + ' 1x, ' + biustLogo + ' 2x'}
           />
         </div>
 

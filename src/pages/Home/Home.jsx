@@ -212,9 +212,9 @@ const Home = () => {
 
         <div className="mission-container pre-animate">
           <div className="home-background-blobs" aria-hidden="true">
-            <img src={getImageUrl('blob2')} alt="" className="home-blobg blob-1" loading="lazy" width={480} height={556} onError={handleImageError} />
-            <img src={getImageUrl('blob3')} alt="" className="home-blobg blob-2" loading="lazy" width={516} height={556} onError={handleImageError} />
-            <img src={getImageUrl('blob4')} alt="" className="home-blobg blob-3" loading="lazy" width={516} height={596} onError={handleImageError} />
+            <img src={getImageUrl('blob2')} alt="" className="home-blobg blob-1" loading="lazy" width={480} height={556} onError={handleImageError} srcSet={getImageUrl('blob2') + ' 1x, ' + getImageUrl('blob2') + ' 2x'} />
+            <img src={getImageUrl('blob3')} alt="" className="home-blobg blob-2" loading="lazy" width={516} height={556} onError={handleImageError} srcSet={getImageUrl('blob3') + ' 1x, ' + getImageUrl('blob3') + ' 2x'} />
+            <img src={getImageUrl('blob4')} alt="" className="home-blobg blob-3" loading="lazy" width={516} height={596} onError={handleImageError} srcSet={getImageUrl('blob4') + ' 1x, ' + getImageUrl('blob4') + ' 2x'} />
           </div>
           <h2>Our Mission</h2>
           <p>
