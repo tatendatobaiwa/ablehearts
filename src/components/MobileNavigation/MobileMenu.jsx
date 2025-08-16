@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import mailIcon from "../../assets/fixed/icons/mail.webp";
+import phoneIcon from "../../assets/fixed/icons/call.webp";
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { safeMap, isValidArray } from '../../utils/safeArrayOperations';
 import { safeDocument } from '../../utils/safeDOMAccess';
@@ -191,7 +193,14 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
             <div className="mobile-menu-contact">
               <p>Contact</p>
               <a href="mailto:ableheartsfoundation@gmail.com">
+                <img src={mailIcon} alt="Mail Icon" className="icon" loading="lazy" width="24" height="24" srcSet={mailIcon + ' 1x, ' + mailIcon + ' 2x'} />
                 ableheartsfoundation@gmail.com
+              </a>
+            </div>
+            <div className="mobile-menu-contact">
+              <a>
+                <img src={phoneIcon} alt="Phone Icon" className="icon" loading="lazy" width="24" height="24" srcSet={phoneIcon + ' 1x, ' + phoneIcon + ' 2x'} />
+                +267 71 422 300
               </a>
             </div>
           </div>

@@ -287,6 +287,10 @@
   border: none;
   box-shadow: none;
   border-radius: 0;
+  max-width: 100%; /* Prevent overflow */
+  overflow: hidden; /* Hide any overflow */  
+  margin-bottom: 0.75rem;
+
 }
 
 .mobile-menu-contact p {
@@ -298,6 +302,9 @@
   letter-spacing: 1px;
 }
 
+.mobile-menu-contact img{
+    margin-right: 0.75rem;
+}
 .mobile-menu-contact a {
   color: var(--menu-text-primary);
   text-decoration: none;
@@ -306,9 +313,11 @@
   transition: var(--menu-transition);
   padding: 0;
   border-radius: 0;
-  display: block;
+  display: flex;
   background: none;
-  word-break: break-all;
+  flex: 1;
+  min-width: 0; /* Allow text to shrink below its content size */
+  line-height: 1.9; 
 }
 
 .mobile-menu-contact a:hover {
