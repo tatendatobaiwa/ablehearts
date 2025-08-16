@@ -19,15 +19,7 @@
   --input-border-color: #ccc;
 }
 
-/*
-  The .page-wrapper for the Home page can be used for specific background
-  or full-width elements if needed, but general page padding and max-width
-  should be handled by .main-content or a PageContainer component as discussed.
-*/
-.home-page-wrapper {
-  width: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll from animations/content */
-}
+/* Removed .home-page-wrapper styles as the wrapper div has been removed */
 
 
 .carousel-container {
@@ -159,12 +151,11 @@
 
 .home-background-blobs {
   opacity: 0.5; /* Softer blobs */
-  position: fixed; /* Relative to viewport */
-  top: 0;
-  left: 0;
+  position: absolute; /* Anchor to mission container to avoid nested scrolling */
+  inset: 0; /* Fill the mission container */
   width: 100%;
   height: 100%;
-  z-index: -1; /* Behind all page content */
+  z-index: -1; /* Behind page content within container */
   pointer-events: none;
   /* background-color: var(--background-color-medium); Removed, let body bg show */
 }

@@ -23,12 +23,12 @@ function App() {
     <ErrorBoundary>
       <SecurityProvider>
         <MobileOptimizer>
-          <div className="app-content" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <div className="app-content" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
             <ScrollToTop />
             <ErrorBoundary fallback={<div>Header failed to load</div>}>
               <Header />
             </ErrorBoundary>
-            <main role="main" style={{ flex: '1 0 auto' }}>
+            <main role="main" className="main-content">
               <ErrorBoundary fallback={<div>Page failed to load</div>}>
                 <Routes>
                   <Route path="/" element={<Home />} />

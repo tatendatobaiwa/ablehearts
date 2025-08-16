@@ -150,8 +150,6 @@ const Home = () => {
           }
         }}
       />
-      <div className="page-wrapper home-page-wrapper">
-      <div className="home-container">
         {isValidArray(slides) && (
           <div
             className="carousel-container pre-animate"
@@ -291,8 +289,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
     </>
   );
 };

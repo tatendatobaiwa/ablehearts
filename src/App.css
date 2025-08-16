@@ -27,18 +27,24 @@ html {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif; /* Or your default global font */
   display: flex;
   flex-direction: column;
   padding-top: var(--header-height-desktop); /* ONLY for the fixed header */
   /* NO other padding or margin on the body itself */
   background-color: #fff; /* Or your desired page background color */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Ensure body handles vertical scrolling */
 }
 
 .main-content {
   flex: 1 0 auto; /* Allows content to grow and push footer down */
   width: 100%;
+  /* Ensure main content doesn't create its own scrolling context */
+  overflow: visible;
+  /* Remove any height constraints that could cause nested scrolling */
+  min-height: 0; /* Allow content to shrink if needed */
   /*
     If you want a max-width for your content and to center it,
     but have NO padding by default, do it like this:
