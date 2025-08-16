@@ -110,9 +110,10 @@
 }
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 per row on desktop */
-  gap: var(--gallery-large-padding);
-  max-width: 1600px;
+  /* Auto-fit reduces empty space when item count is low */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gallery-base-padding);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--gallery-base-padding);
 }
@@ -274,13 +275,14 @@
 }
 .event-images-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Match events-grid default */
-  gap: var(--gallery-large-padding);
-  padding: var(--gallery-large-padding);
+  /* Auto-fit to collapse unused columns when fewer images */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gallery-base-padding);
+  padding: var(--gallery-base-padding);
   overflow-y: auto;
   flex-grow: 1;
   background-color: var(--gallery-bg-page);
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
