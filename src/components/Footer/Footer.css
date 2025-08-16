@@ -28,8 +28,9 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem; /* Adds space between columns */
+  gap: 1.5rem; /* Increased gap to provide more breathing room */
   margin-bottom: 2rem; /* Space before the quote/bottom */
+  align-items: flex-start; /* Align columns to the top */
 }
 
 .footer-column {
@@ -37,6 +38,10 @@ footer {
   padding: 0 15px; /* Keep your column padding */
   box-sizing: border-box;
   min-width: 200px; /* Prevent columns from becoming too narrow */
+  max-width: 100%; /* Prevent columns from exceeding container width */
+  overflow-wrap: break-word; /* Break long words if necessary */
+  word-wrap: break-word; /* Legacy support for older browsers */
+  hyphens: auto; /* Enable hyphenation where supported */
 }
 
 .footer-logo-column .ablehearts-logo-list {
@@ -90,6 +95,8 @@ h4.footer-heading {
 .contact-item {
   display: flex;
   align-items: center;
+  max-width: 100%; /* Prevent overflow */
+  overflow: hidden; /* Hide any overflow */
 }
 
 .contact-item .icon {
@@ -100,8 +107,13 @@ h4.footer-heading {
 }
 
 .contact-item span {
-  white-space: normal; /* Allow text to wrap if needed */
-  word-break: break-word; /* Break long email/strings */
+  flex: 1;
+  min-width: 0; /* Allow text to shrink below its content size */
+  overflow-wrap: break-word; /* Break long words like email addresses */
+  word-wrap: break-word; /* Legacy support */
+  word-break: break-all; /* Break at any character if needed for very long strings */
+  hyphens: auto; /* Enable hyphenation */
+  line-height: 1.4; /* Improve readability when text wraps */
 }
 
 .social-icons {
@@ -164,8 +176,9 @@ h4.footer-heading {
 /* Responsive Design Adjustments */
 @media (max-width: 1023px) {
   .footer-column {
-    flex-basis: calc(50% - 2rem); /* Adjust basis considering gap */
-    min-width: unset; /* Allow more fluid wrapping */
+    flex-basis: calc(50% - 1.5rem); /* Adjust basis considering increased gap */
+    min-width: 180px; /* Maintain minimum width for readability */
+    max-width: calc(50% - 1.5rem); /* Prevent columns from growing too large */
   }
   .footer-logo-column .ablehearts-logo-list li {
     justify-content: center; /* Center logo when columns stack */

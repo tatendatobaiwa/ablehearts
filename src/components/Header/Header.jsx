@@ -22,6 +22,10 @@ const Header = memo(() => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -87,10 +91,10 @@ const Header = memo(() => {
       </div>
       
       {isMobileMenuOpen && (
-        <MobileMenu 
+        <MobileMenu
           id="mobile-menu"
           isOpen={isMobileMenuOpen}
-          onClose={() => setMobileMenuOpen(false)}
+          onClose={closeMobileMenu}
           navigationItems={NAVIGATION_ITEMS}
         />
       )}
