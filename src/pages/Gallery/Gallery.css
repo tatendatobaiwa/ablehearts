@@ -279,7 +279,6 @@
   overflow-y: auto;
   flex-grow: 1;
   background-color: var(--gallery-bg-page);
-  justify-content: center; /* Center the grid items */
 }
 .event-image-card {
   position: relative;

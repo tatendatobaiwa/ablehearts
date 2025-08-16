@@ -378,8 +378,9 @@ const Gallery = () => {
                     src={image.url}
                     alt={image.caption || `Image from ${selectedEvent.title}`}
                     className="event-image-item"
-                    width={image.width}
-                    height={image.height}
+                    width={160}
+                    height={160}
+                    loading="lazy"
                   />
                   {image.caption && (
                     <div className="event-image-overlay">
