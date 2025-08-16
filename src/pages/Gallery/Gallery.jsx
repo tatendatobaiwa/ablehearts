@@ -39,6 +39,9 @@ const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  // Mobile-only image pagination inside modal
+  const [imagePage, setImagePage] = useState(1);
+  const [isMobileImages, setIsMobileImages] = useState(typeof window !== 'undefined' ? window.innerWidth <= 767 : false);
   const eventModalRef = useRef(null);
   const imageModalRef = useRef(null);
   const prevFocusBeforeEventRef = useRef(null);
@@ -50,6 +53,8 @@ const Gallery = () => {
   useEffect(() => {
     const handleResize = () => {
       setPageSize(window.innerWidth > 1200 ? 6 : 3);
+      setIsMobileImages(window.innerWidth <= 767);
+      setImagePage(1);
       setCurrentPage(1); // Reset to first page when page size changes
     };
     
@@ -85,6 +90,7 @@ const Gallery = () => {
     prevFocusBeforeEventRef.current = document.activeElement;
     setSelectedEvent(event);
     setSelectedImage(null);
+    setImagePage(1);
   }, []);
 
   const handleImageClick = useCallback((image) => {
@@ -235,6 +241,11 @@ const Gallery = () => {
     return () => modalEl.removeEventListener('keydown', onKeyDown);
   }, [selectedImage]);
 
+  // Reset image pagination when a new event is opened/changed
+  useEffect(() => {
+    if (selectedEvent) setImagePage(1);
+  }, [selectedEvent]);
+
   const memoizedBlobComponents = useMemo(() => safeMap(blobImagePaths, (blobSrc, index) => (
     <MemoizedImage
       key={`blob-${index}`}
@@ -363,36 +374,71 @@ const Gallery = () => {
               {selectedEvent.date && <p className="event-modal-date-text">{selectedEvent.date}</p>}
               <p id="event-modal-description-text" className="event-modal-description-text">{selectedEvent.description}</p>
             </div>
-            <div className="event-images-grid">
-              {safeMap(selectedEvent?.images, (image) => (
-                <div
-                  key={image.id}
-                  className="event-image-card"
-                  onClick={() => handleImageClick(image)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleImageClick(image)}
-                  aria-label={`View image: ${image.caption || 'Event image'}`}
-                >
-                  <div className="event-image-wrapper">
-                    <MemoizedImage
-                      src={image.url}
-                      alt={image.caption || `Image from ${selectedEvent.title}`}
-                      className="event-image-item"
-                      width={800}
-                      height={600}
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+            {(() => {
+              const allImages = Array.isArray(selectedEvent?.images) ? selectedEvent.images : [];
+              const perPage = isMobileImages ? 4 : allImages.length;
+              const totalImagePages = Math.max(1, Math.ceil(allImages.length / (perPage || 1)));
+              const clampedImgPage = Math.min(Math.max(1, imagePage), totalImagePages);
+              const imgStart = (clampedImgPage - 1) * perPage;
+              const visibleModalImages = allImages.slice(imgStart, imgStart + perPage);
+              const canPaginate = isMobileImages && allImages.length > perPage;
+              return (
+                <>
+                  <div className="event-images-grid">
+                    {safeMap(visibleModalImages, (image) => (
+                      <div
+                        key={image.id}
+                        className="event-image-card"
+                        onClick={() => handleImageClick(image)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleImageClick(image)}
+                        aria-label={`View image: ${image.caption || 'Event image'}`}
+                      >
+                        <MemoizedImage
+                          src={image.url}
+                          alt={image.caption || `Image from ${selectedEvent.title}`}
+                          className="event-image-item"
+                          width={800}
+                          height={600}
+                          loading="lazy"
+                        />
+                        {image.caption && (
+                          <div className="event-image-overlay">
+                            <p className="event-image-caption-text">{image.caption}</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                  {image.caption && (
-                    <div className="event-image-overlay">
-                      <p className="event-image-caption-text">{image.caption}</p>
-                    </div>
+                  {canPaginate && (
+                    <nav className="pagination image-pagination" aria-label="Image pagination">
+                      <button
+                        type="button"
+                        className="page-button"
+                        onClick={() => setImagePage((p) => Math.max(1, p - 1))}
+                        disabled={clampedImgPage === 1}
+                        aria-label="Previous images"
+                      >
+                        ‹
+                      </button>
+                      <span className="page-info" aria-live="polite">
+                        Images {imgStart + 1}-{Math.min(imgStart + perPage, allImages.length)} of {allImages.length}
+                      </span>
+                      <button
+                        type="button"
+                        className="page-button"
+                        onClick={() => setImagePage((p) => Math.min(totalImagePages, p + 1))}
+                        disabled={clampedImgPage === totalImagePages}
+                        aria-label="Next images"
+                      >
+                        ›
+                      </button>
+                    </nav>
                   )}
-                </div>
-              ))}
-            </div>
+                </>
+              );
+            })()}
           </div>
         </div>
       )}
