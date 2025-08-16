@@ -505,7 +505,7 @@
   .gallery-header p { font-size: clamp(0.9rem, 2.8vw, 1.05rem); }
 
   .events-grid {
-    grid-template-columns: 1fr 1fr; /* 2 per row by default under 768px */
+    grid-template-columns: 1fr 1fr; /* 2 per row on mobile */
     gap: var(--gallery-base-padding);
   }
    .event-card { /* If single column, allow more height */

@@ -44,7 +44,7 @@ const Gallery = () => {
   const prevFocusBeforeEventRef = useRef(null);
   const prevFocusBeforeImageRef = useRef(null);
 
-  // Show 3 events per page on smaller screens, 6 on larger screens
+  // Show 3 events per page on smaller screens, 6 on screens larger than 1200px
   const [pageSize, setPageSize] = useState(window.innerWidth > 1200 ? 6 : 3);
   
   useEffect(() => {
