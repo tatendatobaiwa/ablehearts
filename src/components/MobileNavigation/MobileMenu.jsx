@@ -77,6 +77,13 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
         aria-label="Mobile navigation menu"
       >
         <div className="mobile-menu-header">
+          <button
+            className="mobile-menu-close mobile-menu-close-small"
+            onClick={onClose}
+            aria-label="Close mobile menu"
+          >
+            <X size={20} />
+          </button>
           <img
             src={logo}
             alt="AbleHearts Foundation Logo"

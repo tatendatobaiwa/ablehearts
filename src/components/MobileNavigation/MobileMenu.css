@@ -45,13 +45,42 @@
   padding: 24px 20px;
   border-bottom: 1px solid var(--menu-border);
   width: 100%;
+  position: relative;
 }
 
 .mobile-menu-logo {
-  height: 32px;
+  height: 50px;
   width: auto;
   max-width: 100%;
   filter: brightness(1);
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  color: var(--menu-accent);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: var(--menu-transition);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-close:hover {
+  background: var(--menu-hover);
+}
+
+.mobile-menu-close:active {
+  transform: scale(0.95);
+}
+
+.mobile-menu-close-small {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .mobile-menu-content {

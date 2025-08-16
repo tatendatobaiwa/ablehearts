@@ -38,13 +38,24 @@ const Gallery = () => {
   const [isContentLoaded, setIsContentLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const eventModalRef = useRef(null);
   const imageModalRef = useRef(null);
   const prevFocusBeforeEventRef = useRef(null);
   const prevFocusBeforeImageRef = useRef(null);
 
-  // Show 3 events per page
-  const pageSize = 3;
+  // Show 3 events per page on smaller screens, 6 on larger screens
+  const [pageSize, setPageSize] = useState(window.innerWidth > 1200 ? 6 : 3);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setPageSize(window.innerWidth > 1200 ? 6 : 3);
+      setCurrentPage(1); // Reset to first page when page size changes
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   usePageFadeIn();
   useFadeInAnimation('.gallery-page-wrapper');
@@ -246,11 +257,16 @@ const Gallery = () => {
   const visibleEvents = galleryEventsData.slice(startIndex, startIndex + pageSize);
 
   const goToPage = useCallback((p) => {
+    setIsTransitioning(true);
     setCurrentPage(prev => {
       const next = Math.min(Math.max(1, typeof p === 'number' ? p : prev), totalPages);
       return next;
     });
-    // Do not force scroll on page change
+    
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
   }, [totalPages]);
 
   const nextPage = useCallback(() => goToPage(clampedPage + 1), [goToPage, clampedPage]);
@@ -274,7 +290,7 @@ const Gallery = () => {
       </header>
 
       <main className={`gallery-main-content pre-animate`} aria-hidden={Boolean(selectedEvent || selectedImage)}>
-        <div className="events-grid">
+        <div className={`events-grid ${isTransitioning ? 'loading' : ''}`}>
           {safeMap(visibleEvents, (event, index) => (
             <div
               key={event.id}
