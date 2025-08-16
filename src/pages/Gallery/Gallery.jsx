@@ -374,14 +374,17 @@ const Gallery = () => {
                   onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleImageClick(image)}
                   aria-label={`View image: ${image.caption || 'Event image'}`}
                 >
-                  <MemoizedImage
-                    src={image.url}
-                    alt={image.caption || `Image from ${selectedEvent.title}`}
-                    className="event-image-item"
-                    width={160}
-                    height={160}
-                    loading="lazy"
-                  />
+                  <div className="event-image-wrapper">
+                    <MemoizedImage
+                      src={image.url}
+                      alt={image.caption || `Image from ${selectedEvent.title}`}
+                      className="event-image-item"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
                   {image.caption && (
                     <div className="event-image-overlay">
                       <p className="event-image-caption-text">{image.caption}</p>
