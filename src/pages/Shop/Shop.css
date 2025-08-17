@@ -32,7 +32,7 @@
   --z-background-blobs: 0;
   --z-page-content: 1;
   --z-fixed-ui-elements: 990;
-  --z-modal-overlay: 1000;
+  --z-modal-overlay: 1006; /* above cart toggle (1002) and mini-cart (1001) */
   --z-mini-cart: 1001;
   --z-cart-toggle: 1002;
   --z-enlarged-image-modal: 1005;
@@ -213,7 +213,7 @@
   min-height: 100vh;
   min-width: 100vw;
   background-color: var(--shop-modal-overlay-bg);
-  z-index: 1000;
+  z-index: var(--z-modal-overlay);
   padding: 2rem 1.5rem;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
@@ -248,11 +248,45 @@
   scroll-behavior: smooth;
 }
 /* Main image inside the product modal */
-.modal-content-shop .enlarged-image-content img {
-  width: 100%;
+.modal-main-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90%;
+  margin: 0 auto 1rem;
+  animation: shopModalSlideInAnimation 0.3s ease-out;
+}
+
+.product-large-image {
+  max-width: 100%;
+  max-height: 60vh;
+  width: auto;
   height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   display: block;
-  border-bottom: 1px solid #eee;
+  pointer-events: none; /* keep non-interactive per request */
+}
+
+@media (max-width: 768px) {
+  .modal-main-image { max-width: 95%; }
+  .product-large-image {
+    max-height: 65vh;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-main-image {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  .product-large-image {
+    max-height: 60vh;
+    border-radius: 8px;
+  }
 }
 
 /* Details section spacing inside modal */

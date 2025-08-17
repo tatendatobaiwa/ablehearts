@@ -77,7 +77,7 @@ ProductCard.propTypes = {
 
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [enlargedImage, setEnlargedImage] = useState(null);
+  // Removed enlargedImage state as we're using a single modal now
   const [modalImage, setModalImage] = useState(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isContentLoaded, setIsContentLoaded] = useState(false);
@@ -152,11 +152,7 @@ const Shop = () => {
 
   const closeModal = useCallback(() => {
     setSelectedProduct(null);
-    setEnlargedImage(null);
   }, []);
-
-  const handleImageClick = useCallback((image) => setEnlargedImage(image), []);
-  const closeEnlargedImage = useCallback(() => setEnlargedImage(null), []);
 
   const addToCart = useCallback(() => {
     if (!selectedProduct) return;
@@ -238,15 +234,14 @@ const Shop = () => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        if (enlargedImage) closeEnlargedImage();
-        else if (selectedProduct) closeModal();
+        if (selectedProduct) closeModal();
         else if (isCartOpen) setIsCartOpen(false);
         else if (showSuccessModal) setShowSuccessModal(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [enlargedImage, selectedProduct, isCartOpen, showSuccessModal, closeEnlargedImage, closeModal]);
+  }, [selectedProduct, isCartOpen, showSuccessModal, closeModal]);
 
   
 
@@ -300,14 +295,15 @@ const Shop = () => {
 
             {/* Enlarged Image at the Top (preview) */}
             {modalImage && (
-              <div className="enlarged-image-content" role="img" aria-label={`${selectedProduct.name} preview`}>
-                <img
-                  src={modalImage}
-                  alt={`${selectedProduct.name} preview`}
-                  onClick={() => handleImageClick(modalImage)}
+              <div className="modal-main-image">
+                <img 
+                  src={modalImage || selectedProduct.images[0]} 
+                  alt={selectedProduct.name} 
+                  className="product-large-image"
                   loading="lazy"
-                  width="600"
-                  height="600"
+                  width="500"
+                  height="500"
+                  style={{ pointerEvents: 'none' }}
                 />
               </div>
             )}
@@ -436,12 +432,7 @@ const Shop = () => {
         </button>
       )}
 
-      {enlargedImage && (
-        <div className="enlarged-image-overlay" onClick={closeEnlargedImage} role="dialog" aria-modal="true" aria-label="Enlarged product image">
-          <img src={enlargedImage} alt="Enlarged product view" className="enlarged-image-content" onClick={(e) => e.stopPropagation()} loading="lazy" width="400" height="400" srcSet={enlargedImage + ' 1x, ' + enlargedImage + ' 2x'} />
-          <button className="modal-close-button enlarged-image-close-btn" onClick={closeEnlargedImage} aria-label="Close enlarged image"><X size={28}/></button>
-        </div>
-      )}
+      {/* Removed second modal for enlarged image */}
 
       {showSuccessModal && (
         <div className="success-modal-overlay" role="alertdialog" aria-modal="true" aria-labelledby="success-modal-title">
