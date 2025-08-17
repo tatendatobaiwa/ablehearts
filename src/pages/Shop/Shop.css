@@ -214,25 +214,27 @@
   min-width: 100vw;
   background-color: var(--shop-modal-overlay-bg);
   z-index: var(--z-modal-overlay);
-  padding: 2rem 1.5rem;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+  padding: 1.25rem 1rem;
+  /* Allow background page to scroll; keep overlay itself non-scrollable */
+  overscroll-behavior: auto;
   scrollbar-gutter: stable;
-  overflow-y: auto;
+  overflow: visible;
+  /* Let scroll/click pass through the overlay to the page */
+  pointer-events: none;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   margin: 0;
 }
 .modal-content-shop {
   position: relative;
   background-color: var(--shop-modal-content-bg);
-  padding: 3rem 2rem 2rem;
+  padding: 1rem 0.9rem 0.9rem;
   border-radius: var(--shop-border-radius);
-  max-width: 900px;
+  max-width: 600px;
   width: 100%;
   max-height: min(90vh, 100%);
   overflow-y: auto;
@@ -243,6 +245,8 @@
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
   margin: 2rem auto; /* Add top margin for better spacing when scrolled */
   animation: shopModalSlideInAnimation 0.4s ease-out;
+  /* Keep the modal itself interactive while overlay is click-through */
+  pointer-events: auto;
   box-sizing: border-box;
   /* Ensure smooth scrolling */
   scroll-behavior: smooth;
@@ -252,46 +256,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 90%;
-  max-height: 90%;
-  margin: 0 auto 1rem;
+  width: 100%;
+  margin: 0 auto 0.45rem;
   animation: shopModalSlideInAnimation 0.3s ease-out;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .product-large-image {
   max-width: 100%;
-  max-height: 60vh;
   width: auto;
   height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  max-height: 70vh;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
   display: block;
-  pointer-events: none; /* keep non-interactive per request */
+  margin: 0 auto;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
-  .modal-main-image { max-width: 95%; }
-  .product-large-image {
-    max-height: 65vh;
-    border-radius: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-main-image {
+  .modal-main-image { 
     max-width: 100%;
-    padding: 0.5rem;
+    padding: 0 0.75rem;
   }
   .product-large-image {
     max-height: 60vh;
-    border-radius: 8px;
   }
 }
 
 /* Details section spacing inside modal */
 .modal-details {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 @keyframes shopFadeInAnimation { from { opacity: 0; } to { opacity: 1; } }
@@ -336,8 +332,8 @@
   margin-bottom: calc(var(--shop-base-padding) * 0.75);
 }
 .modal-product-image-thumbnail {
-  width: 65px;
-  height: 65px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   border-radius: calc(var(--shop-border-radius) / 2.5);
   cursor: pointer;
@@ -351,17 +347,17 @@
   outline: none;
 }
 .modal-product-title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--shop-accent-color);
   margin-top: calc(var(--shop-base-padding) * 0.75);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 .modal-product-price {
-  font-size: 1.3rem;
+  font-size: 0.95rem;
   color: var(--shop-price-color);
   font-weight: bold;
-  margin-bottom: var(--shop-base-padding);
+  margin-bottom: 0.6rem;
 }
 
 /* Size Selector */
@@ -381,7 +377,7 @@
   justify-content: center;
 }
 .size-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 0.65rem;
   border: 1px solid var(--shop-accent-color);
   border-radius: 4px;
   background: none;
@@ -389,7 +385,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 .size-btn.selected,
 .size-btn:hover,
@@ -421,7 +417,7 @@
   background-color: #f0f0f0;
   border: none;
   cursor: pointer;
-  padding: 0.7rem;
+  padding: 0.45rem;
   transition: background-color 0.2s;
   color: var(--shop-secondary-text);
   line-height: 1;
@@ -430,8 +426,8 @@
   justify-content: center;
 }
 .quantity-btn svg {
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
 }
 .quantity-btn:hover,
 .quantity-btn:focus {
@@ -440,13 +436,13 @@
   outline: none;
 }
 .quantity-input-field {
-  width: 50px;
+  width: 38px;
   text-align: center;
   border: none;
   border-left: 1px solid var(--shop-input-border-color);
   border-right: 1px solid var(--shop-input-border-color);
-  padding: 0.7rem 0;
-  font-size: 0.95rem;
+  padding: 0.45rem 0;
+  font-size: 0.82rem;
   color: var(--shop-secondary-text);
   appearance: textfield;
   -moz-appearance: textfield;
@@ -466,15 +462,15 @@
 .modal-content-shop .cta-button {
   background-color: var(--shop-accent-color);
   color: var(--shop-light-text);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
   border: none;
   border-radius: var(--shop-border-radius);
   cursor: pointer;
   transition: background-color var(--shop-transition-duration) ease, transform 0.2s ease;
   width: 100%;
-  margin-top: var(--shop-base-padding);
+  margin-top: 0.6rem;
   display: block;
   text-align: center;
 }

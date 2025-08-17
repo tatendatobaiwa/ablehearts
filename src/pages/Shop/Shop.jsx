@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback, useMemo, memo } from 'react';
+import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ShoppingCart, X, Plus, Minus } from 'lucide-react';
 import { db } from "@/firebase/config";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { safeMap, safeLength, isValidArray } from '../../utils/safeArrayOperations';
-import { safeDocument, safeWindow } from '../../utils/safeDOMAccess';
+// Note: safe DOM helpers not needed in this file currently
 import './Shop.css';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import SimpleSEO from '../../components/SEO/SimpleSEO';
@@ -89,6 +89,7 @@ const Shop = () => {
   const [contactDetails, setContactDetails] = useState({ email: '', phone: '' });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [formError, setFormError] = useState('');
+  const miniCartRef = useRef(null);
 
   usePageFadeIn();
   useFadeInAnimation('.shop-page-wrapper');
@@ -243,6 +244,17 @@ const Shop = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedProduct, isCartOpen, showSuccessModal, closeModal]);
 
+  useEffect(() => {
+    if (isCartOpen) {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+      if (isMobile) {
+        setTimeout(() => {
+          miniCartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [isCartOpen]);
+
   
 
   const memoizedBlobComponents = useMemo(() => safeMap(BLOB_IMAGE_IMPORTS, (blobSrc, index) => (
@@ -373,7 +385,7 @@ const Shop = () => {
         </div>
       )}
 
-      <div className={`mini-cart ${isCartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div ref={miniCartRef} className={`mini-cart ${isCartOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-labelledby="cart-title">
         <button className="mini-cart-close-btn" onClick={() => setIsCartOpen(false)} aria-label="Close cart"><X size={20} /></button>
         <div className="mini-cart-header">
           <h3 id="cart-title">Your Cart</h3>
