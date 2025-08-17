@@ -78,6 +78,7 @@ ProductCard.propTypes = {
 const Shop = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [enlargedImage, setEnlargedImage] = useState(null);
+  const [modalImage, setModalImage] = useState(null);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [isContentLoaded, setIsContentLoaded] = useState(false);
   const [cart, setCart] = useState([]);
@@ -127,6 +128,7 @@ const Shop = () => {
     setSelectedProduct(product);
     setSelectedSize(product.defaultSize || 'M');
     setQuantity(1);
+    setModalImage(product?.images?.[0] || null);
     
     // Scroll to center of viewport after state update
     setTimeout(() => {
@@ -295,26 +297,42 @@ const Shop = () => {
             <button className="modal-close-button shop-modal-close" onClick={closeModal} aria-label="Close product details">
               <X size={24} />
             </button>
-            <div className="modal-product-header">
+
+            {/* Enlarged Image at the Top (preview) */}
+            {modalImage && (
+              <div className="enlarged-image-content" role="img" aria-label={`${selectedProduct.name} preview`}>
+                <img
+                  src={modalImage}
+                  alt={`${selectedProduct.name} preview`}
+                  onClick={() => handleImageClick(modalImage)}
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                />
+              </div>
+            )}
+
+            {/* Rest of the modal content */}
+            <div className="modal-details modal-product-header">
               <div className="modal-images-container">
                 {safeMap(selectedProduct?.images, (imageSrc, index) => (
                   <img
                     key={index}
                     src={imageSrc}
                     alt={`${selectedProduct.name} - view ${index + 1}`}
-                    className="modal-product-image-thumbnail zoomable"
-                    onClick={() => handleImageClick(imageSrc)}
+                    className={`modal-product-image-thumbnail zoomable ${modalImage === imageSrc ? 'active' : ''}`}
+                    onClick={() => setModalImage(imageSrc)}
                     width="100"
                     height="100"
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleImageClick(imageSrc)}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setModalImage(imageSrc)}
                   />
                 ))}
               </div>
               <h2 id="product-modal-title" className="modal-product-title">{selectedProduct.name}</h2>
               <p className="modal-product-price">P{selectedProduct.price.toFixed(2)}</p>
-              
+
               <div className="size-selector">
                 <p>Select Size:</p>
                 <div className="size-buttons-container">
@@ -330,6 +348,7 @@ const Shop = () => {
                   ))}
                 </div>
               </div>
+
               <div className="quantity-selector">
                 <p>Quantity:</p>
                 <div className="quantity-input-controls">
@@ -349,6 +368,7 @@ const Shop = () => {
                   </button>
                 </div>
               </div>
+
               <button type="button" className="cta-button add-to-cart-main" onClick={addToCart}>
                 Add to Cart
               </button>

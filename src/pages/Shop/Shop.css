@@ -247,6 +247,18 @@
   /* Ensure smooth scrolling */
   scroll-behavior: smooth;
 }
+/* Main image inside the product modal */
+.modal-content-shop .enlarged-image-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+/* Details section spacing inside modal */
+.modal-details {
+  padding: 1rem;
+}
 
 @keyframes shopFadeInAnimation { from { opacity: 0; } to { opacity: 1; } }
 @keyframes shopModalSlideInAnimation {
@@ -730,22 +742,64 @@
 /* Enlarged Image Modal */
 .enlarged-image-overlay {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: var(--z-enlarged-image-modal);
-  padding: var(--shop-base-padding);
+  padding: 1rem;
   animation: shopFadeInAnimation 0.2s ease-out;
+  overflow: auto;
 }
+
 .enlarged-image-content {
-  max-width: 70vw;
-  max-height: 75vh;
-  object-fit: contain;
-  border-radius: var(--shop-border-radius);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: shopModalSlideInAnimation 0.3s ease-out;
 }
+
+.enlarged-image-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .enlarged-image-content {
+    max-width: 95%;
+  }
+  
+  .enlarged-image-content img {
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .enlarged-image-content {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  
+  .enlarged-image-content img {
+    max-height: 80vh;
+    border-radius: 8px;
+  }
+}
+
 .enlarged-image-close-btn {
   position: absolute;
   top: 1rem;
