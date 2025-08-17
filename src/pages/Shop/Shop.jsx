@@ -127,6 +127,25 @@ const Shop = () => {
     setSelectedProduct(product);
     setSelectedSize(product.defaultSize || 'M');
     setQuantity(1);
+    
+    // Scroll to center of viewport after state update
+    setTimeout(() => {
+      const modal = document.querySelector('.modal-content-shop');
+      if (modal) {
+        // Get modal position and size
+        const modalRect = modal.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Calculate scroll position to center the modal
+        const scrollY = window.scrollY + modalRect.top - (viewportHeight / 2) + (modalRect.height / 2);
+        
+        // Smooth scroll to center the modal
+        window.scrollTo({
+          top: Math.max(0, scrollY),
+          behavior: 'smooth'
+        });
+      }
+    }, 30); // Small delay to allow modal to render
   }, []);
 
   const closeModal = useCallback(() => {
@@ -226,6 +245,8 @@ const Shop = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [enlargedImage, selectedProduct, isCartOpen, showSuccessModal, closeEnlargedImage, closeModal]);
+
+  
 
   const memoizedBlobComponents = useMemo(() => safeMap(BLOB_IMAGE_IMPORTS, (blobSrc, index) => (
     <img

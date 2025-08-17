@@ -8,7 +8,7 @@
   --gi-section-padding-vertical: 3rem;
   --gi-section-padding-horizontal: 2rem;
   --gi-card-padding: 2rem; /* Adjusted card padding */
-  --gi-background-light: #FFFFFF;
+  --gi-background-light: #f0f2f5;
   --gi-background-blobs: #f0f2f5; /* Light background for blob area */
   --gi-blob-opacity: 0.2; /* More subtle blobs */
 }

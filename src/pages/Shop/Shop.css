@@ -206,29 +206,46 @@
 /* Modal Styles (Common) */
 .modal-overlay-shop {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 100vh;
+  min-width: 100vw;
   background-color: var(--shop-modal-overlay-bg);
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  overflow-y: auto;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: var(--z-modal-overlay);
-  padding: var(--shop-base-padding);
-  animation: shopFadeInAnimation 0.3s ease-out;
-  overflow-y: auto;
+  align-items: flex-start;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin: 0;
 }
 .modal-content-shop {
-  background-color: var(--shop-modal-content-bg);
-  padding: var(--shop-base-padding);
-  border-radius: var(--shop-border-radius);
-  max-width: 480px;
-  width: 90%;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  max-height: calc(100vh - (2 * var(--shop-base-padding)));
+  background-color: var(--shop-modal-content-bg);
+  padding: 3rem 2rem 2rem;
+  border-radius: var(--shop-border-radius);
+  max-width: 900px;
+  width: 100%;
+  max-height: min(90vh, 100%);
   overflow-y: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0);
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  margin: 2rem auto; /* Add top margin for better spacing when scrolled */
   animation: shopModalSlideInAnimation 0.4s ease-out;
+  box-sizing: border-box;
+  /* Ensure smooth scrolling */
+  scroll-behavior: smooth;
 }
 
 @keyframes shopFadeInAnimation { from { opacity: 0; } to { opacity: 1; } }
@@ -828,7 +845,60 @@
   .shop-subtitle { font-size: 1.1rem; }
 }
 
-@media (max-width: 768px) { /* Mobile */
+/* Hide scrollbar for cleaner look but keep scrollable */
+.modal-content-shop::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content-shop::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0.5rem 0;
+}
+
+.modal-content-shop::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.modal-content-shop::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure images don't overflow */
+.modal-images-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Keep close button fixed in view */
+.modal-close-button.shop-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  background: rgba(43, 77, 228, 0.9);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.modal-close-button.shop-modal-close:hover {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .modal-content-shop {
+    max-height: 95vh;
+    padding: 2.5rem 1.5rem 1.5rem;
+    width: 95%;
+  }
   .shop-page-wrapper {
     padding: var(--shop-base-padding);
     padding-bottom: var(--shop-large-padding);
@@ -841,7 +911,7 @@
     gap: var(--shop-base-padding);
   }
   .shop-title-main { font-size: 2rem; }
-  .shop-subtitle { font-size: 1rem; }
+  .shop-subtitle { font-size: 1rem; padding: 0 2rem; }
 
   .modal-content-shop {
     padding: var(--shop-base-padding);
@@ -879,7 +949,7 @@
   }
 }
 
-@media (max-width: 480px) { /* Smaller Mobile */
+@media (max-width: 480px) { /* Smaller Mobile */  
   .product-grid-shop {
     grid-template-columns: 1fr;
   }
