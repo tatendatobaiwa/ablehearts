@@ -327,70 +327,54 @@
   .impact-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 }
 
-/* Background blobs */
+/* Background blobs (mirroring Programs page styling) */
 .about-background-blobs {
-  opacity: 0.3;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 0; /* Behind content */
   overflow: hidden;
   pointer-events: none;
-  background-color: #f9f9f9;
+  background-color: #f0f2f5; /* Match Programs blob area */
 }
 
 .about-blobg {
   position: absolute;
-  width: 600px;
+  width: clamp(350px, 55vw, 750px);
   height: auto;
-  filter: blur(5px);
-  animation: float 20s infinite ease-in-out;
+  filter: blur(12px);
+  opacity: 0.15;
+  animation: aboutFloat 25s infinite ease-in-out alternate;
+  will-change: transform;
 }
 
-.about-blobg.blob-1 {
-  top: 0%;
-  left: 0%;
-  animation: moveBlob1 20s infinite ease-in-out;
+.about-blobg.blob-1 { top: -15%; left: -20%; animation-duration: 28s; animation-name: aboutMoveBlob1; }
+.about-blobg.blob-2 { top: 10%; right: -15%; animation-duration: 32s; animation-name: aboutMoveBlob2; }
+.about-blobg.blob-3 { bottom: -20%; left: 10%; animation-duration: 26s; animation-name: aboutMoveBlob3; }
+.about-blobg.blob-4 { bottom: 0%; right: 5%; animation-duration: 30s; animation-name: aboutMoveBlob4; }
+
+@keyframes aboutFloat {
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  100% { transform: translateY(-20px) translateX(10px) rotate(3deg); }
 }
 
-.about-blobg.blob-2 {
-  top: 25%;
-  right: 5%;
-  animation: moveBlob2 20s infinite ease-in-out;
+@keyframes aboutMoveBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(25px, 20px) scale(1.05) rotate(4deg); }
 }
-
-.about-blobg.blob-3 {
-  bottom: 20%;
-  left: 0%;
-  animation: moveBlob3 20s infinite ease-in-out;
+@keyframes aboutMoveBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-20px, 30px) scale(1.1) rotate(-6deg); }
 }
-
-.about-blobg.blob-4 {
-  bottom: 0%;
-  right: -10%;
-  animation: moveBlob4 20s infinite ease-in-out;
+@keyframes aboutMoveBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(30px, -15px) scale(1.05) rotate(2deg); }
 }
-
-@keyframes moveBlob1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, 20px) scale(1.1); }
-}
-
-@keyframes moveBlob2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, 30px) scale(1.15); }
-}
-
-@keyframes moveBlob3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -20px) scale(1.1); }
-}
-
-@keyframes moveBlob4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-25px, -25px) scale(1.12); }
+@keyframes aboutMoveBlob4 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-25px, -25px) scale(1.1) rotate(-4deg); }
 }
 
 /* Performance: hide heavy blob background on small screens */
