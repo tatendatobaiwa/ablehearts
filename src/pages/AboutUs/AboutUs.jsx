@@ -116,11 +116,18 @@ const AboutUs = () => {
         <h2 className="section-title">Meet Our Founder</h2>
         <div className="founder-card">
           <div className="founder-image-wrapper">
-            <img
-              src={thefounderphoto}
-              alt="Sakshi Bhargava, Founder of Able Hearts Foundation"
-              className="founder-image"
-            />
+            <a 
+              href="https://www.linkedin.com/in/sakshibhargava201/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Visit Sakshi Bhargava's LinkedIn profile"
+            >
+              <img
+                src={thefounderphoto}
+                alt="Sakshi Bhargava, Founder of Able Hearts Foundation"
+                className="founder-image"
+              />
+            </a>
           </div>
           <div className="founder-details">
             <h3 className="founder-name">Sakshi Bhargava</h3>
