@@ -39,21 +39,24 @@ const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  // Mobile-only image pagination inside modal
+  // Image pagination inside modal
   const [imagePage, setImagePage] = useState(1);
   const [isMobileImages, setIsMobileImages] = useState(typeof window !== 'undefined' ? window.innerWidth <= 767 : false);
+  // New: paginate images on tablets and smaller (<=1024px)
+  const [isPaginatedImages, setIsPaginatedImages] = useState(typeof window !== 'undefined' ? window.innerWidth <= 1024 : true);
   const eventModalRef = useRef(null);
   const imageModalRef = useRef(null);
   const prevFocusBeforeEventRef = useRef(null);
   const prevFocusBeforeImageRef = useRef(null);
 
-  // Show 3 events per page on smaller screens, 6 on screens larger than 1200px
-  const [pageSize, setPageSize] = useState(window.innerWidth > 1200 ? 6 : 3);
+  // Show 3 events per page on phones (<=767px), 6 on tablets and larger (>=768px)
+  const [pageSize, setPageSize] = useState(window.innerWidth <= 767 ? 3 : 6);
   
   useEffect(() => {
     const handleResize = () => {
-      setPageSize(window.innerWidth > 1200 ? 6 : 3);
+      setPageSize(window.innerWidth <= 767 ? 3 : 6);
       setIsMobileImages(window.innerWidth <= 767);
+      setIsPaginatedImages(window.innerWidth <= 1024);
       setImagePage(1);
       setCurrentPage(1); // Reset to first page when page size changes
     };
@@ -376,12 +379,13 @@ const Gallery = () => {
             </div>
             {(() => {
               const allImages = Array.isArray(selectedEvent?.images) ? selectedEvent.images : [];
-              const perPage = isMobileImages ? 4 : allImages.length;
+              // Show max 4 images per page on tablets and smaller
+              const perPage = isPaginatedImages ? 4 : allImages.length;
               const totalImagePages = Math.max(1, Math.ceil(allImages.length / (perPage || 1)));
               const clampedImgPage = Math.min(Math.max(1, imagePage), totalImagePages);
               const imgStart = (clampedImgPage - 1) * perPage;
               const visibleModalImages = allImages.slice(imgStart, imgStart + perPage);
-              const canPaginate = isMobileImages && allImages.length > perPage;
+              const canPaginate = isPaginatedImages && allImages.length > perPage;
               return (
                 <>
                   <div className="event-images-grid">
