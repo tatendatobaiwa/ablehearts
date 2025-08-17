@@ -6,7 +6,7 @@
   --privacy-accent-color1: #005BB5; /* Lighter Blue for section titles */
   --privacy-accent-color2: #008CFF; /* Link color */
   --privacy-accent-hover-color: #004d99; /* Link hover */
-  --privacy-bg-page: #FFFFFF; /* Overall page background */
+  --privacy-bg-page: #f0f2f5; /* Overall page background */
   --privacy-bg-container: #FFFFFF; /* Content card background */
   --privacy-bg-blobs: #f9f9f9;
   --privacy-border-color: #e0e0e0;
@@ -171,20 +171,12 @@
 /* Contact Text Styling */
 .privacy-contact-text { /* Replaced .legal-section p for contact */
   font-size: 1.05rem;
-  margin-top: var(--privacy-section-margin);
   color: var(--privacy-secondary-text);
-  padding-top: var(--privacy-base-padding);
   border-top: 1px solid var(--privacy-subtle-border-color);
 }
 .privacy-contact-text .email-link {
   margin-left: 0.5ch;
 }
-
-/* Remove unused styles from original CSS */
-/* .privacy-container (if it was different from .privacy-page-wrapper) */
-/* .privacy-section:hover (hover effect on whole section might be too much) */
-/* .info-grid, .info-card, .info-card-blob, .info-card-content (not used in JSX) */
-
 /* Responsive Design */
 @media (max-width: 992px) {
   .privacy-page-wrapper {
@@ -215,6 +207,15 @@
   }
   .privacy-list {
     padding-left: 1.5rem;
+  }
+}
+
+/* Performance: hide heavy blob background on small screens */
+@media (max-width: 768px) {
+  .privacy-background-blobs,
+  .privacy-blobg {
+    display: none !important;
+    animation: none !important;
   }
 }
 

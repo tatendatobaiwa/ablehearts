@@ -6,7 +6,7 @@
   --terms-accent-color1: #005BB5; /* Lighter Blue for section titles */
   --terms-accent-color2: #008CFF; /* Link color */
   --terms-accent-hover-color: #004d99; /* Link hover */
-  --terms-bg-page: #FFFFFF;
+  --terms-bg-page: #f0f2f5;
   --terms-bg-container: #FFFFFF;
   --terms-bg-blobs: #f9f9f9;
   --terms-border-color: #e0e0e0;
@@ -211,6 +211,15 @@
   }
   .terms-of-use-list {
     padding-left: 1.8rem;
+  }
+}
+
+/* Performance: hide heavy blob background on small screens */
+@media (max-width: 768px) {
+  .terms-background-blobs,
+  .terms-blobg {
+    display: none !important;
+    animation: none !important;
   }
 }
 

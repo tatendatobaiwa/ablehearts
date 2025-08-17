@@ -393,6 +393,15 @@
   50% { transform: translate(-25px, -25px) scale(1.12); }
 }
 
+/* Performance: hide heavy blob background on small screens */
+@media (max-width: 768px) {
+  .about-background-blobs,
+  .about-blobg {
+    display: none !important;
+    animation: none !important;
+  }
+}
+
 .team-member-image {
   width: 250px;
   height: 250px;
