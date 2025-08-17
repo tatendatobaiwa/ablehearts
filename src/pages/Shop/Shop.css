@@ -73,7 +73,7 @@
 
 /* Background Blobs */
 .shop-background-blobs {
-  opacity: 0.2;
+  opacity: 0.15; /* match subtlety */
   position: fixed;
   top: 0;
   left: 0;
@@ -86,20 +86,37 @@
 }
 .shop-blobg {
   position: absolute;
-  width: clamp(400px, 60vw, 800px); /* Responsive blob size */
+  width: clamp(350px, 55vw, 750px); /* match Programs sizing */
   height: auto;
-  filter: blur(15px); /* Increased blur */
-  animation: giFloat 25s infinite ease-in-out alternate; /* Common animation */
+  filter: blur(12px); /* match Programs blur */
+  animation: shopFloat 25s infinite ease-in-out alternate; /* corrected animation name */
   will-change: transform;
 }
-.shop-blobg.blob-1 { top: -10%; left: -15%; animation-duration: 22s; }
-.shop-blobg.blob-2 { top: 15%; right: -10%; animation-duration: 25s; }
-.shop-blobg.blob-3 { bottom: -15%; left: 5%; animation-duration: 18s; }
-.shop-blobg.blob-4 { top: -10%; right: -5%; animation-duration: 23s; }
+.shop-blobg.blob-1 { top: -15%; left: -20%; animation-duration: 28s; animation-name: shopMoveBlob1; }
+.shop-blobg.blob-2 { top: 10%; right: -15%; animation-duration: 32s; animation-name: shopMoveBlob2; }
+.shop-blobg.blob-3 { bottom: -20%; left: 10%; animation-duration: 26s; animation-name: shopMoveBlob3; }
+.shop-blobg.blob-4 { bottom: 0%; right: 5%; animation-duration: 30s; animation-name: shopMoveBlob4; }
 
 @keyframes shopFloat {
-  0% { transform: translate(0px, 0px) scale(1); }
-  100% { transform: translate(10px, -15px) scale(1.03); }
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  100% { transform: translateY(-20px) translateX(10px) rotate(3deg); }
+}
+
+@keyframes shopMoveBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(25px, 20px) scale(1.05) rotate(4deg); }
+}
+@keyframes shopMoveBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-20px, 30px) scale(1.1) rotate(-6deg); }
+}
+@keyframes shopMoveBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(30px, -15px) scale(1.05) rotate(2deg); }
+}
+@keyframes shopMoveBlob4 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-25px, -25px) scale(1.1) rotate(-4deg); }
 }
 
 /* Header for the Shop Page */
@@ -816,6 +833,9 @@
     padding: var(--shop-base-padding);
     padding-bottom: var(--shop-large-padding);
   }
+  /* Hide blobs on mobile for performance (match Gallery) */
+  .shop-blobg { display: none; }
+  .shop-background-blobs { background-color: var(--shop-bg-page); }
   .product-grid-shop {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: var(--shop-base-padding);
