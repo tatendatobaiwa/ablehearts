@@ -6,20 +6,8 @@ import { updateAnalyticsConsent, initializeAnalytics } from '../utils/analytics'
 import './CookieConsent.css';
 
 const logger = createLogger('CookieConsent');
-
-/**
- * Enhanced Cookie Consent Component
- * GDPR/CCPA/PIPEDA compliant cookie consent management
- * Features:
- * - Improved UI/UX with detailed preferences
- * - Granular cookie control
- * - Legal compliance tracking
- * - Accessibility optimized
- * - Consent withdrawal
- * - Audit trail
- */
 const CookieConsent = memo(() => {
-  const { cookieConsent, setCookieConsent } = useSecurity();
+  const { cookieConsent, setCookieConsent, isInitialized } = useSecurity();
   const [showBanner, setShowBanner] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +52,9 @@ const CookieConsent = memo(() => {
 
   // Check if consent banner should be shown
   useEffect(() => {
+    // Wait for security provider initialization to avoid flicker on first load
+    if (!isInitialized) return;
+
     const checkConsentStatus = () => {
       if (!cookieConsent) {
         setShowBanner(true);
@@ -84,12 +75,13 @@ const CookieConsent = memo(() => {
             analytics: cookieConsent.analytics || false,
             marketing: cookieConsent.marketing || false
           }));
+          setShowBanner(false); // Ensure banner stays hidden when consent is valid
         }
       }
     };
 
     checkConsentStatus();
-  }, [cookieConsent]);
+  }, [cookieConsent, isInitialized]);
 
   // Handle accept all cookies
   const handleAcceptAll = useCallback(async () => {
@@ -215,6 +207,16 @@ const CookieConsent = memo(() => {
       }));
     }
   }, [cookieConsent]);
+
+  // Listen for global manage-cookies event
+  useEffect(() => {
+    const openHandler = () => {
+      setShowBanner(true);
+      handleShowCustomize();
+    };
+    window.addEventListener('open-cookie-preferences', openHandler);
+    return () => window.removeEventListener('open-cookie-preferences', openHandler);
+  }, [handleShowCustomize]);
 
   // Handle hide customize
   const handleHideCustomize = useCallback(() => {

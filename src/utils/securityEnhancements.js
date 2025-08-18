@@ -3,6 +3,39 @@
  * Additional security features beyond basic configuration
  */
 
+import { safeJSONStorage } from './safeStorage';
+
+// Minimal cookie helpers for persistence fallback
+const cookieUtils = {
+  set(name, value, days = 365) {
+    try {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax${secure}`;
+    } catch (e) {
+      // no-op
+    }
+  },
+  get(name) {
+    try {
+      const value = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name + '='))
+        ?.split('=')[1];
+      return value ? decodeURIComponent(value) : null;
+    } catch (e) {
+      return null;
+    }
+  },
+  remove(name) {
+    try {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+    } catch (e) {
+      // no-op
+    }
+  }
+};
+
 // Content Security Policy management
 export const CSP_POLICIES = {
   'default-src': ["'self'"],
@@ -277,27 +310,97 @@ export const privacyProtection = {
   // Cookie consent management
   cookieConsent: {
     set: (consent) => {
+      // Store the complete consent object with all fields
       const consentData = {
-        analytics: consent.analytics || false,
-        marketing: consent.marketing || false,
-        functional: consent.functional || true,
-        timestamp: Date.now()
+        necessary: consent.necessary !== undefined ? consent.necessary : true,
+        functional: consent.functional !== undefined ? consent.functional : false,
+        analytics: consent.analytics !== undefined ? consent.analytics : false,
+        marketing: consent.marketing !== undefined ? consent.marketing : false,
+        timestamp: consent.timestamp || Date.now(),
+        version: consent.version || '1.0',
+        userAgent: consent.userAgent || navigator.userAgent,
+        consentMethod: consent.consentMethod || 'unknown',
+        legalBasis: consent.legalBasis || 'consent'
       };
-      localStorage.setItem('cookie_consent', JSON.stringify(consentData));
+      
+      try {
+        // Persist for app-wide usage using safeJSONStorage to match readers
+        safeJSONStorage.setItem('cookie_consent', consentData);
+        // Additionally set a cookie flag so SSR/CDN or non-JS can detect consent and to help across subdomains
+        cookieUtils.set('ah_cookie_consent', '1');
+      } catch (error) {
+        console.warn('Failed to store cookie consent:', error);
+        try {
+          // Final fallback to direct localStorage (should rarely be needed)
+          localStorage.setItem('cookie_consent', JSON.stringify(consentData));
+          cookieUtils.set('ah_cookie_consent', '1');
+        } catch (lsError) {
+          console.warn('Failed to store cookie consent in localStorage:', lsError);
+        }
+      }
     },
 
     get: () => {
-      try {
-        const consent = localStorage.getItem('cookie_consent');
-        return consent ? JSON.parse(consent) : null;
-      } catch {
+      // Read using safeJSONStorage to stay consistent across the app
+      const stored = safeJSONStorage.getItem('cookie_consent', null);
+      if (!stored) {
+        // Fallback: if a cookie flag exists, it means user made a decision but storage is blocked
+        const flag = typeof document !== 'undefined' ? (document.cookie ? (document.cookie.includes('ah_cookie_consent=1') ? '1' : null) : null) : null;
+        if (flag === '1') {
+          const minimal = {
+            necessary: true,
+            functional: false,
+            analytics: false,
+            marketing: false,
+            timestamp: Date.now(),
+            version: '1.0',
+            userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+            consentMethod: 'cookie_flag_only',
+            legalBasis: 'consent'
+          };
+          try { safeJSONStorage.setItem('cookie_consent', minimal); } catch {}
+          return minimal;
+        }
         return null;
       }
+
+      // Migrate/normalize legacy formats to the full schema
+      const normalized = {
+        necessary: stored.necessary !== undefined ? stored.necessary : true,
+        functional: stored.functional !== undefined ? stored.functional : false,
+        analytics: stored.analytics !== undefined ? stored.analytics : false,
+        marketing: stored.marketing !== undefined ? stored.marketing : false,
+        timestamp: stored.timestamp || Date.now(),
+        version: stored.version || '1.0',
+        userAgent: stored.userAgent || (typeof navigator !== 'undefined' ? navigator.userAgent : ''),
+        consentMethod: stored.consentMethod || 'migrated',
+        legalBasis: stored.legalBasis || 'consent'
+      };
+
+      // If the stored object is missing any fields, write back the normalized version once
+      const needsMigration = JSON.stringify(stored) !== JSON.stringify(normalized);
+      if (needsMigration) {
+        try {
+          safeJSONStorage.setItem('cookie_consent', normalized);
+        } catch {}
+      }
+
+      return normalized;
     },
 
     hasConsent: (type) => {
       const consent = privacyProtection.cookieConsent.get();
       return consent && consent[type] === true;
+    },
+
+    // Clear consent (useful for testing or user-requested data deletion)
+    clear: () => {
+      try {
+        safeJSONStorage.removeItem('cookie_consent');
+        cookieUtils.remove('ah_cookie_consent');
+      } catch (error) {
+        console.warn('Failed to clear cookie consent:', error);
+      }
     }
   }
 };

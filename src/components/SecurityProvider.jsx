@@ -6,6 +6,7 @@ import {
   privacyProtection,
   RateLimiter
 } from '../utils/securityEnhancements';
+import safeStorage from '../utils/safeStorage';
 import SecurityContext, { useSecurity } from '../context/SecurityContext';
 
 /**
@@ -26,10 +27,10 @@ export const SecurityProvider = memo(({ children }) => {
     initializeSecurity();
     
     // Get or generate anonymous ID
-    let anonymousId = localStorage.getItem('anonymous_id');
+    let anonymousId = safeStorage.getItem('anonymous_id');
     if (!anonymousId) {
       anonymousId = privacyProtection.generateAnonymousID();
-      localStorage.setItem('anonymous_id', anonymousId);
+      safeStorage.setItem('anonymous_id', anonymousId);
     }
 
     // Get cookie consent
@@ -60,6 +61,9 @@ export const SecurityProvider = memo(({ children }) => {
         ...prev,
         cookieConsent: consent
       }));
+
+      // Notify listeners (e.g., debug overlay)
+      try { window.dispatchEvent(new Event('cookie-consent-updated')); } catch {}
       
       securityMonitoring.logSecurityEvent('cookie_consent_updated', {
         consent,

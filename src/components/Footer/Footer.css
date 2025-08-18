@@ -82,13 +82,24 @@ h4.footer-heading {
   margin-bottom: 0.75rem; /* Consistent spacing */
 }
 
-.offices-item a, .contact-item a { /* Assuming contact items might become links */
+.offices-item a, .contact-item a, .manage-cookies-link { /* Assuming contact items might become links */
   text-decoration: none;
   color: inherit;
   transition: color 0.2s ease;
 }
 
-.offices-item a:hover, .contact-item a:hover {
+/* Make the Manage Cookies button look like a text link */
+.manage-cookies-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  display: inline;
+}
+
+.offices-item a:hover, .contact-item a:hover, .manage-cookies-link:hover {
   color: var(--footer-link-hover-color);
 }
 

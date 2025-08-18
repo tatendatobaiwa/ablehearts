@@ -68,6 +68,21 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-column">
+             <h4 className="footer-heading">Privacy</h4>
+             <ul className="footer-links">
+               <li className="offices-item">
+                 <button type="button" className="manage-cookies-link" onClick={() => window.dispatchEvent(new Event('open-cookie-preferences'))}>
+                   Manage Cookies
+                 </button>
+               </li>
+               <li className="offices-item">
+                 <Link to="/privacy-policy">
+                   <span>Privacy Policy</span>
+                 </Link>
+               </li>
+             </ul>
+           </div>
+           <div className="footer-column">
               <h4 className="footer-heading">Follow us</h4>
               <ul className="social-icons">
                 <li>

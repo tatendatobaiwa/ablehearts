@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import MobileOptimizer from "./components/MobileOptimizer.jsx";
 import SecurityProvider from "./components/SecurityProvider.jsx";
 import CookieConsent from "./components/CookieConsent.jsx";
+import CookieConsentDebug from "./components/ConsentDebug.jsx";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary.jsx";
 import ProgramsAndInitiatives from "./pages/ProgramsAndInitiatives/ProgramsAndInitiatives.jsx";
 import GetInvolved from "./pages/GetInvolved/GetInvolved.jsx";
@@ -48,6 +49,7 @@ function App() {
               <Footer />
             </ErrorBoundary>
             <CookieConsent />
+            {import.meta.env.DEV && <ErrorBoundary fallback={null}><CookieConsentDebug /></ErrorBoundary>}
           </div>
         </MobileOptimizer>
       </SecurityProvider>
