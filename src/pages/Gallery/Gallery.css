@@ -224,6 +224,7 @@
   max-height: 95vh;
   display: flex;
   flex-direction: column;
+  min-height: 0; /* allow children to shrink inside flex container */
   animation: galleryModalContentSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   /* Keep modal interactive while overlay is pass-through */
   pointer-events: auto;
@@ -297,7 +298,9 @@
   gap: var(--gallery-base-padding);
   padding: var(--gallery-base-padding);
   overflow-y: auto;
-  flex-grow: 1;
+  overflow-x: hidden;
+  flex: 1 1 auto; /* allow grid to shrink/grow properly in flex column */
+  min-height: 0;    /* fix flex child overflow issues */
   background-color: var(--gallery-bg-page);
   max-width: 1200px;
   margin: 0 auto;
@@ -309,8 +312,7 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--gallery-card-shadow);
-  transition: all var(--gallery-transition-duration) ease-out;
-  background-color: #e0e0e0;
+  transition: transform var(--gallery-transition-duration) ease-out, box-shadow var(--gallery-transition-duration) ease-out;
   aspect-ratio: 16/9;
   width: 100%;
   display: flex;
@@ -502,7 +504,8 @@
   transform: translateY(-2px) scale(1.05);
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
+/* Tablet and laptop adjustments */
+@media (max-width: 1280px) and (min-width: 768px) {
   .gallery-page-wrapper {
     padding-left: var(--gallery-base-padding);
     padding-right: var(--gallery-base-padding);
@@ -529,7 +532,8 @@
 /* Match events grid on desktop: 3 columns */
 @media (min-width: 1025px) {
   .event-images-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(200px, auto);
   }
 }
 

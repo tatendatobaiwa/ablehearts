@@ -39,6 +39,9 @@ const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  // Smooth modal closing flags
+  const [isEventClosing, setIsEventClosing] = useState(false);
+  const [isImageClosing, setIsImageClosing] = useState(false);
   // Image pagination inside modal
   const [imagePage, setImagePage] = useState(1);
   const [isMobileImages, setIsMobileImages] = useState(typeof window !== 'undefined' ? window.innerWidth <= 767 : false);
@@ -108,21 +111,30 @@ const Gallery = () => {
   }, [selectedEvent]);
 
   const closeEventModal = useCallback(() => {
-    setSelectedEvent(null);
-    // restore focus
-    const el = prevFocusBeforeEventRef.current;
-    if (el && typeof el.focus === 'function') {
-      setTimeout(() => el.focus(), 0);
-    }
+    // add closing animation class then unmount
+    setIsEventClosing(true);
+    setTimeout(() => {
+      setSelectedEvent(null);
+      setIsEventClosing(false);
+      // restore focus
+      const el = prevFocusBeforeEventRef.current;
+      if (el && typeof el.focus === 'function') {
+        setTimeout(() => el.focus(), 0);
+      }
+    }, 200); // match CSS animation duration
   }, []);
 
   const closeImageModal = useCallback(() => {
-    setSelectedImage(null);
-    // restore focus
-    const el = prevFocusBeforeImageRef.current;
-    if (el && typeof el.focus === 'function') {
-      setTimeout(() => el.focus(), 0);
-    }
+    setIsImageClosing(true);
+    setTimeout(() => {
+      setSelectedImage(null);
+      setIsImageClosing(false);
+      // restore focus
+      const el = prevFocusBeforeImageRef.current;
+      if (el && typeof el.focus === 'function') {
+        setTimeout(() => el.focus(), 0);
+      }
+    }, 200);
   }, []);
 
   const nextImage = useCallback((e) => {
@@ -361,14 +373,14 @@ const Gallery = () => {
 
       {selectedEvent && (
         <div 
-          className="modal-overlay" 
+          className={`modal-overlay ${isEventClosing ? 'closing' : ''}`} 
           onClick={closeEventModal} 
           role="dialog" 
           aria-modal="true" 
           aria-labelledby="event-modal-title-text"
           aria-describedby="event-modal-description-text"
         >
-          <div className="modal-content event-modal-content" onClick={(e) => e.stopPropagation()} ref={eventModalRef}>
+          <div className={`modal-content event-modal-content ${isEventClosing ? 'closing' : ''}`} onClick={(e) => e.stopPropagation()} ref={eventModalRef}>
             <button className="modal-close-button" onClick={closeEventModal} aria-label="Close event details">
               ×
             </button>
@@ -449,13 +461,13 @@ const Gallery = () => {
 
       {selectedImage && (
         <div 
-          className="modal-overlay image-modal-overlay" 
+          className={`modal-overlay image-modal-overlay ${isImageClosing ? 'closing' : ''}`} 
           onClick={closeImageModal} 
           role="dialog" 
           aria-modal="true" 
           aria-labelledby="image-modal-caption-text"
         >
-          <div className="modal-content image-modal-content" onClick={(e) => e.stopPropagation()} ref={imageModalRef}>
+          <div className={`modal-content image-modal-content ${isImageClosing ? 'closing' : ''}`} onClick={(e) => e.stopPropagation()} ref={imageModalRef}>
             <button className="modal-close-button image-modal-close-button" onClick={closeImageModal} aria-label="Close image viewer">
               ×
             </button>
