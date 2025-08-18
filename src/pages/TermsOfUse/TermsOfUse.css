@@ -174,13 +174,11 @@
 /* Email Contact Styling */
 .terms-of-use-contact {
   font-size: 1.1rem;
-  margin-top: var(--terms-section-margin);
   color: var(--terms-secondary-text);
-  padding-top: var(--terms-base-padding);
-  border-top: 1px solid var(--terms-subtle-border-color); /* Separator before contact */
 }
 .terms-of-use-contact .terms-of-use-email {
   margin-left: 0.5ch; /* Space before email link */
+  word-wrap: break-word;
 }
 
 /* Responsive Design */
