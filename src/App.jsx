@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Routes, Route } from "react-router-dom"; 
 import Header from './components/Header/Header.jsx';
 import Footer from "./components/Footer/Footer.jsx";
@@ -7,17 +8,20 @@ import SecurityProvider from "./components/SecurityProvider.jsx";
 import CookieConsent from "./components/CookieConsent.jsx";
 import CookieConsentDebug from "./components/ConsentDebug.jsx";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary.jsx";
-import ProgramsAndInitiatives from "./pages/ProgramsAndInitiatives/ProgramsAndInitiatives.jsx";
-import GetInvolved from "./pages/GetInvolved/GetInvolved.jsx";
-import Shop from "./pages/Shop/Shop.jsx";
-import AboutUs from "./pages/AboutUs/AboutUs.jsx";
-import TermsOfUse from "./pages/TermsOfUse/TermsOfUse.jsx";
-import Home from "./pages/Home/Home.jsx";
-import Gallery from "./pages/Gallery/Gallery.jsx";
-import UBApp from "./pages/UBApp/UBApp.jsx";
-import BIUSTApp from "./pages/BIUSTApp/BIUSTApp.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import LazyLoadWrapper from "./components/LoadingStates/LazyLoadWrapper.jsx";
 import './App.css';
+
+// Lazy load page components for code splitting
+const Home = lazy(() => import("./pages/Home/Home.jsx"));
+const ProgramsAndInitiatives = lazy(() => import("./pages/ProgramsAndInitiatives/ProgramsAndInitiatives.jsx"));
+const GetInvolved = lazy(() => import("./pages/GetInvolved/GetInvolved.jsx"));
+const Shop = lazy(() => import("./pages/Shop/Shop.jsx"));
+const AboutUs = lazy(() => import("./pages/AboutUs/AboutUs.jsx"));
+const TermsOfUse = lazy(() => import("./pages/TermsOfUse/TermsOfUse.jsx"));
+const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
+const UBApp = lazy(() => import("./pages/UBApp/UBApp.jsx"));
+const BIUSTApp = lazy(() => import("./pages/BIUSTApp/BIUSTApp.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy.jsx"));
 
 function App() {
   return (
@@ -32,16 +36,56 @@ function App() {
             <main role="main" className="main-content">
               <ErrorBoundary fallback={<div>Page failed to load</div>}>
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/programs-and-initiatives" element={<ProgramsAndInitiatives />} />
-                  <Route path="/get-involved" element={<GetInvolved />} />
-                  <Route path="/shop" element={<Shop />} />
-                  <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/terms-of-use" element={<TermsOfUse />} />
-                  <Route path="/gallery" element={<Gallery />} />
-                  <Route path="/ablehearts-ub" element={<UBApp />} />
-                  <Route path="/ablehearts-biust" element={<BIUSTApp />} />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/" element={
+                    <LazyLoadWrapper>
+                      <Home />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/programs-and-initiatives" element={
+                    <LazyLoadWrapper>
+                      <ProgramsAndInitiatives />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/get-involved" element={
+                    <LazyLoadWrapper>
+                      <GetInvolved />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/shop" element={
+                    <LazyLoadWrapper>
+                      <Shop />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/about-us" element={
+                    <LazyLoadWrapper>
+                      <AboutUs />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/terms-of-use" element={
+                    <LazyLoadWrapper>
+                      <TermsOfUse />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/gallery" element={
+                    <LazyLoadWrapper>
+                      <Gallery />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/ablehearts-ub" element={
+                    <LazyLoadWrapper>
+                      <UBApp />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/ablehearts-biust" element={
+                    <LazyLoadWrapper>
+                      <BIUSTApp />
+                    </LazyLoadWrapper>
+                  } />
+                  <Route path="/privacy-policy" element={
+                    <LazyLoadWrapper>
+                      <PrivacyPolicy />
+                    </LazyLoadWrapper>
+                  } />
                 </Routes>
               </ErrorBoundary>
             </main>

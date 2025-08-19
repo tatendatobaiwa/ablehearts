@@ -6,6 +6,7 @@ import App from './App.jsx';
 import { AccessibilityProvider } from './context/AccessibilityContext.jsx';
 import { initializeAnalytics, trackPerformance, trackUserEngagement } from './utils/analytics.js';
 import { loadCriticalResources, registerServiceWorker } from './utils/performance.js';
+import { preloadCriticalRoutes } from './utils/routePreloader.js';
 
 // Initialize analytics (will check consent automatically)
 initializeAnalytics();
@@ -15,6 +16,9 @@ loadCriticalResources();
 
 // Register service worker for caching
 registerServiceWorker();
+
+// Preload critical routes for faster navigation
+preloadCriticalRoutes();
 
 // Start performance and engagement tracking
 trackPerformance();

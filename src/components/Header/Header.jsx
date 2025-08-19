@@ -6,6 +6,7 @@ import './Header.css';
 import logo from '/src/assets/fixed/icons/ableheartslogo.webp';
 import MobileMenu from '../MobileNavigation/MobileMenu';
 import { NAVIGATION_ITEMS } from '../../constants/navigation';
+import { createPreloadHandlersForPath } from '../../utils/routePreloader';
 import { safeWindow } from '../../utils/safeDOMAccess';
 import { Menu, X } from 'lucide-react';
 
@@ -67,7 +68,7 @@ const Header = memo(() => {
           <ul>
             {NAVIGATION_ITEMS.map(({ to, label }) => (
               <li key={to}>
-                <Link to={to} aria-current={location.pathname === to ? 'page' : undefined}>
+                <Link to={to} {...createPreloadHandlersForPath(to)} aria-current={location.pathname === to ? 'page' : undefined}>
                   {label}
                 </Link>
               </li>

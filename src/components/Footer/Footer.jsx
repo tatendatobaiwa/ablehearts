@@ -9,6 +9,7 @@ import ablehearts from "../../assets/fixed/icons/whiteablehearts.webp";
 import locationlogo from "../../assets/fixed/icons/pin.webp";
 import whatsapplogo from "../../assets/fixed/icons/whatsapp.webp";
 import './Footer.css';
+import { createPreloadHandlersForPath } from '../../utils/routePreloader';
 
 const Footer = () => {
   return (
@@ -29,22 +30,22 @@ const Footer = () => {
               <h4 className="footer-heading">AbleHearts Foundation</h4>
               <ul className="footer-links">
                 <li className="offices-item">
-                  <Link to="/programs-and-initiatives">
+                  <Link to="/programs-and-initiatives" {...createPreloadHandlersForPath('/programs-and-initiatives')}>
                     <span>Programs & Initiatives</span>
                   </Link>
                 </li>
                 <li className="offices-item">
-                  <Link to="/get-involved">
+                  <Link to="/get-involved" {...createPreloadHandlersForPath('/get-involved')}>
                     <span>Get Involved</span>
                   </Link>
                 </li>
                 <li className="offices-item">
-                  <Link to="/shop">
+                  <Link to="/shop" {...createPreloadHandlersForPath('/shop')}>
                     <span>Shop</span>
                   </Link>
                 </li>
                 <li className="offices-item">
-                  <Link to="/about-us">
+                  <Link to="/about-us" {...createPreloadHandlersForPath('/about-us')}>
                     <span>About Us</span>
                   </Link>
                 </li>

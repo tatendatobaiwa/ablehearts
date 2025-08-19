@@ -11,6 +11,7 @@ import instagramIcon from "../../assets/fixed/icons/instagram.webp";
 import whatsapplogo from "../../assets/fixed/icons/whatsapp.webp";
 import logo from "../../assets/fixed/icons/whiteablehearts.webp";
 import './MobileMenu.css';
+import { createPreloadHandlersForPath } from '../../utils/routePreloader';
 
 const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
   const [expandedItems, setExpandedItems] = useState({});
@@ -124,6 +125,7 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
                         <Link
                           key={subItem.id}
                           to={subItem.path}
+                          {...createPreloadHandlersForPath(subItem.path)}
                           className={`mobile-submenu-link ${
                             location.pathname === subItem.path ? 'active' : ''
                           }`}
@@ -137,6 +139,7 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
                 ) : (
                   <Link
                     to={item.to}
+                    {...createPreloadHandlersForPath(item.to)}
                     className={`mobile-menu-link ${
                       location.pathname === item.to ? 'active' : ''
                     }`}
