@@ -13,31 +13,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-router': ['react-router-dom'],
-          'vendor-firebase': ['firebase/app', 'firebase/analytics', 'firebase/firestore'],
-          'vendor-ui': ['lucide-react', 'react-icons', 'styled-components'],
-          'vendor-utils': ['axios', 'jspdf', 'emailjs-com'],
-          
-          // App chunks
-          'components-core': [
-            './src/components/Header/Header.jsx',
-            './src/components/Footer/Footer.jsx',
-            './src/components/ErrorBoundary/ErrorBoundary.jsx'
-          ],
-          'components-forms': [
-            './src/components/DonationForm.jsx',
-            './src/components/NewsLetterSignup.jsx',
-            './src/components/CookieConsent.jsx'
-          ],
-          'utils': [
-            './src/utils/analytics.js',
-            './src/utils/performance.js',
-            './src/utils/security.js'
-          ]
-        }
+        // Simplified chunking - let Vite handle it automatically for now
       }
     },
     chunkSizeWarningLimit: 1000, // Increase warning limit temporarily

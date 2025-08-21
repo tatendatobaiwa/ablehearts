@@ -113,18 +113,34 @@ export const preloadCriticalRoutes = () => {
 /**
  * Create preload handlers for navigation elements
  * @param {string} routeName - Name of the route to preload
- * @returns {Object} Event handlers for onMouseEnter and onFocus
+ * @returns {Object} Event handlers for onMouseEnter, onMouseLeave, and onFocus
  */
 export const createPreloadHandlers = (routeName) => {
+  let preloadTimeout;
+
   const handlePreload = () => {
+    // Check for slow network conditions
+    if (navigator.connection && (navigator.connection.saveData || /2g|slow-2g/.test(navigator.connection.effectiveType))) {
+      return; // Don't preload on slow networks
+    }
+
     if (ROUTE_IMPORTS[routeName]) {
       preloadRoute(ROUTE_IMPORTS[routeName], routeName);
     }
   };
 
+  const startPreload = () => {
+    preloadTimeout = setTimeout(handlePreload, 200); // 200ms delay
+  };
+
+  const cancelPreload = () => {
+    clearTimeout(preloadTimeout);
+  };
+
   return {
-    onMouseEnter: handlePreload,
-    onFocus: handlePreload,
+    onMouseEnter: startPreload,
+    onMouseLeave: cancelPreload,
+    onFocus: handlePreload, // Preload immediately on focus
   };
 };
 
