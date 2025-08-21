@@ -320,8 +320,7 @@ const Gallery = () => {
           {safeMap(visibleEvents, (event, index) => (
             <div
               key={event.id}
-              className={`event-card pre-animate-scale`}
-              style={{ transitionDelay: `${index * 0.1}s` }}
+              className={`event-card pre-animate-scale event-card-delay`}
               onClick={() => handleEventClick(event)}
               role="button"
               tabIndex={0}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { safeJSONStorage } from '../utils/safeStorage';
+import './ConsentDebug.css';
 
 // Small debug indicator for consent state (dev-only by default)
 export default function ConsentDebug() {
@@ -27,46 +28,24 @@ export default function ConsentDebug() {
 
   const granted = consent ? ['functional', 'analytics', 'marketing'].filter(k => consent[k]).join(', ') || 'necessary only' : 'none';
 
-  const style = {
-    position: 'fixed',
-    bottom: '10px',
-    right: '10px',
-    background: 'rgba(0,0,0,0.75)',
-    color: '#fff',
-    padding: '8px 10px',
-    borderRadius: '6px',
-    fontSize: '12px',
-    zIndex: 9999,
-    maxWidth: '280px'
-  };
-
-  const pill = {
-    display: 'inline-block',
-    padding: '2px 6px',
-    borderRadius: '999px',
-    background: consent ? '#28a745' : '#dc3545',
-    color: '#fff',
-    marginLeft: '6px'
-  };
-
   return (
-    <div style={style}>
+    <div className="consent-debug">
       <div><strong>Consent</strong>
-        <span style={pill}>{consent ? 'present' : 'missing'}</span>
+        <span className={`consent-debug-pill ${consent ? 'present' : 'missing'}`}>{consent ? 'present' : 'missing'}</span>
       </div>
-      <div style={{ marginTop: 6 }}>
+      <div className="consent-debug-margin-top-6">
         {consent ? (
           <>
             <div>granted: {granted}</div>
-            <div style={{ maxHeight: 100, overflow: 'auto', marginTop: 4 }}>
-              <pre style={{ margin: 0 }}>{JSON.stringify(consent, null, 2)}</pre>
+            <div className="consent-debug-pre-container">
+              <pre className="consent-debug-pre">{JSON.stringify(consent, null, 2)}</pre>
             </div>
           </>
         ) : (
           <div>No stored consent</div>
         )}
       </div>
-      <div style={{ marginTop: 6 }}>
+      <div className="consent-debug-margin-top-6">
         <button onClick={() => window.dispatchEvent(new Event('open-cookie-preferences'))}>Open Preferences</button>
       </div>
     </div>

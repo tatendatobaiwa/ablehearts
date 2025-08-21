@@ -161,11 +161,10 @@ const Home = () => {
             {safeMap(slides, (slide, index) => (
               <div
                 key={slide.title + index} // More robust key
-                className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+                className={`carousel-slide ${index === currentSlide ? 'active' : ''} carousel-slide-image`}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${safeLength(slides)}: ${slide.title}`}
-                style={{ backgroundImage: `url(${getImageUrl(slide.image)})` }}
               >
                 <div className="slide-content">
                   <div className="event-details">

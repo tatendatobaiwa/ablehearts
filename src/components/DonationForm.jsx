@@ -152,8 +152,7 @@ const DonationForm = () => {
             <p className="form-subtitle">We&apos;ll be in touch soon with details.</p>
             <button 
               onClick={handleReset} 
-              className="submit-button"
-              style={{ marginTop: '1rem' }}
+              className="submit-button another-donation-button"
             >
               Submit Another Donation
             </button>

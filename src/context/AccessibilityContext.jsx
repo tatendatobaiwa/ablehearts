@@ -63,4 +63,15 @@ AccessibilityProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
- 
+// Custom hook to use the accessibility context
+export const useAccessibility = () => {
+  const context = useContext(AccessibilityContext);
+  if (!context) {
+    throw new Error('useAccessibility must be used within an AccessibilityProvider');
+  }
+  return context;
+};
+
+// Export the context for direct access if needed
+export { AccessibilityContext };
+export default AccessibilityContext;

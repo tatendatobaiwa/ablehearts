@@ -2,7 +2,7 @@
  * Simple Animated Number Component - Bulletproof Version
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './AnimatedNumber.css';
 
@@ -32,15 +32,16 @@ const AnimatedNumber = ({
     );
 
     if (elementRef.current) {
-      observer.observe(elementRef.current);
+      const currentElement = elementRef.current;
+      observer.observe(currentElement);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
-  }, [hasStarted]);
+  }, [hasStarted, startCounting]);
 
   // Simple counting function
   const startCounting = () => {

@@ -291,7 +291,7 @@ const Shop = () => {
       <main className={`shop-main-content pre-animate`}>
         <div className="product-grid-shop">
           {safeMap(SHOP_PRODUCTS, (product, index) => (
-            <div key={product.id} className="pre-animate-scale" style={{ transitionDelay: `${index * 0.2}s` }}>
+            <div key={product.id} className="pre-animate-scale pre-animate-scale-delay">
               <ProductCard product={product} onOpenModal={openModal} />
             </div>
           ))}
@@ -311,11 +311,7 @@ const Shop = () => {
                 <img 
                   src={modalImage || selectedProduct.images[0]} 
                   alt={selectedProduct.name} 
-                  className="product-large-image"
-                  loading="lazy"
-                  width="500"
-                  height="500"
-                  style={{ pointerEvents: 'none' }}
+                  className="product-large-image no-pointer-events"
                 />
               </div>
             )}

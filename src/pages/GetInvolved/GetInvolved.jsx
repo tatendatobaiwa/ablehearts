@@ -145,7 +145,7 @@ const GetInvolved = () => {
             </div>
           </section>
 
-          <section className="content-container1 pre-animate" aria-labelledby="partnerships-heading" style={{ backgroundColor: '#0066cc', marginBottom: '0' }}>
+          <section className="content-container1 pre-animate partnership-section">
             <div className="contour-overlay" aria-hidden="true">
               <img src={scribble} alt=""
                 loading="lazy" width="1000"
@@ -154,8 +154,8 @@ const GetInvolved = () => {
               />
             </div>
             <div className="partnership-left-content">
-              <h2 id="partnerships-heading" style={{ color: 'white' }}>Partnerships</h2>
-              <p style={{ color: 'white' }}>
+              <h2 id="partnerships-heading" className="white-text">Partnerships</h2>
+              <p className="white-text">
                 Partner with us to amplify our efforts. Together, we can create impactful initiatives that empower
                 individuals with disabilities and drive community change.
               </p>
@@ -168,12 +168,11 @@ const GetInvolved = () => {
                 Send Us an Email
               </button>
             </div>
-            <div className="right-content partnership-image-container" style={{ padding: '0' }}>
+            <div className="right-content partnership-image-container no-padding">
               <img
                 src={partner}
                 alt="Hands shaking, symbolizing partnership."
-                className="placeholder-image"
-                style={{ borderRadius: '0' }}
+                className="placeholder-image no-border-radius"
                 loading="lazy"
                 width="500"
                 height="300"

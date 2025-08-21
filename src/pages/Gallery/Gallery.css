@@ -146,6 +146,10 @@
   background-color: #e0e0e0; /* Fallback background */
   width: 100%;
 }
+
+.event-card-delay {
+  transition-delay: calc(var(--delay-index) * 0.1s);
+}
 .event-card:hover,
 .event-card:focus-visible {
   transform: translateY(-5px) scale(1.01); /* Subtle hover */

@@ -177,53 +177,85 @@
 }
 
 /* Team Section */
-.team-branch {
-  margin-bottom: 3rem;
+.team-cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.team-member-card {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.branch-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .branch-logo {
   height: 60px;
   width: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .branch-title {
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  margin: 0;
   color: #043F70;
+  font-weight: 600;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+.team-member-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #005BB5;
+  transition: border-color 0.3s ease;
 }
 
-.team-member-card {
-  text-align: center;
+.team-member-card a:hover .team-member-image {
+  border-color: #043F70;
 }
 
 .team-member-name {
   font-size: 1.2rem;
   font-weight: 600;
+  color: #043F70;
+  margin: 0.5rem 0;
 }
 
 .team-member-role {
-  color: #333;
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
 }
 
 .team-member-card a {
   text-decoration: none;
   color: inherit;
-  transition: text-decoration 0.3s ease;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .team-member-card a:hover {
   color: inherit;
+  transform: scale(1.05);
 }
 
 /* Scroll to Top Button */

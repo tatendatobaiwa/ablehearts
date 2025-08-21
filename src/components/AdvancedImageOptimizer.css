@@ -1,0 +1,11 @@
+.advanced-image-optimizer {
+  transition: opacity 0.3s ease;
+}
+
+.advanced-image-optimizer.loading {
+  opacity: 0.7;
+}
+
+.advanced-image-optimizer.loaded {
+  opacity: 1;
+}

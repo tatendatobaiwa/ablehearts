@@ -103,6 +103,18 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
+.score-good {
+  color: #10b981;
+}
+
+.score-needs-improvement {
+  color: #f59e0b;
+}
+
+.score-poor {
+  color: #ef4444;
+}
+
 .vital-value {
   font-size: 1.2rem;
   font-weight: 700;
@@ -263,8 +275,14 @@
 }
 
 .memory-fill {
+  width: var(--progress-width, 0%);
   height: 100%;
   transition: width 0.3s ease;
+  background-color: #10b981;
+}
+
+.memory-fill.warning {
+  background-color: #ef4444;
 }
 
 .memory-unavailable {

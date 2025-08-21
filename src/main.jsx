@@ -7,6 +7,7 @@ import { AccessibilityProvider } from './context/AccessibilityContext.jsx';
 import { initializeAnalytics, trackPerformance, trackUserEngagement } from './utils/analytics.js';
 import { loadCriticalResources, registerServiceWorker } from './utils/performance.js';
 import { preloadCriticalRoutes } from './utils/routePreloader.js';
+import { runDevelopmentChecks } from './utils/buildOptimizations.js';
 
 // Initialize analytics (will check consent automatically)
 initializeAnalytics();
@@ -17,12 +18,28 @@ loadCriticalResources();
 // Register service worker for caching
 registerServiceWorker();
 
+// Register our enhanced service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('SW registered: ', registration);
+      })
+      .catch((registrationError) => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
+
 // Preload critical routes for faster navigation
 preloadCriticalRoutes();
 
 // Start performance and engagement tracking
 trackPerformance();
 const cleanupEngagement = trackUserEngagement();
+
+// Run development optimization checks
+runDevelopmentChecks();
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {

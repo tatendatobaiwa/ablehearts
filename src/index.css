@@ -1,3 +1,6 @@
+/* Import critical styles first */
+@import url('./styles/critical.css');
+
 /* Import universal animations */
 @import url('./styles/animations.css');
 

@@ -2,7 +2,7 @@ import { useState, useEffect, memo, useCallback } from 'react';
 import { useSecurity } from '../context/SecurityContext';
 import { safeJSONStorage } from '../utils/safeStorage';
 import { createLogger } from '../utils/logger';
-import { updateAnalyticsConsent, initializeAnalytics } from '../utils/analytics';
+import { updateAnalyticsConsent } from '../utils/analytics';
 import './CookieConsent.css';
 
 const logger = createLogger('CookieConsent');
@@ -252,7 +252,7 @@ const CookieConsent = memo(() => {
               <h3>We value your privacy</h3>
               <p>
                 We use cookies to enhance your browsing experience, serve personalized content, 
-                and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                 <br />
                 <strong>Your privacy matters:</strong> You can customize your preferences or reject non-essential cookies.
               </p>

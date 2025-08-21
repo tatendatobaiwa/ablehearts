@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Button from '../UI/Button';
+import './ErrorFallback.css';
 
 /**
  * Reusable error fallback component for error boundaries
@@ -16,24 +17,16 @@ const ErrorFallback = ({
   return (
     <div 
       className="error-fallback"
-      style={{
-        padding: '2rem',
-        textAlign: 'center',
-        backgroundColor: '#fef2f2',
-        border: '1px solid #fecaca',
-        borderRadius: '0.5rem',
-        margin: '1rem'
-      }}
       role="alert"
     >
-      <h2 style={{ color: '#dc2626', marginBottom: '1rem' }}>
+      <h2 className="error-fallback__title">
         {message}
       </h2>
-      <p style={{ color: '#7f1d1d', marginBottom: '1.5rem' }}>
+      <p className="error-fallback__message">
         We apologize for the inconvenience. Please try again or contact support if the problem persists.
       </p>
       
-      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+      <div className="error-fallback__actions">
         <Button 
           variant="primary" 
           onClick={resetError}
@@ -51,19 +44,11 @@ const ErrorFallback = ({
       </div>
       
       {import.meta.env.DEV && error && (
-        <details style={{ marginTop: '1rem', textAlign: 'left' }}>
-          <summary style={{ cursor: 'pointer', color: '#7f1d1d' }}>
+        <details className="error-fallback__details">
+          <summary className="error-fallback__summary">
             Error Details (Development)
           </summary>
-          <pre style={{ 
-            backgroundColor: '#f3f4f6', 
-            padding: '1rem', 
-            borderRadius: '0.25rem',
-            overflow: 'auto',
-            fontSize: '0.875rem',
-            color: '#374151',
-            marginTop: '0.5rem'
-          }}>
+          <pre className="error-fallback__code">
             {error.toString()}
           </pre>
         </details>

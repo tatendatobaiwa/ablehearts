@@ -1,0 +1,63 @@
+{
+  "name": "Able Hearts Foundation",
+  "short_name": "Able Hearts",
+  "description": "Empowering individuals with disabilities through inclusive programs in Botswana",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#005BB5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["social", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "/ableheartslogo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ableheartslogo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/ableheartslogo.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Programs",
+      "short_name": "Programs",
+      "description": "View our programs and initiatives",
+      "url": "/programs-and-initiatives",
+      "icons": [
+        {
+          "src": "/ableheartslogo.webp",
+          "sizes": "96x96",
+          "type": "image/webp"
+        }
+      ]
+    },
+    {
+      "name": "Get Involved",
+      "short_name": "Volunteer",
+      "description": "Join our mission",
+      "url": "/get-involved",
+      "icons": [
+        {
+          "src": "/ableheartslogo.webp",
+          "sizes": "96x96",
+          "type": "image/webp"
+        }
+      ]
+    }
+  ]
+}

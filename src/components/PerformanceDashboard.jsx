@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { 
   useWebVitals, 
@@ -90,8 +90,7 @@ const PerformanceDashboard = memo(({ isVisible = false }) => {
                     <div className="vital-header">
                       <span className="vital-name">{vital.toUpperCase()}</span>
                       <span 
-                        className="vital-score"
-                        style={{ color: getScoreColor(score) }}
+                        className={`vital-score score-${score}`}
                       >
                         {score}
                       </span>
@@ -183,11 +182,7 @@ const PerformanceDashboard = memo(({ isVisible = false }) => {
                   </div>
                   <div className="memory-bar">
                     <div 
-                      className="memory-fill"
-                      style={{ 
-                        width: `${memoryInfo.usagePercentage}%`,
-                        backgroundColor: memoryWarning ? '#ef4444' : '#10b981'
-                      }}
+                      className={`memory-fill ${memoryWarning ? 'warning' : ''}`}
                     ></div>
                   </div>
                 </div>

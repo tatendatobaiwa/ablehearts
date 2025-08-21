@@ -40,6 +40,11 @@
 .pre-animate:nth-child(4) { transition-delay: 0.4s; }
 .pre-animate:nth-child(5) { transition-delay: 0.5s; }
 
+/* Dynamic delay using CSS custom properties */
+.pre-animate-scale-delay {
+  transition-delay: calc(var(--delay-index, 0) * 0.1s);
+}
+
 /* Alternative fade-in from different directions */
 .pre-animate-left {
   opacity: 0;

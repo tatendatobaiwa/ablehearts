@@ -1,0 +1,11 @@
+.newsletter-message {
+  margin-top: 10px;
+}
+
+.newsletter-message.success {
+  color: #2ecc71;
+}
+
+.newsletter-message.error {
+  color: #e74c3c;
+}

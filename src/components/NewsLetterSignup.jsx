@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { db } from "@/firebase/config";
 import { collection, addDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import './NewsLetterSignup.css';
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState('');
@@ -67,7 +68,7 @@ const NewsletterSignup = () => {
         </button>
       </form>
       {message && (
-        <p style={{ marginTop: '10px', color: message.includes('Thanks') ? '#2ecc71' : '#e74c3c' }}>
+        <p className={`newsletter-message ${message.includes('Thanks') ? 'success' : 'error'}`}>
           {message}
         </p>
       )}

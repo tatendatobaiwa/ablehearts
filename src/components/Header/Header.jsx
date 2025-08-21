@@ -1,7 +1,5 @@
 
 import { useState, useEffect, memo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './Header.css';
 import logo from '/src/assets/fixed/icons/ableheartslogo.webp';
 import MobileMenu from '../MobileNavigation/MobileMenu';
@@ -61,7 +59,7 @@ const Header = memo(() => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
       <div className="header-container">
         <Link to="/" className="header-logo" aria-label="AbleHearts Foundation Home">
-          <img src={logo} alt="AbleHearts Foundation Logo" loading="lazy" height="60" srcSet={logo + ' 1x, ' + logo + ' 2x'} />
+          <img src={logo} alt="AbleHearts Foundation Logo" loading="eager" fetchPriority="high" decoding="async" height="60" srcSet={logo + ' 1x, ' + logo + ' 2x'} />
         </Link>
         
         <nav className="header-nav" role="navigation" aria-label="Main navigation">

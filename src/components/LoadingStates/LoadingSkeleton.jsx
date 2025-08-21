@@ -13,7 +13,6 @@ const LoadingSkeleton = ({
     <div
       key={index}
       className={`skeleton ${variant} ${animate ? 'animate' : ''} ${className}`}
-      style={{ width, height }}
       aria-hidden="true"
     />
   ));

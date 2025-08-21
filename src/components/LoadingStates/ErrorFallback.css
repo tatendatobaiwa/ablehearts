@@ -1,0 +1,46 @@
+/* Error Fallback Component Styles */
+
+.error-fallback {
+  padding: 2rem;
+  text-align: center;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
+.error-fallback__title {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.error-fallback__message {
+  color: #7f1d1d;
+  margin-bottom: 1.5rem;
+}
+
+.error-fallback__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.error-fallback__details {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.error-fallback__summary {
+  cursor: pointer;
+  color: #7f1d1d;
+}
+
+.error-fallback__code {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  overflow: auto;
+  font-size: 0.875rem;
+  color: #374151;
+  margin-top: 0.5rem;
+}

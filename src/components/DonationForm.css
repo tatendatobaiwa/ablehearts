@@ -113,6 +113,10 @@
   background-color: #005bb5;
 }
 
+.another-donation-button {
+  margin-top: 1rem;
+}
+
 .form-note {
   text-align: center;
   color: #666;
