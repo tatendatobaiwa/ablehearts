@@ -42,7 +42,6 @@ header {
 .header-logo img {
   display: block;
   width: auto;
-  height: 60px !important;
 }
 
 .header-nav {
@@ -317,8 +316,7 @@ nav {
   }
   
   .header-logo img {
-    height: 45px !important;
-    max-height: none !important;
+    max-height: 45px;
   }
 
   /* Mobile menu is handled by MobileMenu component */
