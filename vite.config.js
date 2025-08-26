@@ -4,7 +4,9 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Set base for GitHub Pages
+  base: '/', 
+  server: {
+  port: 3000},
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'), // Alias '@' for the 'src' folder
