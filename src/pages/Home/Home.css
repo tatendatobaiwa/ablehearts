@@ -545,7 +545,9 @@
     max-width: 250px;
   }
   .collaborators-container h3 { font-size: 1.5rem; }
-  .logo-slider { gap: 2rem; }
+  .logo-slider { gap: 2rem;
+    animation: slide 10s linear infinite; 
+ }
   .collaborator-logo { height: 50px; }
 }
 
