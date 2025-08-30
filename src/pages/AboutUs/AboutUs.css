@@ -203,8 +203,43 @@
   gap: 1.5rem;
 }
 
+/* Presidents Section - Enhanced Layout */
+.presidents-section .team-grid {
+  display: grid;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* Large screens (laptops and desktops) - Side by side */
+@media (min-width: 1024px) {
+  .presidents-section .team-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Medium screens (tablets) - Side by side with smaller gap */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .presidents-section .team-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Small screens (mobile) - Single column */
+@media (max-width: 767px) {
+  .presidents-section .team-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 .team-member-card {
   text-align: center;
+  max-width: 400px;
+  width: 100%;
 }
 
 .team-member-name {
@@ -224,6 +259,15 @@
 
 .team-member-card a:hover {
   color: inherit;
+}
+
+.team-member-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #005BB5;
+  margin: 0 auto 1rem;
 }
 
 /* Scroll to Top Button */
@@ -385,13 +429,4 @@
     display: none !important;
     animation: none !important;
   }
-}
-
-.team-member-image {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #005BB5;
-  margin: 0 auto 1rem;
 }

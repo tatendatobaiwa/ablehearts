@@ -193,6 +193,7 @@ const AboutUs = () => {
       
       <section className="about-section team-section pre-animate">
         <h2 className="section-title">Meet Our Branch Presidents</h2>
+        <div className="team-grid">
         <div className="team-branch">
           <img src={ubLogo} alt="UB Logo" className="branch-logo" width="60" height="60" loading="lazy" srcSet={ubLogo + ' 1x, ' + ubLogo + ' 2x'} />
           <h3 className="branch-title">University of Botswana Branch</h3>
@@ -218,6 +219,7 @@ const AboutUs = () => {
               <p className="team-member-role">{biustPresident.role}</p>
             </div>
           </div>
+        </div>
         </div>
       </section>
 

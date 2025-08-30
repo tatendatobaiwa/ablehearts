@@ -22,15 +22,21 @@ export const db = getFirestore(app);
 // Initialize Firebase Analytics (with consent checking)
 export const initializeFirebaseAnalytics = async () => {
   try {
-    if (!firebaseConfig.measurementId) return null;
+    // Check if measurement ID exists and is not empty
+    if (!firebaseConfig.measurementId || firebaseConfig.measurementId.trim() === '') {
+      console.info('[Analytics] Analytics disabled - no measurement ID provided');
+      return null;
+    }
+    
     const supported = await isSupported();
     if (supported) {
+      console.info('[Analytics] Analytics initialized successfully');
       return getAnalytics(app);
     }
-    console.warn('Firebase Analytics not supported in this environment');
+    console.warn('[Analytics] Firebase Analytics not supported in this environment');
     return null;
   } catch (error) {
-    console.error('Firebase Analytics initialization error:', error);
+    console.error('[Analytics] Firebase Analytics initialization error:', error);
     return null;
   }
 };
