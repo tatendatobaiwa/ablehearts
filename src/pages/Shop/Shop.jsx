@@ -278,7 +278,10 @@ const Shop = () => {
         keywords="shop, merchandise, t-shirts, jerseys, support, donation, able hearts foundation, Botswana"
         type="website"
       />
-      <div className={`shop-page-wrapper page-fade-in ${isContentLoaded ? 'content-loaded' : ''}`}>
+      <div 
+        className={`shop-page-wrapper page-fade-in ${isContentLoaded ? 'content-loaded' : ''}`}
+        aria-hidden={Boolean(selectedProduct || showSuccessModal)}
+      >
       <div className="shop-background-blobs" aria-hidden="true">
         {memoizedBlobComponents}
       </div>
@@ -447,8 +450,8 @@ const Shop = () => {
       {/* Removed second modal for enlarged image */}
 
       {showSuccessModal && (
-        <div className="success-modal-overlay" role="alertdialog" aria-modal="true" aria-labelledby="success-modal-title">
-          <div className="success-modal-content">
+        <div className="success-modal-overlay" onClick={() => setShowSuccessModal(false)} role="alertdialog" aria-modal="true" aria-labelledby="success-modal-title">
+          <div className="success-modal-content" onClick={(e) => e.stopPropagation()}>
             <h3 id="success-modal-title">Pre-order Placed!</h3>
             <p>Your pre-order has been successfully placed. We will contact you regarding the progress of your Order!</p>
             <button type="button" className="cta-button" onClick={() => setShowSuccessModal(false)}>Close</button>

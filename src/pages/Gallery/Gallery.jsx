@@ -169,12 +169,7 @@ const Gallery = () => {
     const elementsToObserve = document.querySelectorAll('.gallery-page-wrapper .pre-animate');
     elementsToObserve.forEach(element => observer.observe(element));
 
-    return () => {
-        elementsToObserve.forEach(element => {
-            if(element) observer.unobserve(element);
-        });
-        observer.disconnect();
-    }
+    return () => observer.disconnect();
   }, [isContentLoaded]); // Rerun observer setup if contentLoaded changes, to catch initially hidden elements
 
   
@@ -204,57 +199,36 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage, selectedEvent, selectedImageIndex, closeImageModal, closeEventModal]);
 
-  // Focus trap for event modal
+  // Focus trap for modals
   useEffect(() => {
-    if (!selectedEvent) return;
-    const modalEl = eventModalRef.current;
-    if (!modalEl) return;
-    const focusable = modalEl.querySelectorAll(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-    );
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    first && first.focus();
-    const onKeyDown = (e) => {
-      if (e.key === 'Tab') {
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last && last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first && first.focus();
-        }
-      }
-    };
-    modalEl.addEventListener('keydown', onKeyDown);
-    return () => modalEl.removeEventListener('keydown', onKeyDown);
-  }, [selectedEvent]);
+    const activeModalRef = selectedImage ? imageModalRef : selectedEvent ? eventModalRef : null;
+    const isOpen = selectedImage || selectedEvent;
 
-  // Focus trap for image modal
-  useEffect(() => {
-    if (!selectedImage) return;
-    const modalEl = imageModalRef.current;
-    if (!modalEl) return;
+    if (!isOpen || !activeModalRef?.current) return;
+
+    const modalEl = activeModalRef.current;
     const focusable = modalEl.querySelectorAll(
       'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
     );
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    first && first.focus();
+
+    first?.focus();
+
     const onKeyDown = (e) => {
       if (e.key === 'Tab') {
         if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
-          last && last.focus();
+          last?.focus();
         } else if (!e.shiftKey && document.activeElement === last) {
           e.preventDefault();
-          first && first.focus();
+          first?.focus();
         }
       }
     };
     modalEl.addEventListener('keydown', onKeyDown);
     return () => modalEl.removeEventListener('keydown', onKeyDown);
-  }, [selectedImage]);
+  }, [selectedEvent, selectedImage]);
 
   // Reset image pagination when a new event is opened/changed
   useEffect(() => {
@@ -305,7 +279,10 @@ const Gallery = () => {
         description="Explore our events and the moments that make them special. View photos from our community initiatives, talent shows, donations, and impact programs across Botswana."
         keywords="gallery, events, photos, community initiatives, talent show, donations, Botswana, able hearts foundation"
       />
-      <div className={`gallery-page-wrapper page-fade-in ${isContentLoaded ? 'content-loaded' : ''}`}>
+      <div 
+        className={`gallery-page-wrapper page-fade-in ${isContentLoaded ? 'content-loaded' : ''}`}
+        aria-hidden={Boolean(selectedEvent || selectedImage)}
+      >
       <div className="gallery-background-blobs" aria-hidden={Boolean(selectedEvent || selectedImage)}>
         {memoizedBlobComponents}
       </div>

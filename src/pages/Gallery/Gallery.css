@@ -190,9 +190,8 @@
 
 .modal-overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   background-color: var(--gallery-modal-overlay-bg);
   display: flex;
   justify-content: center;
@@ -206,8 +205,8 @@
   /* Blur the background content */
   backdrop-filter: blur(var(--gallery-backdrop-blur));
   -webkit-backdrop-filter: blur(var(--gallery-backdrop-blur));
-  /* Let pointer/touch and wheel pass through to the page */
-  pointer-events: none;
+  /* Ensure overlay captures all pointer events */
+  pointer-events: auto;
 }
 @keyframes galleryModalFadeIn {
   from { opacity: 0; }
@@ -226,8 +225,6 @@
   flex-direction: column;
   min-height: 0; /* allow children to shrink inside flex container */
   animation: galleryModalContentSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  /* Keep modal interactive while overlay is pass-through */
-  pointer-events: auto;
 }
 
 @keyframes galleryModalContentSlideIn {
@@ -369,10 +366,6 @@
 }
 
 .image-modal-overlay {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1010; /* Above event modal */
 }
 
@@ -542,27 +535,18 @@
   
   .events-grid {
     grid-template-columns: 1fr; /* Single column on phones */
+    gap: var(--gallery-base-padding);
     max-width: 500px;
     margin: 0 auto;
-    /* Show exactly 3 events per page */
     grid-auto-rows: minmax(250px, 1fr);
-    min-height: calc(3 * 300px); /* 3 events * minimum height */
   }
   
-  /* Ensure only 3 events are visible at a time */
-  .events-grid > *:nth-child(n+4) {
-    display: none;
-  }
   .gallery-header {
     margin-bottom: var(--gallery-base-padding);
   }
   .gallery-header h1 { font-size: clamp(1.8rem, 5vw, 2.2rem); }
   .gallery-header p { font-size: clamp(0.9rem, 2.8vw, 1.05rem); }
 
-  .events-grid {
-    grid-template-columns: 1fr; /* Single column on phones */
-    gap: var(--gallery-base-padding);
-  }
    .event-card { /* If single column, allow more height */
     aspect-ratio: 16 / 10;
   }
@@ -780,4 +764,18 @@
 .events-grid.loading .event-card {
   opacity: 0.5;
   pointer-events: none;
+}
+
+/* Disable background interactions when modals are open */
+.gallery-page-wrapper[aria-hidden="true"] {
+  pointer-events: none;
+  user-select: none;
+}
+
+.gallery-page-wrapper[aria-hidden="true"] .gallery-header,
+.gallery-page-wrapper[aria-hidden="true"] .gallery-main-content,
+.gallery-page-wrapper[aria-hidden="true"] .gallery-background-blobs,
+.gallery-page-wrapper[aria-hidden="true"] .scroll-to-top-btn-gallery {
+  pointer-events: none;
+  user-select: none;
 }

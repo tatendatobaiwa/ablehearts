@@ -219,8 +219,8 @@
   overscroll-behavior: auto;
   scrollbar-gutter: stable;
   overflow: visible;
-  /* Let scroll/click pass through the overlay to the page */
-  pointer-events: none;
+  /* Ensure overlay captures all pointer events */
+  pointer-events: auto;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -228,6 +228,9 @@
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   margin: 0;
+  /* Blur the background content */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .modal-content-shop {
   position: relative;
@@ -267,7 +270,7 @@
   max-width: 100%;
   width: auto;
   height: auto;
-  max-height: 70vh;
+  max-height: 45vh;
   border-radius: 8px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
   display: block;
@@ -281,7 +284,7 @@
     padding: 0 0.75rem;
   }
   .product-large-image {
-    max-height: 60vh;
+    max-height: 40vh;
   }
 }
 
@@ -332,8 +335,8 @@
   margin-bottom: calc(var(--shop-base-padding) * 0.75);
 }
 .modal-product-image-thumbnail {
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: calc(var(--shop-border-radius) / 2.5);
   cursor: pointer;
@@ -864,6 +867,11 @@
   z-index: var(--z-success-modal);
   padding: var(--shop-base-padding);
   animation: shopFadeInAnimation 0.3s ease-out;
+  /* Blur the background content */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Ensure overlay captures all pointer events */
+  pointer-events: auto;
 }
 .success-modal-content {
   background-color: var(--shop-modal-content-bg);
@@ -1005,7 +1013,7 @@
   .modal-product-title { font-size: 1.3rem; }
   .modal-product-price { font-size: 1.15rem; }
   .modal-images-container { gap: 0.4rem; }
-  .modal-product-image-thumbnail { width: 55px; height: 55px; }
+  .modal-product-image-thumbnail { width: 65px; height: 65px; }
 
   .size-btn { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
   .quantity-input-field { width: 45px; padding: 0.6rem 0; font-size: 0.9rem;}
@@ -1045,7 +1053,7 @@
   }
   .modal-product-title { font-size: 1.2rem; }
   .modal-product-price { font-size: 1.1rem; }
-  .modal-product-image-thumbnail { width: 50px; height: 50px; }
+  .modal-product-image-thumbnail { width: 60px; height: 60px; }
 
   .size-btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
   .quantity-input-field { width: 40px; padding: 0.5rem 0; }
@@ -1066,4 +1074,18 @@
     width: 26px;
     height: 26px;
   }
+}
+
+/* Disable background interactions when modals are open */
+.shop-page-wrapper[aria-hidden="true"] {
+  pointer-events: none;
+  user-select: none;
+}
+
+.shop-page-wrapper[aria-hidden="true"] .shop-header,
+.shop-page-wrapper[aria-hidden="true"] .shop-main-content,
+.shop-page-wrapper[aria-hidden="true"] .shop-background-blobs,
+.shop-page-wrapper[aria-hidden="true"] .scroll-to-top-btn {
+  pointer-events: none;
+  user-select: none;
 }
