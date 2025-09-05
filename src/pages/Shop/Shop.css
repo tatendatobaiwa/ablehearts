@@ -986,8 +986,21 @@
 }
 
 @media (max-width: 768px) {
+  /* Let the entire overlay scroll rather than the body being locked at the top
+     when the modal is taller than the viewport.  Center the modal to keep the
+     close-button accessible and avoid it sliding partially off-screen. */
+  .modal-overlay-shop {
+    align-items: center;      /* vertically centre on small screens */
+    overflow-y: auto;         /* allow page scroll if modal > viewport */
+    padding-top: 1rem;        /* tighter padding so we don’t exceed 100vh */
+    padding-bottom: 1rem;
+  }
+
   .modal-content-shop {
-    max-height: 95vh;
+    /* Use dynamic viewport units so the max-height always respects the visible
+       area even when mobile browser chrome collapses/expands.  Leave a little
+       space so the modal never blocks the very bottom/top of the screen. */
+    max-height: calc(100dvh - 2rem);
     padding: 2.5rem 1.5rem 1.5rem;
     width: 95%;
   }
