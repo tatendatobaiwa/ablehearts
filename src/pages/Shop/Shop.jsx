@@ -217,7 +217,7 @@ const Shop = () => {
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
-      await addDoc(collection(db, 'pre-orders'), orderData);
+      await addDoc(collection(db, 'orders'), orderData);
       setShowSuccessModal(true);
       setCart([]);
       setIsCartOpen(false);
