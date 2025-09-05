@@ -14,6 +14,7 @@ import './MobileMenu.css';
 
 const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
   const [expandedItems, setExpandedItems] = useState({});
+  const [isClosing, setIsClosing] = useState(false);
   const location = useLocation();
   const initialPathRef = useRef(location.pathname);
   const hasOpenedRef = useRef(false);
@@ -98,6 +99,8 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
       <nav
         className="mobile-menu"
         onClick={(e) => e.stopPropagation()}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         role="navigation"
         aria-label="Mobile navigation menu"
       >

@@ -24,6 +24,10 @@
   touch-action: none;
 }
 
+.mobile-menu-overlay.closing {
+  animation: fadeOutOverlay 0.3s ease-out forwards;
+}
+
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -85,6 +89,7 @@
 }
 
 .mobile-menu-content {
+  width: 100%;
   flex: 1;
   padding: 0;
   overflow-y: auto;
@@ -347,6 +352,24 @@
   }
 }
 
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 /* Touch improvements */
 @media (hover: none) and (pointer: coarse) {
   .mobile-menu-link,
@@ -402,7 +425,7 @@
   }
 
   .menu-section {
-    padding: 20px 16px 12px;
+    padding: 20px 20px 20px;
   }
 
   .mobile-menu-link,
