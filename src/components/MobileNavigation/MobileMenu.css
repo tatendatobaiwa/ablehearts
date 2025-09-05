@@ -29,12 +29,13 @@
   top: 0;
   right: 0;
   height: 100vh;
-  width: min(85vw, 320px);
+  width: min(95vw, 380px); /* give a little more breathing room on larger phones */
   background: var(--menu-dark-bg);
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
-  overflow: hidden;
+  overflow-y: auto;          /* allow the entire panel to scroll if content > viewport */
+  overscroll-behavior: contain; /* keep scroll within the panel */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 

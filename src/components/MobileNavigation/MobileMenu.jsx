@@ -17,6 +17,29 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
   const location = useLocation();
   const initialPathRef = useRef(location.pathname);
   const hasOpenedRef = useRef(false);
+ 
+  /* ----------------- Swipe-to-close handlers ------------------ */
+  const touchStartXRef = useRef(null);
+  const SWIPE_CLOSE_THRESHOLD = 80; // px user must drag towards the edge
+
+  const handleTouchStart = (e) => {
+    if (e.touches && e.touches.length === 1) {
+      touchStartXRef.current = e.touches[0].clientX;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartXRef.current === null) return;
+    const endX = e.changedTouches && e.changedTouches.length ? e.changedTouches[0].clientX : null;
+    if (endX !== null) {
+      const deltaX = endX - touchStartXRef.current;
+      // Menu is on the right; user needs to swipe the panel toward the right edge (positive delta)
+      if (deltaX > SWIPE_CLOSE_THRESHOLD) {
+        onClose();
+      }
+    }
+    touchStartXRef.current = null;
+  };
 
   // Close menu when route changes (but not on initial mount)
   useEffect(() => {
