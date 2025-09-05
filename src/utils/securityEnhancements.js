@@ -66,7 +66,8 @@ export const CSP_POLICIES = {
     'https://www.google-analytics.com',
     'https://analytics.google.com',
     'https://firestore.googleapis.com',
-    'https://firebase.googleapis.com'
+    'https://firebase.googleapis.com',
+    'https://formspree.io'
   ],
   'frame-src': [
     "'none'"
@@ -78,7 +79,8 @@ export const CSP_POLICIES = {
     "'self'"
   ],
   'form-action': [
-    "'self'"
+    "'self'",
+    'https://formspree.io'
   ]
 };
 

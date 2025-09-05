@@ -72,7 +72,8 @@ const UBApp = () => {
         }
       } catch (err) {
         setStatus('error');
-        alert('Failed to send form. Please try again.');
+        console.error('UB form submission error:', err);
+        alert(`There was a problem submitting your request: ${err.message || 'Unknown error'}`);
       }
     }
   };

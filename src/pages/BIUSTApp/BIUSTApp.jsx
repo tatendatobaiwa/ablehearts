@@ -72,7 +72,8 @@ const BIUSTApp = () => {
         }
       } catch (error) {
         setStatus('error');
-        alert('Failed to send form. Please try again.');
+        console.error('BIUST form submission error:', error);
+        alert(`There was a problem submitting your request: ${error.message || 'Unknown error'}`);
       }
     }
   };

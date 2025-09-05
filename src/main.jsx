@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import { AccessibilityProvider } from './context/AccessibilityContext.jsx';
+import { SecurityProvider } from './components/SecurityProvider.jsx';
 import { initializeAnalytics, trackPerformance, trackUserEngagement } from './utils/analytics.js';
 import { loadCriticalResources, registerServiceWorker } from './utils/performance.js';
 
@@ -30,9 +31,11 @@ window.addEventListener('beforeunload', () => {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter> 
-      <AccessibilityProvider>
-        <App />
-      </AccessibilityProvider>
+      <SecurityProvider>
+        <AccessibilityProvider>
+          <App />
+        </AccessibilityProvider>
+      </SecurityProvider>
     </BrowserRouter>
   </StrictMode>
 );
