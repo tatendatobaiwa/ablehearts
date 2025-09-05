@@ -55,15 +55,32 @@ const Gallery = () => {
   // Show 3 events per page on phones (<=767px), 6 on tablets and larger (>=768px)
   const [pageSize, setPageSize] = useState(window.innerWidth <= 767 ? 3 : 6);
   
+  // Re-evaluate layout values on viewport resize. We only reset pagination when the
+  // effective page size actually changes (e.g. crossing the mobile / tablet
+  // breakpoint). A tiny viewport width change – like when the vertical scrollbar
+  // appears/disappears while the user scrolls – should NOT reset the current
+  // event page. This prevents the "jump back to first page" problem that was
+  // occurring while browsing the gallery.
   useEffect(() => {
     const handleResize = () => {
-      setPageSize(window.innerWidth <= 767 ? 3 : 6);
+      const newPageSize = window.innerWidth <= 767 ? 3 : 6;
+
+      // Update responsive flags that are independent of page size
       setIsMobileImages(window.innerWidth <= 767);
       setIsPaginatedImages(window.innerWidth <= 1024);
-      setImagePage(1);
-      setCurrentPage(1); // Reset to first page when page size changes
+
+      // Only update page size (and therefore reset pagination) when it has
+      // actually changed. This avoids unnecessary resets caused by very small
+      // width changes (e.g. scrollbar toggling).
+      setPageSize(prevPageSize => {
+        if (prevPageSize !== newPageSize) {
+          setCurrentPage(1); // Reset to first page only when breakpoint changed
+          setImagePage(1);
+        }
+        return newPageSize;
+      });
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
