@@ -43,6 +43,11 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* closing state mirrors open animation in reverse */
+.mobile-menu.closing {
+  animation: slideOutToRight 0.3s ease-in forwards;
+}
+
 .mobile-menu-header {
   display: flex;
   justify-content: center;

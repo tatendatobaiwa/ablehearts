@@ -16,12 +16,32 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
   const [expandedItems, setExpandedItems] = useState({});
   const [isClosing, setIsClosing] = useState(false);
   const location = useLocation();
+  const menuRef = useRef(null);
   const initialPathRef = useRef(location.pathname);
   const hasOpenedRef = useRef(false);
  
   /* ----------------- Swipe-to-close handlers ------------------ */
   const touchStartXRef = useRef(null);
   const SWIPE_CLOSE_THRESHOLD = 80; // px user must drag towards the edge
+
+  const closeWithAnimation = () => {
+    if (isClosing) return;
+    setIsClosing(true);
+    const finish = () => {
+      onClose();
+      setIsClosing(false);
+    };
+    if (menuRef.current) {
+      const handler = () => {
+        finish();
+      };
+      menuRef.current.addEventListener('animationend', handler, { once: true });
+      // Fallback timeout in case animationend doesn't fire
+      setTimeout(finish, 350);
+    } else {
+      setTimeout(finish, 300);
+    }
+  };
 
   const handleTouchStart = (e) => {
     if (e.touches && e.touches.length === 1) {
@@ -36,7 +56,7 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
       const deltaX = endX - touchStartXRef.current;
       // Menu is on the right; user needs to swipe the panel toward the right edge (positive delta)
       if (deltaX > SWIPE_CLOSE_THRESHOLD) {
-        onClose();
+        closeWithAnimation();
       }
     }
     touchStartXRef.current = null;
@@ -78,6 +98,12 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      setIsClosing(false);
+    }
+  }, [isOpen]);
+
   const toggleExpanded = (itemId) => {
     setExpandedItems(prev => ({
       ...prev,
@@ -95,9 +121,10 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="mobile-menu-overlay" onClick={onClose}>
+    <div className={`mobile-menu-overlay ${isClosing ? 'closing' : ''}`} onClick={closeWithAnimation}>
       <nav
-        className="mobile-menu"
+        ref={menuRef}
+        className={`mobile-menu ${isClosing ? 'closing' : ''}`}
         onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -107,7 +134,7 @@ const MobileMenu = ({ isOpen, onClose, navigationItems }) => {
         <div className="mobile-menu-header">
           <button
             className="mobile-menu-close mobile-menu-close-small"
-            onClick={onClose}
+            onClick={closeWithAnimation}
             aria-label="Close mobile menu"
           >
             <X size={20} />
