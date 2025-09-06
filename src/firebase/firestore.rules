@@ -6,6 +6,12 @@
           allow read, write: if true; // THIS IS INSECURE FOR PRODUCTION
         }
 
+        // Allow unauthenticated clients to create pre-order documents
+        // Reads are blocked by default (no read rule), adjust if you need to list orders.
+        match /orders/{document=**} {
+          allow create: if true;
+        }
+
         // Keep other rules as they are, or restrict access to other collections
         // For example, if you have other collections:
         // match /{path=**} {
