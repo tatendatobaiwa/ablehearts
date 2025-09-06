@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { scrollToModalRef } from '../utils/modalScrollUtils';
 
 import './DonationForm.css';
 
@@ -22,16 +23,6 @@ const DonationForm = () => {
 
   const formRef = useRef(null);
 
-  // Effect to handle scrolling when submission state changes
-  useEffect(() => {
-    if (submitted && formRef.current) {
-      const formTop = formRef.current.offsetTop;
-      window.scrollTo({
-        top: formTop - 20, // Slight offset for visual comfort
-        behavior: 'smooth'
-      });
-    }
-  }, [submitted]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,7 +96,9 @@ const DonationForm = () => {
       });
 
       if (response.ok) {
-        setSubmitted(true);
+setSubmitted(true);
+        // Auto-scroll to bring success message into view
+        scrollToModalRef(formRef, 100);
       } else {
         const result = await response.json();
         throw new Error(result.errors ? result.errors.map(err => err.message).join(', ') : 'Form submission failed');

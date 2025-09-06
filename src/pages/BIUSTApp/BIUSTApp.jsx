@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { scrollToModal } from '../../utils/modalScrollUtils';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import { useNavigate } from 'react-router-dom';
 import './BIUSTApp.css';
@@ -58,6 +59,8 @@ const BIUSTApp = () => {
         if (response.ok) {
           setStatus('success');
           setShowSuccess(true);
+          // Auto-scroll to center the success modal
+          scrollToModal('.biust-app-success-popup', 100);
           setFormData({
             name: '',
             email: '',

@@ -5,6 +5,7 @@ import './Gallery.css';
 import { useFadeInAnimation, usePageFadeIn } from '../../hooks/useFadeInAnimation';
 import SimpleSEO from '../../components/SEO/SimpleSEO';
 import { galleryEventsData, blobImagePaths } from './galleryData';
+import { scrollToModalRef } from '../../utils/modalScrollUtils';
 const SCROLL_THRESHOLD_TOP_BTN = 300;
 
 
@@ -114,6 +115,8 @@ const Gallery = () => {
     setSelectedEvent(event);
     setSelectedImage(null);
     setImagePage(1);
+    // Auto-scroll to center the modal
+    scrollToModalRef(eventModalRef, 100);
   }, []);
 
   const handleImageClick = useCallback((image) => {
@@ -125,6 +128,8 @@ const Gallery = () => {
     } else {
       setSelectedImageIndex(0);
     }
+    // Auto-scroll to center the modal
+    scrollToModalRef(imageModalRef, 100);
   }, [selectedEvent]);
 
   const closeEventModal = useCallback(() => {

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, memo, useRef } from 'react';
+import { scrollToModal } from '../../utils/modalScrollUtils';
 import PropTypes from 'prop-types';
 import { ShoppingCart, X, Plus, Minus } from 'lucide-react';
 import { db } from "@/firebase/config";
@@ -219,6 +220,8 @@ const Shop = () => {
       };
       await addDoc(collection(db, 'orders'), orderData);
       setShowSuccessModal(true);
+      // Auto-scroll to center the success modal
+      scrollToModal('.success-modal-content', 100);
       setCart([]);
       setIsCartOpen(false);
       setContactDetails({ email: '', phone: '' });
