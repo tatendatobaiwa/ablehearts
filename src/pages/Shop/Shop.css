@@ -1102,3 +1102,48 @@
   pointer-events: none;
   user-select: none;
 }
+
+/* Mobile modal overrides: make overlay non-interactive for scroll and resize modal to fit viewport */
+@media (max-width: 768px) {
+  .modal-overlay-shop {
+    pointer-events: none; /* allow background to receive scroll/touch */
+    overflow: visible;    /* avoid creating its own scroll context */
+    align-items: flex-start;
+    padding: 0.75rem 0.75rem max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .modal-content-shop {
+    pointer-events: auto; /* keep modal interactive */
+    width: min(92vw, 560px);
+    margin: 1rem auto 0;
+    max-height: calc(100dvh - 2rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow: hidden; /* eliminate inner scrollbars on modal content */
+    border-radius: 10px;
+  }
+  .modal-main-image {
+    padding: 0 0.5rem;
+  }
+  .product-large-image {
+    max-height: 35vh; /* reduce to fit viewport without scrolling */
+  }
+  .modal-images-container {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .modal-product-header {
+    margin-bottom: 0.5rem;
+  }
+  .modal-product-title {
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .size-selector {
+    margin: 0.5rem 0;
+  }
+  .quantity-selector {
+    margin: 0.5rem 0;
+  }
+  .modal-content-shop .cta-button {
+    margin-top: 0.5rem;
+  }
+}
